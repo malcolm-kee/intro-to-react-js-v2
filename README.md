@@ -20,19 +20,18 @@ To avoid the workshop time being spent on downloading and installing tools, make
 
 ## Agenda
 
-- Using React without build tools
-- Tooling around React
+- Introduction (5 minutes) 10.00 - 10.05
+- Using React without build tools (30 minutes) 10.05 - 10.35
+- Tooling around React (1.5 hours) 10.35 - 12.00
   - NodeJS & npm
   - prettier
   - webpack & babel
   - eslint
-- React core
+- React core (1.5 hours) 13.00 - 14.30
   - JSX
   - function vs class component
   - react lifecycle method
-  - context
-  - portals
-- Common React how-to
+- Common React how-to (2 hours) 14.30 - 14.30
   - making api call
   - routing for spa
   - testing
