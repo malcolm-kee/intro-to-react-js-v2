@@ -20,7 +20,7 @@ To avoid the workshop time being spent on downloading and installing tools, make
 
 ## Agenda
 
-- Introduction (5 minutes) 10.00 - 10.05
+- [Introduction](introduction/introduction.md) (5 minutes) 10.00 - 10.05
 - Using React without build tools (30 minutes) 10.05 - 10.35
 - Tooling around React (1.5 hours) 10.35 - 12.00
   - NodeJS & npm
