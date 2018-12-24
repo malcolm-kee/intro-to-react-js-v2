@@ -21,7 +21,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - Advanced React Patterns e.g. Higher Order Components and Render Props
 - Redux
 - Typescript/Flow
-- The hook feature
+- React hook feature
 
 ## What is expected of You
 
