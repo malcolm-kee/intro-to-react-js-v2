@@ -35,3 +35,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - It is popular - we have good tooling built around React JS
 - It is battle-tested by facebook
 - It trains you to be a good JS developer - learn functional programming and Js standards
+
+## Why this course
+
+Being productive in React requires more than familiar with React API, you also need to know the tooling around React and the value they bring, so you know when to use them.
