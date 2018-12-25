@@ -1,3 +1,8 @@
+---
+title: React Tooling
+path: '/react-tooling'
+---
+
 # React Tooling
 
 Now we will dive deep into tooling around tooling around React and modern frontend development in general.

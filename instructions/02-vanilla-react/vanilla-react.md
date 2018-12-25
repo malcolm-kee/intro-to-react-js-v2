@@ -1,3 +1,8 @@
+---
+title: Vanilla React
+path: '/vanilla-react'
+---
+
 # Vanilla React
 
 We will start learning React by using React with vanilla JS - which means we will not include any tooling first, and only code with a simple HTML file and a script tag.

@@ -1,3 +1,8 @@
+---
+title: Introduction
+path: '/introduction'
+---
+
 # Introduction
 
 This course is "A Complete Introduction to React JS", which will teach you the core of React JS and the tools around ReactJS.

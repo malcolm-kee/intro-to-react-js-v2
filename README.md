@@ -1,3 +1,8 @@
+---
+title: README
+path: '/'
+---
+
 # Intro to React JS
 
 A complete introduction to ReactJS - up and running with ReactJS by learning tooling that improves your development workflow, ReactJS core API, and common how-to e.g. writing tests, routing, and code splitting.

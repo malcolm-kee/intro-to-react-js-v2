@@ -1,0 +1,43 @@
+{
+  "name": "intro-to-react-js",
+  "version": "1.0.0",
+  "description": "A complete introduction to ReactJS - up and running with ReactJS by learning tooling that improves your development workflow, ReactJS core API, and common how-to e.g. writing tests, routing, and code splitting.",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "gatsby develop",
+    "build": "gatsby build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malcolm-kee/intro-to-react-js.git"
+  },
+  "keywords": [
+    "react workshop",
+    "learning materials"
+  ],
+  "author": "Malcolm Kee <malcolm.keeweesiong@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malcolm-kee/intro-to-react-js/issues"
+  },
+  "homepage": "https://github.com/malcolm-kee/intro-to-react-js#readme",
+  "dependencies": {
+    "gatsby": "^2.0.76",
+    "gatsby-image": "^2.0.25",
+    "gatsby-plugin-netlify": "^2.0.6",
+    "gatsby-plugin-react-helmet": "^3.0.5",
+    "gatsby-plugin-sharp": "^2.0.16",
+    "gatsby-plugin-typography": "^2.2.4",
+    "gatsby-remark-images": "^3.0.1",
+    "gatsby-remark-prismjs": "^3.1.4",
+    "gatsby-source-filesystem": "^2.0.12",
+    "gatsby-transformer-remark": "^2.1.17",
+    "gatsby-transformer-sharp": "^2.1.9",
+    "prismjs": "^1.15.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-helmet": "^5.2.0",
+    "react-typography": "^0.16.18",
+    "typography": "^0.16.18"
+  }
+}
