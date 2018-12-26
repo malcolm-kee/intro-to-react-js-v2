@@ -14,7 +14,7 @@ Now we will dive deep into tooling around tooling around React and modern fronte
 [Download Page](https://nodejs.org/en/download/)
 
 - NodeJS is a Javascript runtime. It enables you to run javascript outside browser, in your laptop and server.
-- ReactJS do not need NodeJS (which I have demonstrated in previous section). However, NodeJS is important because it is the environment that enables the tooling that React depends heavily e.g. package management, bundling, transpiling, formating, and linting.
+- React does not need NodeJS (which I have demonstrated in previous section). However, NodeJS is important because it is the environment that enables the tooling that React depends heavily e.g. package management, bundling, transpiling, formating, and linting.
 
 ## npm
 

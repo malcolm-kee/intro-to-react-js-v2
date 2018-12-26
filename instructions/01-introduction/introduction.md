@@ -12,7 +12,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - A React JS developer, OSS contributor
 - Ex BA and Scrum Master
 - Start my developer role in jquery, then fall in love with React
-- Find me at malcolmkee.com
+- Find me at [malcolmkee.com](https://malcolmkee.com)
 
 ## What this courses will covered are:
 
@@ -34,11 +34,11 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - Ask questions
 - Help others
 
-## Why React JS
+## Why React
 
 - It can be included incrementally
-- It is popular - we have good tooling built around React JS
-- It is battle-tested by facebook
+- It is popular - we have good tooling built around React
+- Facebook dogfood React - it means minimal breaking changes and they build tools for migration when introduce breaking change.
 - It trains you to be a good JS developer - learn functional programming and Js standards
 
 ## Why this course

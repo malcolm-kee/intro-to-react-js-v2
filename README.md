@@ -5,7 +5,7 @@ path: '/'
 
 # Introduction to React JS
 
-A complete introduction to ReactJS - up and running with React by learning tooling that improves your development workflow, React core API, and common how-to e.g. writing tests, routing, and code splitting.
+A complete introduction to React - up and running with React by learning tooling that improves your development workflow, React core API, and common how-to e.g. writing tests, routing, and code splitting.
 
 > This repo outlines the content of the workshop - separate repo will be written as a code-along sample for the workshop.
 
