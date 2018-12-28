@@ -15,7 +15,7 @@ We will start learning React by using React with vanilla JS - which means we wil
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Adopt Me</title>
+    <title>React Movie App</title>
   </head>
 
   <body>
@@ -36,7 +36,7 @@ const App = function() {
   return React.createElement(
     'div',
     {},
-    React.createElement('h1', {}, 'Adopt Me!')
+    React.createElement('h1', {}, 'React Movie App')
   );
 };
 
@@ -53,7 +53,7 @@ ReactDOM.render(React.createElement(App), document.getElementById('root'));
 
 <hr >
 
-## Do It: Type the code
+## :pencil: Do It: Type the code
 
 1. Create a file and name it as `index.html`.
 1. Add the code above in the file.
@@ -63,19 +63,18 @@ ReactDOM.render(React.createElement(App), document.getElementById('root'));
 Modify your code, so that it becomes
 
 ```js
-const Pet = () =>
+const Movie = () =>
   React.createElement('div', {}, [
-    React.createElement('h1', {}, 'Luna'),
-    React.createElement('h2', {}, 'Dog'),
-    React.createElement('h2', {}, 'Havanese')
+    React.createElement('h1', {}, 'Aquaman'),
+    React.createElement('h2', {}, '2018-12-07')
   ]);
 
 const App = function() {
   return React.createElement('div', {}, [
-    React.createElement('h1', {}, 'Adopt Me!'),
-    React.createElement(Pet),
-    React.createElement(Pet),
-    React.createElement(Pet)
+    React.createElement('h1', {}, 'React Movie App'),
+    React.createElement(Movie),
+    React.createElement(Movie),
+    React.createElement(Movie)
   ]);
 };
 
@@ -83,39 +82,36 @@ ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
 
 - to make an element to have multiple children, just pass it an array of elements.
-- `Pet` is our second component. I use [arrow function][arrow-function] syntax here, which will have an implicit return if the function body is a single expression
-- We can have multiple `Pet` instances by calling `React.createElement` multiple times!
+- `Movie` is our second component. I use [arrow function][arrow-function] syntax here, which will have an implicit return if the function body is a single expression
+- We can have multiple `Movie` instances by calling `React.createElement` multiple times!
 - If you're seeing console warning about keys, ignore it for now.
 
 <hr >
 
-We have multiple pets but it's not very useful component yet, since not all pets has name Luna. Let's make Pet component a bit more useful.
+We have multiple movies but it's not very useful component yet, since not all movies has name Aquaman. Let's make Movie component a bit more useful.
 
 ```js
-const Pet = props =>
+const Movie = props =>
   React.createElement('div', {}, [
     React.createElement('h1', {}, props.name),
-    React.createElement('h2', {}, props.animal),
-    React.createElement('h2', {}, props.breed)
+    React.createElement('h2', {}, props.releaseDate)
   ]);
 
 const App = function() {
   return React.createElement('div', {}, [
-    React.createElement('h1', {}, 'Adopt Me!'),
-    React.createElement(Pet, {
-      name: 'Luna',
-      animal: 'Dog',
-      breed: 'Havanese'
+    React.createElement('h1', {}, 'React Movie App'),
+    React.createElement('h1', {}, 'React Movie App'),
+    React.createElement(Movie, {
+      name: 'Aquaman',
+      releaseDate: '2018-12-07'
     }),
-    React.createElement(Pet, {
-      name: 'Pepper',
-      animal: 'Bird',
-      breed: 'Cockatiel'
+    React.createElement(Movie, {
+      name: 'Bumblebee',
+      releaseDate: '2018-12-15'
     }),
-    React.createElement(Pet, {
-      name: 'Doink',
-      animal: 'Cat',
-      breed: 'Mix'
+    React.createElement(Movie, {
+      name: 'Fantastic Beasts: The Crimes of Grindelwald',
+      releaseDate: '2018-11-14'
     })
   ]);
 };
@@ -123,8 +119,8 @@ const App = function() {
 ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
 
-- Now `Pet` is a more flexible component that accepts props from its parent.
-- `Props` are variables that parent component (`App`) pass to its children (`Pet`).
+- Now `Movie` is a more flexible component that accepts props from its parent.
+- `props` are variables that parent component (`App`) pass to its children (`Movie`).
 
 <hr >
 
@@ -134,18 +130,19 @@ As mentioned before, there are 2 types of component - function component and cla
 class App extends React.Component {
   render() {
     return React.createElement('div', {}, [
-      React.createElement('h1', {}, 'Adopt Me!'),
-      React.createElement(Pet, {
-        name: 'Luna',
-        animal: 'Dog',
-        breed: 'Havanese'
+      React.createElement('h1', {}, 'React Movie App'),
+      React.createElement(Movie, {
+        name: 'Aquaman',
+        releaseDate: '2018-12-07'
       }),
-      React.createElement(Pet, {
-        name: 'Pepper',
-        animal: 'Bird',
-        breed: 'Cockatiel'
+      React.createElement(Movie, {
+        name: 'Bumblebee',
+        releaseDate: '2018-12-15'
       }),
-      React.createElement(Pet, { name: 'Doink', animal: 'Cat', breed: 'Mix' })
+      React.createElement(Movie, {
+        name: 'Fantastic Beasts: The Crimes of Grindelwald',
+        releaseDate: '2018-11-14'
+      })
     ]);
   }
 }
@@ -157,6 +154,16 @@ class App extends React.Component {
 - Both function component and render method of class component must be pure function, i.e.:
   - given the same input, it always return the same output (markup)
   - it does not have any side effect - you should not make ajax call / add event listener here.
-- So, when you should make an ajax call in a React app, that will be part 3 of this course. But before that, let's dive into the tooling around React.
+- So, when you should make an ajax call in a React app? That will be answered in part 3 of this course. But before that, let's dive into the tooling around React.
+
+<hr >
+
+## :pencil: Do It: Create your Movie Component
+
+1. Add `Movie` component in your code and use it as explained above.
+1. Modify your `App` component to a class component
+1. (Bonus) Add a new props `genres` in your `Movie` component and render it in a `span` tag.
+
+<hr >
 
 [arrow-function]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions

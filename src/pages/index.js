@@ -15,6 +15,7 @@ const IndexPage = ({ data }) => (
           </li>
         ))}
     </ul>
+    <p>To be continued...</p>
   </PageContainer>
 );
 

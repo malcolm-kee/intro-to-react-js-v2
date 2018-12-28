@@ -5,24 +5,26 @@ path: '/introduction'
 
 # Introduction
 
-This course is "A Complete Introduction to React JS", which will teach you the core of React JS and the tools around ReactJS.
+![React logo](react-logo.png)
+
+This course is "A Complete Introduction to React JS", which will teach you the core of React and the tools around React.
 
 ## Who am I
 
-- A React JS developer, OSS contributor
+- A React developer, OSS contributor
 - Ex BA and Scrum Master
 - Start my developer role in jquery, then fall in love with React
 - Find me at [malcolmkee.com](https://malcolmkee.com)
 
 ## What this courses will covered are:
 
-- Core API of React JS
+- Core API of React
 - common tools that people use in conjunction with React and why to use them
 - common use cases when using React JS e.g. making api call, routing, testing, code splitting
 
 ## What this course will not cover:
 
-- Basics of HTML and Javascript
+- Basics of HTML, CSS, & Javascript
 - Advanced React Patterns e.g. Higher Order Components and Render Props
 - Redux
 - Typescript/Flow
@@ -30,16 +32,16 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 
 ## What is expected of You
 
-- Do the coding exercise
-- Ask questions
-- Help others
+- :pencil: Do the coding exercise
+- :raising_hand: Ask questions
+- :two_men_holding_hands: Help others
 
-## Why React
+## Why Learn React
 
+- It trains you to be a good JS developer - learn functional programming and JS standards
 - It can be included incrementally
 - It is popular - we have good tooling built around React
 - Facebook dogfood React - it means minimal breaking changes and they build tools for migration when introduce breaking change.
-- It trains you to be a good JS developer - learn functional programming and Js standards
 
 ## Why this course
 

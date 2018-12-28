@@ -31,14 +31,14 @@ To avoid the workshop time being spent on downloading and installing tools, make
 - [Tooling around React](react-tooling/react-tooling.md) (1.5 hours) 10.35 - 12.00
   - NodeJS & npm
   - prettier
-  - webpack & babel
   - eslint
-  - React devtools
+  - webpack & babel
 - React core (1.5 hours) 13.00 - 14.30
   - JSX
   - function vs class component
   - react lifecycle method
 - Common React how-to (2 hours) 14.30 - 14.30
+  - using React devtools
   - making api call
   - routing for spa
   - testing
