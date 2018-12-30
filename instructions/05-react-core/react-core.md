@@ -462,7 +462,7 @@ Our app is able to load data from backend API now, which is great. However, ther
 
 Once your page load and you quickly click "Show Movies" button, you may see no movies is displayed if that API is slow. For that, we should display a loading indicator if we waiting for the API response.
 
-> To simulate slow API response, let's modify url in `loadMovies` function `api.js` to `'http://www.deelay.me/1000/https://react-intro-movies.herokuapp.com/movies'`. [deelay.me][http:://www.deelay.me] is a proxy to simulate slow response. The URL above will simulate API response to return after 1 second delay.
+> To simulate slow API response, wrap `loadMovies` function `api.js` to with this [utility](https://gist.github.com/malcolm-kee/8f3d2973872f0791ed5faea9cb4f1891).
 
 [typescript]: https://www.typescriptlang.org/
 [react-devtools]: https://github.com/facebook/react-devtools
