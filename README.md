@@ -35,7 +35,7 @@ To avoid the workshop time being spent on downloading and installing tools, make
   - webpack & babel
 - React core (1.5 hours) 13.00 - 14.30
   - JSX
-  - function vs class component
+  - react states
   - react lifecycle method
 - Common React how-to (2 hours) 14.30 - 14.30
   - using React devtools

@@ -184,6 +184,15 @@ Note that webpack is much more powerful than I've described above. The following
 
 <hr >
 
+## Cleaning Up
+
+As our code has been reorganized, with introduction of webpack, let's update our npm scripts accordingly. Update `format` and `lint` script in `package.json`:
+
+```json
+   "format": "prettier --write src/**/*.{js,jsx}",
+   "lint": "eslint src/**/*.{js,jsx} --quiet"
+```
+
 [webpack]: https://webpack.js.org/
 [commonjs]: https://flaviocopes.com/commonjs/
 [ecma-module]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
