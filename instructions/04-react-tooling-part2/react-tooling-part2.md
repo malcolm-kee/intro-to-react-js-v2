@@ -19,38 +19,43 @@ In this section, we will discuss about webpack and the ecosystem around it.
 
 ### Bundling code with webpack
 
-- To use webpack:
-  1. Install it in your project: `npm install -D webpack webpack-cli`
-  1. Create a folder and call it `src`. Move your `script.js` into this folder and rename it as `index.js`.
-  1. Add the following npm scripts:
-     ```json
-     "build": "webpack --mode=\"development\""
-     ```
-  1. Run `npm run build`
+To use webpack in your project:
+
+1. Install it in your project: `npm install -D webpack webpack-cli`
+1. Create a folder and call it `src`. Move your `script.js` into this folder and rename it as `index.js`.
+1. Add the following npm scripts:
+   ```json
+   "build": "webpack --mode=\"development\""
+   ```
+1. Run `npm run build`
+
 - webpack will produces a file call `main.js` in `dist` folder.
   - webpack will includes some additional code (known as webpackBootstrap). The code is the runtime of webpack to manage your dependencies and perform some magic e.g. lazy-loading (which we will explain later).
   - If you update your `index.html` to use script from `dist/main.js`, the code should works as before.
-- Let's utilize webpack by splitting `App` and `Movie` into their own module/file:
-  1. Create a file alongside `index.js` and call it `movie.js`.
-  1. Cut and paste the `Movie` component into `movie.js`.
-  1. At the bottom of the `movie.js`, add the following statement:
-     ```js
-     export default Movie;
-     ```
-  1. Create another file and call it `app.js`.
-  1. Cut and paste the `App` component into `app.js`.
-  1. At the top of the `app.js`, add the following statement:
-     ```js
-     import Movie from './movie';
-     ```
-  1. At the bottom of the `app.js`, add the following statement:
-     ```js
-     export default App;
-     ```
-  1. All `App` and `Movie` code should be removed from `index.js` now. Add the following statement at the top of `index.js`:
-     ```js
-     import App from './app';
-     ```
+
+Now that webpack is processing our file, let's utilize webpack by splitting `App` and `Movie` into their own module/file:
+
+1. Create a file alongside `index.js` and call it `movie.js`.
+1. Cut and paste the `Movie` component into `movie.js`.
+1. At the bottom of the `movie.js`, add the following statement:
+   ```js
+   export default Movie;
+   ```
+1. Create another file and call it `app.js`.
+1. Cut and paste the `App` component into `app.js`.
+1. At the top of the `app.js`, add the following statement:
+   ```js
+   import Movie from './movie';
+   ```
+1. At the bottom of the `app.js`, add the following statement:
+   ```js
+   export default App;
+   ```
+1. All `App` and `Movie` code should be removed from `index.js` now. Add the following statement at the top of `index.js`:
+   ```js
+   import App from './app';
+   ```
+
 - Functionally, our code still works the same. However, now we organize our code with modules and dependencies between them are managed by webpack.
 - `import` statement is used to include code that the module depends on. For our example above:
   - `app.js` depends on `movie.js`
@@ -71,19 +76,20 @@ In this section, we will discuss about webpack and the ecosystem around it.
 
 ### Bundling external dependencies
 
-- Now let us utilize webpack to manage the our dependencies to React and ReactDOM.
-  1. Install React and ReactDOM: `npm install react react-dom`. Note that there is no `-D` flag as we need React and ReactDOM in our application code, not tools during development/building.
-  1. At the top of your `index.js`, add the following statements:
-     ```js
-     import React from 'react';
-     import ReactDOM from 'react-dom';
-     ```
-  1. At the top of `app.js` and `movie.js`, add the following statement:
-     ```js
-     import React from 'react';
-     ```
-  1. Remove the unpkg script tags for React and ReactDOM in your `index.html`.
-  1. Run `npm run build` again. Verify that your code still works as before.
+Now webpack is managing dependencies between our codes (`index.js`, `app.js` and `movie.js`), let's take one step further to utilize it to manage the our dependencies to React and ReactDOM.
+
+1. Install React and ReactDOM: `npm install react react-dom`. Note that there is no `-D` flag as we need React and ReactDOM in our application code, not tools during development/building.
+1. At the top of your `index.js`, add the following statements:
+   ```js
+   import React from 'react';
+   import ReactDOM from 'react-dom';
+   ```
+1. At the top of `app.js` and `movie.js`, add the following statement:
+   ```js
+   import React from 'react';
+   ```
+1. Remove the unpkg script tags for React and ReactDOM in your `index.html`.
+1. Run `npm run build` again. Verify that your code still works as before.
 
 <hr >
 
@@ -97,17 +103,19 @@ In this section, we will discuss about webpack and the ecosystem around it.
 
 ### Bundling for production
 
-- You may realize that the current output file of webpack has tons of comments and spaces, which is good for us to read and understand what it is doing, but bad to be included to production as those comments are not useful for our customers/users.
-- Let us create a production bundle for our app:
-  1. Add the following npm script in `package.json`:
-     ```json
-     "build:prod": "webpack --mode=\"production\""
-     ```
-  1. run `npm run build:prod`
+You may realize that the current output file of webpack has tons of comments and spaces, which is good for us to read and understand what it is doing, but bad to be included to production as those comments are not useful for our customers/users.
+
+To create a production bundle for our app:
+
+1. Add the following npm script in `package.json`:
+   ```json
+   "build:prod": "webpack --mode=\"production\""
+   ```
+1. run `npm run build:prod`
 
 <hr >
 
-## :pencil: Do It: install React and let webpack bundle it
+## :pencil: Do It: create a production bundle
 
 1. Configure build:prod npm scripts as described above.
 1. Run the script and verify the produced `main.js` is minified, and the file size is much smaller now.
