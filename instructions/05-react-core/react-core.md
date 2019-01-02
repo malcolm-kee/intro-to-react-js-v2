@@ -259,6 +259,7 @@ One last thing before you write your code, install browser extension for [React 
 
 ## :pencil: Do It: enhance App
 
+1. Install React DevTools.
 1. Enhance your `App` component to show movies only when clicked as described above.
 1. Run `npm run build` and verify that the application works as expected.
 
@@ -445,16 +446,7 @@ To load data from backend API:
    ```
 
    - as `this.state.movies` is an array, we use [`Array.map`][array-map] method to loop through the array and render a list of `Movie` component instances.
-   - when you render a dynamic list of component, you need to provide a special props, `key` for React to identify a specific component instance so that it can decide whether an item need to be unmount or just reorder the dom whenever the list change.
-
-<hr >
-
-## :pencil: Do It: Getting Data from Backend API
-
-1. Get the movie data for your `App` from backend API instead of hand-coding them.
-1. Verify that the application works as expected.
-
-<hr >
+   - when you render a dynamic list of component, you need to provide a special props, `key`. `key` is used by React to identify a specific component instance so that it can decide whether an item need to be unmount or just reorder the dom whenever the list change.
 
 ### Touching Up UI by Adding Loading Indicator
 
@@ -462,7 +454,92 @@ Our app is able to load data from backend API now, which is great. However, ther
 
 Once your page load and you quickly click "Show Movies" button, you may see no movies is displayed if that API is slow. For that, we should display a loading indicator if we waiting for the API response.
 
-> To simulate slow API response, wrap `loadMovies` function `api.js` to with this [utility](https://gist.github.com/malcolm-kee/8f3d2973872f0791ed5faea9cb4f1891).
+> To simulate slow API response, wrap `loadMovies` function in `api.js` to with this [utility](https://gist.github.com/malcolm-kee/8f3d2973872f0791ed5faea9cb4f1891).
+
+To show loading indicator when waiting API response:
+
+1. create a file `busy-container.js` in `src` folder with the following contents:
+
+   ```jsx
+   import React from 'react';
+
+   export const BusyContainer = ({ isLoading, children }) => (
+     <div>
+       {isLoading && <span>loading...</span>}
+       {children}
+     </div>
+   );
+   ```
+
+   - `BusyContainer` is a simple component that will render "loading..." text when its `isLoading` props is `true`. In an actual application, you may want to add some fancy spinner svg here.
+   - `children` is a special props for React components. It's the contents within the JSX tags.
+
+1. update `App` component:
+
+   ```jsx
+   import React from 'react';
+   import { loadMovies } from './api';
+   import { BusyContainer } from './busy-container';
+   import Movie from './movie';
+
+   class App extends React.Component {
+     constructor(props) {
+       super(props);
+       this.state = {
+         showMovies: false,
+         isLoading: true,
+         movies: []
+       };
+       this.toggleMovies = this.toggleMovies.bind(this);
+     }
+
+     componentDidMount() {
+       loadMovies().then(movies => this.setState({ movies, isLoading: false }));
+     }
+
+     toggleMovies() {
+       this.setState(prevState => ({
+         showMovies: !prevState.showMovies
+       }));
+     }
+
+     render() {
+       return (
+         <div>
+           <h1>React Movie App</h1>
+           <button onClick={this.toggleMovies}>
+             {this.state.showMovies ? 'Hide' : 'Show'} Movies
+           </button>
+           {this.state.showMovies && (
+             <BusyContainer isLoading={this.state.isLoading}>
+               {this.state.movies.map(movie => (
+                 <Movie
+                   name={movie.name}
+                   releaseDate={movie.releaseDate}
+                   key={movie.id}
+                 />
+               ))}
+             </BusyContainer>
+           )}
+         </div>
+       );
+     }
+   }
+   ```
+
+   - we initiate state with additional props, `isLoading` and set it as `true`.
+   - when ajax call returns, we set `isLoading` to `false`.
+   - `isLoading` is passed to `BusyContainer` as props.
+
+<hr >
+
+## :pencil: Do It: Getting Data from Backend API
+
+1. Get the movie data for your `App` from backend API instead of hand-coding them..
+1. Create `BusyContainer` as described and use it in your `App` component to show loading indicator.
+1. Verify that the application works as expected.
+
+<hr >
 
 [typescript]: https://www.typescriptlang.org/
 [react-devtools]: https://github.com/facebook/react-devtools
