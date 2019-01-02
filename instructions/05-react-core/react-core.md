@@ -535,7 +535,7 @@ To show loading indicator when waiting API response:
 
 ## :pencil: Do It: Getting Data from Backend API
 
-1. Get the movie data for your `App` from backend API instead of hand-coding them..
+1. Get the movie data for your `App` from backend API instead of hand-coding them.
 1. Create `BusyContainer` as described and use it in your `App` component to show loading indicator.
 1. Verify that the application works as expected.
 
