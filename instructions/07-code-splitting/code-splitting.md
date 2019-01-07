@@ -162,4 +162,88 @@ The ESLint error should be fixed now.
 
 <hr >
 
+## Lazy Loading React Component
+
+Once you understand dynamic `import()` for JS code, lazy-loading React Components is a no-brainer.
+
+Let's lazy load our `Movie` components by modify `app.js`:
+
+```jsx
+import React from 'react';
+import { BusyContainer } from './busy-container';
+
+const Movie = React.lazy(() =>
+  import(/* webpackChunkName: "Movie" */ './movie')
+);
+
+const loadCodeAndMoviesData = () =>
+  import(/* webpackChunkName: "api" */ './api').then(({ loadMovies }) =>
+    loadMovies()
+  );
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMovies: false,
+      isLoading: true,
+      movies: []
+    };
+    this.toggleMovies = this.toggleMovies.bind(this);
+  }
+
+  componentDidMount() {
+    loadCodeAndMoviesData().then(movies =>
+      this.setState({ movies, isLoading: false })
+    );
+  }
+
+  toggleMovies() {
+    this.setState(prevState => ({
+      showMovies: !prevState.showMovies
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>React Movie App</h1>
+        <button onClick={this.toggleMovies}>
+          {this.state.showMovies ? 'Hide' : 'Show'} Movies
+        </button>
+        {this.state.showMovies && (
+          <React.Suspense fallback={<span>Loading Component...</span>}>
+            <BusyContainer isLoading={this.state.isLoading}>
+              {this.state.movies.map(movie => (
+                <Movie
+                  name={movie.name}
+                  releaseDate={movie.releaseDate}
+                  key={movie.id}
+                />
+              ))}
+            </BusyContainer>
+          </React.Suspense>
+        )}
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+- We wrap dynamic `import` statement with `React.lazy`, so that React knows this is a lazy-loaded Component.
+- We wrap lazy-loaded component with `React.Suspense` so that React will fallback to the loading indicator whenever any component within the `React.Suspense` is waiting to be loaded.
+
+That's it!
+
+<hr >
+
+## :pencil: Do It: lazy loading React Component
+
+1. modify `app.js` to lazy-load `Movie` component.
+1. test the application and ensure the code still works as before.
+
+<hr >
+
 [dynamic-import]: https://developers.google.com/web/updates/2017/11/dynamic-import
