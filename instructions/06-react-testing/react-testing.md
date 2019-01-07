@@ -361,16 +361,22 @@ describe('<App />', () => {
       .spyOn(api, 'loadMovies')
       .mockImplementation(() => Promise.resolve(mockMovieData));
 
-    const { getByText, queryAllByTestId } = render(<App />);
+    const { getByText, getAllByTestId } = render(<App />);
 
     await wait();
 
     fireEvent.click(getByText('Show Movies'));
 
-    expect(queryAllByTestId('movie').length).toBe(mockMovieData.length);
+    expect(getAllByTestId('movie').length).toBe(mockMovieData.length);
   });
 });
 ```
+
+- we define `mockMovieData` which will be used to act as mock response for the api call. Usually you can get his via the data contract that has been agreed with your the API developer or via the sample REST call to the actual API.
+- we use `fireEvent` helper from `react-testing-library` to simulate event. In the tests, we use it to simulate click event. You can use it to simulate most of the browser events, e.g. focus, blur, change etc.
+- we use `jest.spyOn` to spy the calling of the `loadMovies` function and mock a implementation that will return a Promise that resolve with our `mockMovieData`.
+- we use `wait` helper from `react-testing-library` to introduce some delay. This is because the `loadMovies` returns a promise, which will only be resolve in next ticks on the JS event cycle.
+- we use `getAllByTestId` to get the count of the mounted movie components and asserts the count is equal to the number of movies in our mock data.
 
 [jest]: https://jestjs.io/en/
 [classnames]: https://www.npmjs.com/package/classnames
