@@ -54,6 +54,19 @@ module.exports = {
         pathToConfigModule: 'src/config/typography'
       }
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'Intro to ReactJS',
+        short_name: 'React Intro',
+        start_url: '/',
+        background_color: '#fdf6e3',
+        theme_color: '#61dafb',
+        display: 'standalone',
+        icon: 'src/images/react-logo.png',
+        legacy: true
+      }
+    },
     'gatsby-plugin-netlify'
   ]
 };
