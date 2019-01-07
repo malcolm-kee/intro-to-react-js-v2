@@ -100,7 +100,7 @@ Congratulations! You just written your first test.
   - `expect(result).toEqual(expectedValue)` (recursively check for equality for objecy)
   - `expect(result).toBeDefined()` (equivalent to `expect(result).not.toBe(undefined)`)
 
-    Read through the [docs][jest-expect] to be aware of the supported assertions.
+    Read through the [Jest expect docs][jest-expect] to get an idea of the supported assertions.
 
 ## Additional Configurations of Jest
 
@@ -157,6 +157,159 @@ To generate code coverage report:
 
 <hr >
 
+## Testing React Components
+
+Before we start writing tests for React components, let's take a step back and discuss how we organize a test.
+
+When writing tests for a function, it is mostly about asserting the returns of the function given a specific parameters. The convention is `given X, when Y, then Z`. Given parameters of 'btn' and 'btn--default', when run `classNames`, then it will returns the result of `'btn btn--default'`.
+
+There is no difference when writing tests for React Components. The difference of React components is that the output of the component is not returned to us, but being passed to `ReactDOM` to decide what to append/update in the DOM.
+
+Let's explore how to do that.
+
+### Write React Component test
+
+We will write test for `busy-container.js`. But before that, let's modify `BusyContainer` slightly:
+
+```jsx
+import React from 'react';
+
+export const BusyContainer = ({ isLoading, children }) => (
+  <div>
+    {isLoading && <span data-testid="loading-indicator">loading...</span>}
+    {children}
+  </div>
+);
+```
+
+> `data-testid` attribute is a common convention to add "hook" to DOM for automated testing.
+
+Let's create a file `busy-container.test.js` next to `busy-container.js` with the following contents:
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BusyContainer } from './busy-container';
+
+describe('BusyContainer', () => {
+  it('is defined', () => {
+    expect(BusyContainer).toBeDefined();
+  });
+
+  it('renders loading indicator when props is loading', () => {
+    // Thanks to JSDOM (included part of jest, we have access to browser object like document)
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+
+    ReactDOM.render(
+      <BusyContainer isLoading={true}>
+        <div id="children">Hello Test</div>
+      </BusyContainer>,
+      div
+    );
+
+    const loadingIndicator = div.querySelector(
+      '[data-testid="loading-indicator"]'
+    );
+
+    expect(loadingIndicator).toBeDefined();
+
+    // cleanup after test is done
+    ReactDOM.unmountComponentAtNode(div);
+    document.body.removeChild(div);
+  });
+
+  it('not renders loading indicator when props loading = false', () => {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+
+    ReactDOM.render(
+      <BusyContainer isLoading={false}>
+        <div id="children">Hello Test</div>
+      </BusyContainer>,
+      div
+    );
+
+    const loadingIndicator = div.querySelector(
+      '[data-testid="loading-indicator"]'
+    );
+
+    expect(loadingIndicator).toBe(null);
+
+    // cleanup after test is done
+    ReactDOM.unmountComponentAtNode(div);
+    document.body.removeChild(div);
+  });
+});
+```
+
+- As Jest will run the test in [jsdom] (a environment to be run in NodeJS that supports many features listed in web standards), so we have access to DOM API like `document.createElement` and `document.body.appendChild`.
+- For each test, we need to
+  - setup our DOM by creating a div and append to body, then we use `ReactDOM` to render our components
+  - use `querySelector` to check the current state of the DOM and assert it.
+  - unmount the component with `ReactDOM.unmountComponentAtNode`, then remove the container from the body
+
+As the setup and cleanup are required and similar for all tests, there are a library that already implements them with a bunch of helpers. The library name is [`react-testing-library`][react-testing-library] (surprise, surprise!). Let's install that:
+
+`npm install -D react-testing-library`
+
+Let's change `busy-container.test.js` to the following:
+
+```jsx
+import React from 'react';
+import { render, cleanup } from 'react-testing-library';
+import { BusyContainer } from './busy-container';
+
+afterEach(cleanup);
+
+describe('BusyContainer', () => {
+  it('is defined', () => {
+    expect(BusyContainer).toBeDefined();
+  });
+
+  it('renders loading indicator when props is loading', () => {
+    const { getByTestId } = render(
+      <BusyContainer isLoading={true}>
+        <div id="children">Hello Test</div>
+      </BusyContainer>
+    );
+
+    const loadingIndicator = getByTestId('loading-indicator');
+
+    expect(loadingIndicator).toBeDefined();
+  });
+
+  it('not renders loading indicator when props loading = false', () => {
+    const { queryByTestId } = render(
+      <BusyContainer isLoading={false}>
+        <div id="children">Hello Test</div>
+      </BusyContainer>
+    );
+
+    const loadingIndicator = queryByTestId('loading-indicator');
+
+    expect(loadingIndicator).toBe(null);
+  });
+});
+```
+
+- `cleanup` will perform the cleanup step of unmount component and remove container that we did manually previously.
+- `render` will create a container and mount our component in the container, as we did manually previously.
+- `render` will also returns a few helpers for us to query the DOM. In our case, we use `getByTestId` and `queryByTestId`, which is `querySelector('[data-testid="${testId}"]')` (the difference between the two is `getByTestId` will throws error if no result returns while `queryByTestId` will not throw error and returns `null`). For a full list of supported queries, refer to the [`react-testing-library` Queries docs][react-testing-library-queries].
+
+<hr >
+
+## :pencil: Do It: write React component test
+
+1. install `react-testing-library` as described.
+1. modify `BusyContainer` and write the test for it.
+1. ensure all the tests are passed
+
+<hr >
+
 [jest]: https://jestjs.io/en/
 [classnames]: https://www.npmjs.com/package/classnames
 [jest-expect]: https://jestjs.io/docs/en/expect
+[react-testing-library]: https://testing-library.com/react
+[jsdom]: https://github.com/jsdom/jsdom
+[react-testing-library-queries]: https://testing-library.com/docs/api-queries
