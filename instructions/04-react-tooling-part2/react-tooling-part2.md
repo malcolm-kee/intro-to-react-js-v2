@@ -101,6 +101,44 @@ Now webpack is managing dependencies between our codes (`index.js`, `app.js` and
 
 <hr >
 
+### webpack-dev-server and html-webpack-plugin
+
+`webpack-dev-server` is a feature that would ease your development by spinning up a web server to serve your code. We will use it with `html-webpack-plugin` so that even our `index.html` will be managed by webpack.
+
+1. `npm i -D webpack-dev-server html-webpack-plugin`
+1. update `webpack.config.js`:
+
+   ```js
+   // eslint-disable-next-line no-unused-vars
+   const webpack = require('webpack');
+   const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+   /**
+    * @type {webpack.Configuration}
+    */
+   module.exports = {
+     devServer: {
+       port: 9200
+     },
+     plugins: [
+       new HtmlWebpackPlugin({
+         template: 'index.html'
+       })
+     ]
+   };
+   ```
+
+1. remove `<script src="dist/main.js"></script>` from `index.html` because webpack will help you to inject it.
+1. add a `start` npm script:
+
+   ```json
+   "start": "webpack-dev-server --mode=\"development\""
+   ```
+
+1. run `npm start` (`npm run start` works too)
+1. open the url [http://localhost:9200/](http://localhost:9200/) with your browser.
+1. try modify your code now. webpack will help you to refresh browser.
+
 ### Bundling for production
 
 You may realize that the current output file of webpack has tons of comments and spaces, which is good for us to read and understand what it is doing, but bad to be included to production as those comments are not useful for our customers/users.
@@ -171,7 +209,15 @@ Note that webpack is much more powerful than I've described above. The following
              use: ['babel-loader']
            }
          ]
-       }
+       },
+       devServer: {
+         port: 9200
+       },
+       plugins: [
+         new HtmlWebpackPlugin({
+           template: 'index.html'
+         })
+       ]
      };
      ```
   1. Update your npm scripts in `package.json`:

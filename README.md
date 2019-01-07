@@ -7,7 +7,7 @@ path: '/'
 
 A complete introduction to React - up and running with React by learning tooling that improves your development workflow, React core API, and common how-to e.g. writing tests, routing, and code splitting.
 
-> This repo outlines the content of the workshop - separate repo will be written as a code-along sample for the workshop.
+> This repo outlines the content of the workshop - please refer to this [repo][code-along-repo] for the code-along sample of this workshop.
 
 ## Prerequisite
 
@@ -43,3 +43,5 @@ To avoid the workshop time being spent on downloading and installing tools, make
   - routing for spa
   - testing
   - code splitting
+
+[code-along-repo]: https://github.com/malcolm-kee/react-movie-app
