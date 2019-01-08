@@ -96,7 +96,10 @@ Now you can invoke prettier by running `npm run format`.
 
 - ESLint is a linter that enforce some code styles that more to usage than to code styles, e.g. never use `with` or never has unused parameters in your function.
 - To use ESLint in your project:
-  1. run `npm install -D eslint eslint-config-prettier`
+  1. install the packages as devDependencies:
+     ```bash
+       npm install -D eslint eslint-config-prettier
+     ```
   1. create a file and call it `.eslintrc` with the following content:
      ```json
      {

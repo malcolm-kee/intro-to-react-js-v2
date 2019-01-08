@@ -201,7 +201,10 @@ class App extends React.Component {
 
 - We declare `constructor` for our `App` and initialize our state with `this.state = { showMovies: false }`. Note that I've told you previously that class component is more powerful, and state is one of the functionality that only available for class component (at least for now).
 - React state should always be a plain Object, while the value of the properties it totally up to you.
-- We bind `this` keywords in `showMovies` methods to the component with `this.showMovies = this.showMovies.bind(this)`, because `this` is dynamic in Javascript (try to remove that line and you will get an error).
+- Because `this` is dynamic in Javascript, we need to bind `this` keywords in `showMovies` methods to the component with the following code:
+  ```js
+  this.showMovies = this.showMovies.bind(this);
+  ```
 - We declare a `showMovies` methods, which will call `this.setState`. `setState` is a method that is available to all React class component (the component inherit this method via `extends React.Component`), and it's only way for you to update states. If you update state directly (`this.state.showMovies = true`), React will not be notified that the state has been change and thus will not re-render your component, then what is displayed will be incorrect.
 - When we call `setState`, React will merge the object we provide it with its current state, then it will rerender the component.
 - In the `render` method, we create a `button` element which will call `showMovies` method when it is clicked.

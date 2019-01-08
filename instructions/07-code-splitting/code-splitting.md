@@ -80,9 +80,12 @@ export default App;
 - We define a function `loadCodeAndMoviesData`, which will use dynamic `import` to load the code and then use the loaded function `loadMovies` to make the ajax call.
 - In the `componentDidMount`, we use `loadCodeAndMoviesData` to get the movies from backend.
 
-When you try to compile the code by `npm run build` now, you would get a syntax error. This is because babel does not understand dynamic `import` by default, so we need to add plugin to "teach" babel about the syntax.
+When you try to compile the code by `npm start` now, you would get a syntax error. This is because babel does not understand dynamic `import` by default, so we need to add plugin to "teach" babel about the syntax.
 
-1. `npm install -D @babel/plugin-syntax-dynamic-import`
+1. install a babel plugin as devDependency:
+   ```bash
+     npm install -D @babel/plugin-syntax-dynamic-import
+   ```
 1. update `.babelrc`:
    ```json
    {
@@ -90,7 +93,7 @@ When you try to compile the code by `npm run build` now, you would get a syntax 
      "plugins": ["@babel/plugin-syntax-dynamic-import"]
    }
    ```
-1. run `npm run build` again.
+1. run `npm start` again.
 
 Now you would see the following output:
 
@@ -106,28 +109,7 @@ Built at: 2019-01-07 21:45:12
 Entrypoint main = main.js
 ```
 
-Try to open the `index.html` file, and you realize that the splitted chunk (`0.js` and `1.js` cannot be loaded). This is because our webpack output is in the `dist/` folder and webpack doesn't know that. Let's fix it.
-
-Update `webpack.config.js` to:
-
-```js
-module.exports = {
-  output: {
-    publicPath: '/dist/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      }
-    ]
-  }
-};
-```
-
-Run `npm run build` again and refresh `index.html`, and your page is loaded successfully! Woohoo!
+And from the Network tab of your DevTools, you should be able to see chunk `0.bundle.js` and `1.bundle.js` are loaded.
 
 ### Fixing ESLint
 
@@ -234,6 +216,7 @@ export default App;
 
 - We wrap dynamic `import` statement with `React.lazy`, so that React knows this is a lazy-loaded Component.
 - We wrap lazy-loaded component with `React.Suspense` so that React will fallback to the loading indicator whenever any component within the `React.Suspense` is waiting to be loaded.
+- The comment `/* webpackChunkName: "Movie" */` is known as webpack magic comments. It allows us to name our chunk with a desired name like `api.js` instead of `0.js`. You can read it in [this section of webpack docs][webpack-dynamic-imports].
 
 That's it!
 
@@ -247,3 +230,4 @@ That's it!
 <hr >
 
 [dynamic-import]: https://developers.google.com/web/updates/2017/11/dynamic-import
+[webpack-dynamic-imports]: https://webpack.js.org/guides/code-splitting/#dynamic-imports

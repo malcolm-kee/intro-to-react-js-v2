@@ -105,7 +105,10 @@ Now webpack is managing dependencies between our codes (`index.js`, `app.js` and
 
 `webpack-dev-server` is a feature that would ease your development by spinning up a web server to serve your code. We will use it with `html-webpack-plugin` so that even our `index.html` will be managed by webpack.
 
-1. `npm i -D webpack-dev-server html-webpack-plugin`
+1. install required packages as devDependencies:
+   ```bash
+     npm i -D webpack-dev-server html-webpack-plugin
+   ```
 1. update `webpack.config.js`:
 
    ```js
@@ -132,11 +135,10 @@ Now webpack is managing dependencies between our codes (`index.js`, `app.js` and
 1. add a `start` npm script:
 
    ```json
-   "start": "webpack-dev-server --mode=\"development\""
+   "start": "webpack-dev-server --mode=\"development\" --open"
    ```
 
-1. run `npm start` (`npm run start` works too)
-1. open the url [http://localhost:9200/](http://localhost:9200/) with your browser.
+1. run `npm start` (`npm run start` works too). This should open your default browser with the url [http://localhost:9200/](http://localhost:9200/).
 1. try modify your code now. webpack will help you to refresh browser.
 
 ### Bundling for production
@@ -164,9 +166,9 @@ To create a production bundle for our app:
 
 Note that webpack is much more powerful than I've described above. The following common use cases of webpack are omitted here, but you should have a read after this workshop.
 
-- [`HtmlWebpackPlugin`][htmlwebpackplugin]: include your `index.html` into your webpack bundling process, so it will auto-inject any output into the html automatically.
-- [`webpack DevServer`][webpack-devserver]: create a development server that will serve your output files and auto-reload page whenever you edit your code
 - [`style-loader`][style-loader] and [`css-loader`][css-loader]: allow you to import `.css` file in your javascript file, which will be injected as `<script>` tag in html.
+- [Hot Module Replacement][hot-module-replacement] used in conjunction with [`react-hot-loader`][react-hot-loader] allows you to tweak React components while maintaining state.
+- [`dotenv-webpack`][dotenv-webpack] allows you to define environment variables. This is very commonly used to set environment specific variables, e.g. API endpoints, variables to set logging behavior etc.
 
 ## [Babel]
 
@@ -255,4 +257,7 @@ As our code has been reorganized, with introduction of webpack, let's update our
 [webpack-devserver]: https://webpack.js.org/configuration/dev-server/
 [style-loader]: https://webpack.js.org/loaders/style-loader/
 [css-loader]: https://webpack.js.org/loaders/css-loader/
+[hot-module-replacement]: https://webpack.js.org/guides/hot-module-replacement/
+[react-hot-loader]: https://github.com/gaearon/react-hot-loader
+[dotenv-webpack]: https://www.npmjs.com/package/dotenv-webpack
 [babel]: https://babeljs.io/

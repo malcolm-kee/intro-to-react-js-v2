@@ -19,7 +19,10 @@ However, thanks to [Jest], all of these are included in single library with mini
 
 To setup Jest for our application:
 
-1. run `npm install -D jest babel-jest babel-core@7.0.0-bridge.0`
+1. install the packages as devDependencies:
+   ```bash
+     npm install -D jest babel-jest babel-core@7.0.0-bridge.0
+   ```
 1. add a `test` npm script in `package.json`
 
    ```json
@@ -96,9 +99,10 @@ Congratulations! You just written your first test.
 - `test` is used to wrap your unit test and give it a name. When your test fails, the test name will be displayed in the console.
 - `expect` is used to assert the result of your test. Common usages are:
 
-  - `expect(result).toBe(expectedValue)` (use `===` for equality check)
-  - `expect(result).toEqual(expectedValue)` (recursively check for equality for objecy)
+  - `expect(result).toBe(expected)` (use `===` for equality check)
+  - `expect(result).toEqual(expected)` (recursively check for equality for object and array, this is useful when you don't care the identity of the variable but the value of it)
   - `expect(result).toBeDefined()` (equivalent to `expect(result).not.toBe(undefined)`)
+  - each of the assertion above can be prefix with `.not` to invert the assertion, e.g. `expect(result).not.toBeDefined()`, `expect(result).not.toBe(expected)`.
 
     Read through the [Jest expect docs][jest-expect] to get an idea of the supported assertions.
 
