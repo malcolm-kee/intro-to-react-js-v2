@@ -5,16 +5,18 @@ import { PageContainer } from '../components/page-container';
 const IndexPage = ({ data }) => (
   <PageContainer>
     <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
-    <h2>Table of Contents</h2>
-    <ul>
-      {data.instructions.edges
-        .map(edge => edge.node.frontmatter)
-        .map(({ path, title }) => (
-          <li key={path}>
-            <Link to={path}>{title}</Link>
-          </li>
-        ))}
-    </ul>
+    <section className="table-of-content-section">
+      <h2>Table of Contents</h2>
+      <ol>
+        {data.instructions.edges
+          .map(edge => edge.node.frontmatter)
+          .map(({ path, title }) => (
+            <li key={path}>
+              <Link to={path}>{title}</Link>
+            </li>
+          ))}
+      </ol>
+    </section>
   </PageContainer>
 );
 

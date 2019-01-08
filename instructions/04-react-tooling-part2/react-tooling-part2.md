@@ -174,7 +174,7 @@ Note that webpack is much more powerful than I've described above. The following
 
 ![Babel logo](babel-logo.png)
 
-- In our current code, we use new JS feature/syntax like arrow-function, `const` and `class`. However, only modern browser recognize those JS syntax - it will cause parsing error in older browser like IE 11. You can confirm this by opening your `index.html` using IE.
+- In our current code, we use new JS feature/syntax like arrow-function, `const` and `class`. However, only modern browser recognize those JS syntax - it will cause parsing error in older browser like IE 11. You can confirm this by opening [http://localhost:9200/](http://localhost:9200/) using IE.
 - Babel is the tool that allow us to write modern JS while maximizing backward compatibility.
 - Babel is a compiler that compile your modern JS code (usually called ES2015+, or ES6+) to the older JS code.
 - You can see Babel in action at [https://babeljs.io/repl](https://babeljs.io/repl).
@@ -225,18 +225,19 @@ Note that webpack is much more powerful than I've described above. The following
   1. Update your npm scripts in `package.json`:
      ```javascript
      ...
-     "build": "webpack --config webpack.config.js --mode=\"development\"",
-     "build:prod": "webpack --config webpack.config.js --mode=\"production\"",
+     "build": "webpack --mode=\"development\"",
+     "build:prod": "webpack --mode=\"production\"",
      ...
      ```
-  1. Run `npm run build` again. Verify your code should works in IE now.
+  1. Terminate your webpack-dev-server if it's running by Ctrl+C. Run `npm start` start it again. This is because configuration change will not be picked up by webpack-dev-server while it is running.
+  1. Open [http://localhost:9200/](http://localhost:9200/) with IE and verify your code should works now.
 
 <hr >
 
 ## :pencil: Do It: install Babel and integrate it with your project
 
 1. Configure Babel as described above.
-1. Run `npm run build` and verify that the application works in IE.
+1. Restart webpack-dev-server and verify that the application works in IE.
 
 <hr >
 

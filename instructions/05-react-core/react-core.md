@@ -74,7 +74,7 @@ Therefore, we need to configure Babel so that it will recognize JSX and compile 
    }
    ```
 
-Now when you run `npm run build` again, the compilation should succeeds and your app should work as before.
+Now when you start webpack-dev-server, the compilation should succeeds and your app should work as before.
 
 <hr >
 
@@ -82,7 +82,7 @@ Now when you run `npm run build` again, the compilation should succeeds and your
 
 1. Update `index.js`, `app.js`, and `movie.js` to use JSX as described above.
 1. Configure Babel to compile JSX.
-1. Run `npm run build` and verify that the application still works as before.
+1. Restart webpack-dev-server and verify that the application still works as before.
 
 <hr >
 
@@ -264,7 +264,7 @@ One last thing before you write your code, install browser extension for [React 
 
 1. Install React DevTools.
 1. Enhance your `App` component to show movies only when clicked as described above.
-1. Run `npm run build` and verify that the application works as expected.
+1. Verify that the application works as expected.
 
 <hr >
 

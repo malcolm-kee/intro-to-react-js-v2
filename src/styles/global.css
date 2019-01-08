@@ -6,9 +6,21 @@ h2 a {
   text-decoration: none;
 }
 
+.table-of-content-section {
+  margin: 32px 0;
+}
+
 .instruction-template-nav {
   display: flex;
   justify-content: space-between;
+  margin-top: 16px;
+}
+
+.instruction-template-nav a {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 500px) {
