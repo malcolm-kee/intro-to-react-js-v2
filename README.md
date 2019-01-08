@@ -24,24 +24,4 @@ To avoid the workshop time being spent on downloading and installing tools, make
 - git ([Download](https://git-scm.com/downloads))
 - VS code ([Download](https://code.visualstudio.com/Download)) - you can use other editor if you wish, but when discussing editor integration, this workshop will focus on VS code only.
 
-## Agenda
-
-- [Introduction](introduction/introduction.md) (5 minutes) 10.00 - 10.05
-- [Vanilla React without build tools](vanilla-react/vanilla-react.md) (30 minutes) 10.05 - 10.35
-- [Tooling around React](react-tooling/react-tooling.md) (1.5 hours) 10.35 - 12.00
-  - NodeJS & npm
-  - prettier
-  - eslint
-  - webpack & babel
-- React core (1.5 hours) 13.00 - 14.30
-  - JSX
-  - react states
-  - react lifecycle method
-- Common React how-to (2 hours) 14.30 - 14.30
-  - using React devtools
-  - making api call
-  - routing for spa
-  - testing
-  - code splitting
-
 [code-along-repo]: https://github.com/malcolm-kee/react-movie-app

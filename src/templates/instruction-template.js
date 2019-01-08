@@ -5,21 +5,20 @@ import { MaterialIcons } from '../components/material-icons';
 import { PageContainer } from '../components/page-container';
 
 const InstructionNav = ({ pageContext }) => (
-  <nav
-    className="instruction-template-nav"
-    style={{ display: 'flex', justifyContent: 'space-between' }}
-  >
+  <nav className="instruction-template-nav">
     {pageContext.previous ? (
       <LinkButton to={pageContext.previous.frontmatter.path}>
         <MaterialIcons name="arrow_back" />
-        {pageContext.previous.frontmatter.title}
+        <span className="hide-small">
+          {pageContext.previous.frontmatter.title}
+        </span>
       </LinkButton>
     ) : (
       <span />
     )}
     {pageContext.next ? (
       <LinkButton to={pageContext.next.frontmatter.path}>
-        {pageContext.next.frontmatter.title}
+        <span className="hide-small">{pageContext.next.frontmatter.title}</span>
         <MaterialIcons name="arrow_forward" />
       </LinkButton>
     ) : (

@@ -5,3 +5,14 @@ img.emoji-icon {
 h2 a {
   text-decoration: none;
 }
+
+.instruction-template-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+  .hide-small {
+    display: none;
+  }
+}
