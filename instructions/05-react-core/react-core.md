@@ -7,8 +7,6 @@ path: '/react-core'
 
 In this section, we will discuss the core API of React.
 
-But before that, we will discuss the thing people associate closely with React &mdash; JSX
-
 ## JSX
 
 You do not need JSX to use React, as I've shown you in [previous section](/vanilla-react). However, JSX would make your code a bit more readable.
@@ -475,7 +473,7 @@ To show loading indicator when waiting API response:
    ```
 
    - `BusyContainer` is a simple component that will render "loading..." text when its `isLoading` props is `true`. In an actual application, you may want to add some fancy spinner svg here.
-   - `children` is a special props for React components. It's the contents within the JSX tags.
+   - `children` is a special props for React components. It's the contents within the JSX tags (if you remember, the third parameters to `React.createElement`).
 
 1. update `App` component:
 

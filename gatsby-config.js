@@ -5,7 +5,8 @@ module.exports = {
   siteMetadata: {
     title: `Introduction to React JS`,
     author: packageJson.author,
-    description: packageJson.description
+    description: packageJson.description,
+    siteUrl: packageJson.homepage
   },
   plugins: [
     {
@@ -54,6 +55,7 @@ module.exports = {
         pathToConfigModule: 'src/config/typography'
       }
     },
+    'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {

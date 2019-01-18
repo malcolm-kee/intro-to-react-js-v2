@@ -39,9 +39,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 ## Why Learn React
 
 - It trains you to be a good JS developer - learn functional programming and JS standards
-- It can be included incrementally
-- It is popular - we have good tooling built around React
-- Facebook dogfood React - it means minimal breaking changes and they build tools for migration when introduce breaking change.
+- It is popular - good job prospect! :moneybag:
 
 ## Why this course
 

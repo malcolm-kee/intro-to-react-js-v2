@@ -5,7 +5,7 @@ path: '/code-splitting'
 
 # Code Splitting
 
-In any large-scale React applications, it is very common that your users would not use all features everytime they access your applications. Therefore, it's better if you can split the code to multiple chunks and only send down the chunks that is required (lazy-loading).
+In most large-scale React applications, it is very common that your users would not need all features everytime they access your applications. Therefore, it's better if you can split the code to multiple chunks and only send down the chunks that is required (lazy-loading).
 
 This used to be very difficult to do in a scalable way. However, thanks to webpack (and other bundler like Parcel), it has becoming very easy to setup.
 
