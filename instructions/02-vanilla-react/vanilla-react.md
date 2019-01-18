@@ -29,6 +29,8 @@ We will start learning React by using React with vanilla JS - which means we wil
 </html>
 ```
 
+> Pro Tips: If you're using VS Code (which supports emmet out-out-the-box), you can type `html:5` can press Tab key, which will generates most of the code above.
+
 In the `<script>` tag, add the following code
 
 ```js

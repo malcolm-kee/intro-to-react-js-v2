@@ -11,11 +11,13 @@ In this section, we will discuss about webpack and the ecosystem around it.
 
 ![webpack logo](webpack-logo.png)
 
-- Modern JS applications usually involved hundreds, if not thousands of files/functions. It would be painful and error-prone if we just include `<script>` tags in our html file manually.
-- This may not seems obvious to us now because currently we have only two components `App` and `Movie`. However, even with only two components, we need to bear in mind that `React` and `ReactDOM` are our dependencies and we need to ensure our code only run after they are loaded. Try to move our script tag above the `React` and `ReactDOM` script tags, and you realize our code no longer works because React code has not loaded yet.
-- Now imagine you have 50+ components and more than 20 dependencies, and there are some inter-dependencies between those files, manually analyzing and rearranging your script tags would be very painful, if not impossible.
-- webpack is the tools that solves this problem. It allows us to use JS module system like [commonjs] (e.g. `const React = require('react')`) and [ECMAScript Module][ecma-module] (e.g. `import React from 'react'`) by parsing them and create a single bundled output file.
-- On top of that, webpack has been extended to handle all types of files that involved in a modern web application, e.g. css, images, html etc.
+Modern JS applications usually involved hundreds, if not thousands of files/functions. It would be painful and error-prone if we just include `<script>` tags in our html file manually.
+
+This may not seems obvious to us now because currently we have only two components `App` and `Movie`. However, even with only two components, we need to bear in mind that `React` and `ReactDOM` are our dependencies and we need to ensure our code only run after they are loaded. Try to move our script tag above the `React` and `ReactDOM` script tags, and you realize our code no longer works because React code has not loaded yet.
+
+Now imagine you have 50+ components and more than 20 dependencies, and there are some inter-dependencies between those files, manually analyzing and rearranging your script tags would be very painful, if not impossible.
+
+webpack is the tools that solves this problem. It allows us to use JS module system like [commonjs] (e.g. `const React = require('react')`) and [ECMAScript Module][ecma-module] (e.g. `import React from 'react'`) by parsing them and create a single bundled output file. On top of that, webpack has been extended to handle all types of files that involved in a modern web application, e.g. css, images, html etc.
 
 ### Bundling code with webpack
 
@@ -56,7 +58,8 @@ Now that webpack is processing our file, let's utilize webpack by splitting `App
    import App from './app';
    ```
 
-- Functionally, our code still works the same. However, now we organize our code with modules and dependencies between them are managed by webpack.
+Functionally, our code still works the same. However, now we organize our code with modules and dependencies between them are managed by webpack.
+
 - `import` statement is used to include code that the module depends on. For our example above:
   - `app.js` depends on `movie.js`
   - `index.js` depends on `app.js`
@@ -103,7 +106,7 @@ Now webpack is managing dependencies between our codes (`index.js`, `app.js` and
 
 ### webpack-dev-server and html-webpack-plugin
 
-`webpack-dev-server` is a feature that would ease your development by spinning up a web server to serve your code. We will use it with `html-webpack-plugin` so that even our `index.html` will be managed by webpack.
+`webpack-dev-server` is a webpack feature that would ease your development by spinning up a web server to serve your code. We will use it with `html-webpack-plugin` so that even our `index.html` will be managed by webpack.
 
 1. install required packages as devDependencies:
    ```bash
@@ -157,8 +160,8 @@ To create a production bundle for our app:
 
 ## :pencil: Do It: create a production bundle
 
-1. Configure build:prod npm scripts as described above.
-1. Run the script and verify the produced `main.js` is minified, and the file size is much smaller now.
+1. configure webpack-dev-server as described and run it. Verify it recompile and refresh your browser when you make change to your code.
+1. configure build:prod npm scripts as described above. Verify the produced `main.js` is minified, and the file size is much smaller now.
 
 <hr >
 
@@ -169,6 +172,7 @@ Note that webpack is much more powerful than I've described above. The following
 - [`style-loader`][style-loader] and [`css-loader`][css-loader]: allow you to import `.css` file in your javascript file, which will be injected as `<script>` tag in html.
 - [Hot Module Replacement][hot-module-replacement] used in conjunction with [`react-hot-loader`][react-hot-loader] allows you to tweak React components while maintaining state.
 - [`dotenv-webpack`][dotenv-webpack] allows you to define environment variables. This is very commonly used to set environment specific variables, e.g. API endpoints, variables to set logging behavior etc.
+- [`webpack-merge`][webpack-merge] allows you to merge webpack configurations. This is useful when you have multiple webpack configurations for different purpose (development optimized for compilation time, production optimized for runtime performance), and this package allows you to merge webpack configurations instead of copy-pasting the configurations.
 
 ## [Babel]
 
@@ -261,4 +265,5 @@ As our code has been reorganized, with introduction of webpack, let's update our
 [hot-module-replacement]: https://webpack.js.org/guides/hot-module-replacement/
 [react-hot-loader]: https://github.com/gaearon/react-hot-loader
 [dotenv-webpack]: https://www.npmjs.com/package/dotenv-webpack
+[webpack-merge]: https://www.npmjs.com/package/webpack-merge
 [babel]: https://babeljs.io/
