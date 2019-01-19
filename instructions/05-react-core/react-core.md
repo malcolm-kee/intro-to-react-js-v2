@@ -203,6 +203,7 @@ class App extends React.Component {
   ```js
   this.showMovies = this.showMovies.bind(this);
   ```
+  (This binding is required for _each_ custom method that you define for React component. I will show you how to avoid those tedious repetitions slightly later.)
 - We declare a `showMovies` methods, which will call `this.setState`. `setState` is a method that is available to all React class component (the component inherit this method via `extends React.Component`), and it's only way for you to update states. If you update state directly (`this.state.showMovies = true`), React will not be notified that the state has been change and thus will not re-render your component, then what is displayed will be incorrect.
 - When we call `setState`, React will merge the object we provide it with its current state, then it will rerender the component.
 - In the `render` method, we create a `button` element which will call `showMovies` method when it is clicked.
@@ -252,6 +253,53 @@ class App extends React.Component {
 }
 ```
 
+### Use Class Properties Syntax
+
+It is tedious and error-prone to remember and write the binding for each of your component methods. Luckily, you could use the class properties syntax.
+
+Convert your `App` component as below:
+
+```jsx
+class App extends React.Component {
+    state = {
+      showMovies: false
+    };
+
+  showMovies = () => {
+    this.setState({
+      showMovies: true
+    });
+  }
+
+  render() {
+    ...
+    }
+}
+```
+
+This is much more terse than previous code. However, you would see some compilation error now because class properties is still at proposal phase and babel doesn't understand it by default. To make babel understand additonal syntax, we need to install plugin to "teach" it to parse the syntax.
+
+1. Install the babel plugin:
+
+   ```bash
+   npm install -D @babel/plugin-proposal-class-properties
+   ```
+
+1. Update `.babelrc` as below:
+
+   ```json
+   {
+     "presets": ["@babel/preset-env", "@babel/preset-react"],
+     "plugins": ["@babel/plugin-proposal-class-properties"]
+   }
+   ```
+
+1. Restart webpack-dev-server.
+
+Your code should works now, but with terser code.
+
+### React DevTools
+
 One last thing before you write your code, install browser extension for [React DevTools][react-devtools]. The extension will add a new tab in your browser Devtools with title "React", which you can used to inspect your React component props and states.
 
 ![React DevTools](react-devtools.png)
@@ -261,7 +309,8 @@ One last thing before you write your code, install browser extension for [React 
 ## :pencil: Do It: enhance App
 
 1. Install React DevTools.
-1. Enhance your `App` component to show movies only when clicked as described above.
+1. Configure babel to parse class properties syntax.
+1. Modify your `App` component to show movies only when clicked as described above.
 1. Verify that the application works as expected.
 
 <hr >
