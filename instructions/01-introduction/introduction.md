@@ -11,7 +11,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 
 ## Who am I
 
-- A React developer, OSS contributor
+- A Javascript developer (primarily in React), OSS contributor
 - Ex BA and Scrum Master
 - Start my developer role in jquery, then fall in love with React
 - Find me at [malcolmkee.com](https://malcolmkee.com)
@@ -19,7 +19,7 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 ## What this courses will covered are:
 
 - Core API of React
-- common tools that people use in conjunction with React and why to use them
+- common tools that people use in conjunction with React and their purpose
 - common use cases when using React JS e.g. making api call, routing, testing, code splitting
 
 ## What this course will not cover:
@@ -43,4 +43,4 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 
 ## Why this course
 
-Being productive in React requires more than familiar with React API, you also need to know the tooling around React and the value they bring, so you know when to use them.
+Being productive in React requires more than familiar with React API, you also need to know the tooling around React and the value they bring, so you know when to use and modify them.
