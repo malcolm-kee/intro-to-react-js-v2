@@ -42,6 +42,10 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 - :raising_hand: Ask questions
 - :two_men_holding_hands: Help others
 
+> While following along the code exercise, whenever you're lost, look for the :octocat: emoji, which will point you to the branch in this [repo][code-along-repo] at the point of the workshop. Example below:
+
+> [:octocat: `master`](https://github.com/malcolm-kee/react-movie-app/tree/master)
+
 ## Why Learn React
 
 - It trains you to be a good JS developer - learn functional programming and JS standards
@@ -55,3 +59,5 @@ My hope is that at the end of this workshop,
 
 - you understand when to use the modern frontend development tools, regardless if you're using React, JQuery, or Vue.
 - you have sufficient understandings of React and the ecosystem around it that you know what to search for when you encounters a problem
+
+[code-along-repo]: https://github.com/malcolm-kee/react-movie-app

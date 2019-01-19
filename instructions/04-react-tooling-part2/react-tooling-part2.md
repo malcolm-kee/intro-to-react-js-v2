@@ -75,6 +75,8 @@ Functionally, our code still works the same. However, now we organize our code w
 1. Verify that your code still works as before.
 1. (Bonus) use named exports for `movie.js`.
 
+> [:octocat: `030-webpack-app-code`](https://github.com/malcolm-kee/react-movie-app/tree/030-webpack-app-code)
+
 <hr >
 
 ### Bundling external dependencies
@@ -98,21 +100,23 @@ Now webpack is managing dependencies between our codes (`index.js`, `app.js` and
 
 ## :pencil: Do It: install React and let webpack bundle it
 
-1. Install React and ReactDOM.
+1. Install React and ReactDOM as the dependencies of the project.
 1. Bundle them together by including changes as described above.
 1. Verify that your code still works as before.
+
+> [:octocat: `040-webpack-dependencies`](https://github.com/malcolm-kee/react-movie-app/tree/040-webpack-dependencies)
 
 <hr >
 
 ### webpack-dev-server and html-webpack-plugin
 
-`webpack-dev-server` is a webpack feature that would ease your development by spinning up a web server to serve your code. We will use it with `html-webpack-plugin` so that even our `index.html` will be managed by webpack.
+[`webpack-dev-server`][webpack-devserver] is a webpack feature that would ease your development by starting up a web server to serve your code. We will use it with [`html-webpack-plugin`][htmlwebpackplugin] so that even our `index.html` will be managed by webpack.
 
 1. install required packages as devDependencies:
    ```bash
      npm i -D webpack-dev-server html-webpack-plugin
    ```
-1. update `webpack.config.js`:
+1. create a file `webpack.config.js` with the following content. `webpack.config.js` is the file that allows you to customize behavior of webpack. There are [many configurations][webpack-configurations] that you can do here, e.g. specify the entry points (if you entry point is not `src/index.js`) or the output folder (if you want to put the output in the folder with name other than `dist`).
 
    ```js
    // eslint-disable-next-line no-unused-vars
@@ -158,10 +162,12 @@ To create a production bundle for our app:
 
 <hr >
 
-## :pencil: Do It: create a production bundle
+## :pencil: Do It: setup webpack-dev-server create a production bundle
 
 1. configure webpack-dev-server as described and run it. Verify it recompile and refresh your browser when you make change to your code.
 1. configure build:prod npm scripts as described above. Verify the produced `main.js` is minified, and the file size is much smaller now.
+
+> [:octocat: `050-webpack-dev-server`](https://github.com/malcolm-kee/react-movie-app/tree/050-webpack-dev-server)
 
 <hr >
 
@@ -204,7 +210,7 @@ Note that webpack is much more powerful than I've described above. The following
      > 1%
      not ie <= 8
      ```
-  1. Create a `webpack.config.js` file with the following content. This configuration tells webpack to run through all file ends with `.js` or `.jsx` extension through the `babel-loader`.
+  1. Update `webpack.config.js` file by adding `module.rules` section, like the following content. This configuration tells webpack to run through all file ends with `.js` or `.jsx` extension through the `babel-loader`.
      ```javascript
      module.exports = {
        module: {
@@ -226,13 +232,6 @@ Note that webpack is much more powerful than I've described above. The following
        ]
      };
      ```
-  1. Update your npm scripts in `package.json`:
-     ```javascript
-     ...
-     "build": "webpack --mode=\"development\"",
-     "build:prod": "webpack --mode=\"production\"",
-     ...
-     ```
   1. Terminate your webpack-dev-server if it's running by Ctrl+C. Run `npm start` start it again. This is because configuration change will not be picked up by webpack-dev-server while it is running.
   1. Open [http://localhost:9200/](http://localhost:9200/) with IE and verify your code should works now.
 
@@ -242,6 +241,8 @@ Note that webpack is much more powerful than I've described above. The following
 
 1. Configure Babel as described above.
 1. Restart webpack-dev-server and verify that the application works in IE.
+
+> [:octocat: `060-babel-integration`](https://github.com/malcolm-kee/react-movie-app/tree/060-babel-integration)
 
 <hr >
 
@@ -258,6 +259,7 @@ As our code has been reorganized, with introduction of webpack, let's update our
 [commonjs]: https://flaviocopes.com/commonjs/
 [ecma-module]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
 [export-docs]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
+[webpack-configurations]: https://webpack.js.org/configuration/
 [htmlwebpackplugin]: https://webpack.js.org/plugins/html-webpack-plugin/
 [webpack-devserver]: https://webpack.js.org/configuration/dev-server/
 [style-loader]: https://webpack.js.org/loaders/style-loader/

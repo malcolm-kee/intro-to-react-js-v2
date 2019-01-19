@@ -47,6 +47,8 @@ In order to start an npm project, run `npm init` at the root of your project fol
    ```
 1. open the `index.html` file with browser and ensure it still works.
 
+> [:octocat: `010-initial-project`](https://github.com/malcolm-kee/react-movie-app/tree/010-init-project)
+
 <hr >
 
 ## [prettier]
@@ -92,6 +94,8 @@ Now you can invoke prettier by running `npm run format`.
 1. Install prettier and configure format script based on the instruction above.
 1. (Optional) Configure prettier plugin if you're using VS code.
 
+> [:octocat: `020-prettier`](https://github.com/malcolm-kee/react-movie-app/tree/020-prettier)
+
 <hr >
 
 ## [ESLint]
@@ -136,6 +140,8 @@ Now you can invoke prettier by running `npm run format`.
 
 1. Install ESLint and configure lint script based on the instruction above.
 1. (Optional) Configure ESLint plugin if you're using VS code.
+
+> [:octocat: `021-eslint`](https://github.com/malcolm-kee/react-movie-app/tree/021-eslint)
 
 <hr >
 
