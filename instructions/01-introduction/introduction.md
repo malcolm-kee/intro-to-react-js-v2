@@ -7,7 +7,7 @@ path: '/introduction'
 
 ![React logo](react-logo.png)
 
-This course is "A Complete Introduction to React JS", which will teach you the core of React and the tools around React.
+This workshop is "A Complete Introduction to React JS", which will introduces you the core of React and the tools around React.
 
 ## Who am I
 
@@ -16,13 +16,13 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - Start my developer role in jquery, then fall in love with React
 - Find me at [malcolmkee.com](https://malcolmkee.com)
 
-## What this courses will covered are:
+## This Workshop will Cover:
 
 - Core API of React
 - common tools that people use in conjunction with React and their purpose
 - common use cases when using React JS e.g. making api call, routing, testing, code splitting
 
-## What this course will not cover:
+## This Workshop will NOT Cover:
 
 - Basics of HTML, CSS, & Javascript
 - Advanced React Patterns e.g. Higher Order Components and Render Props
@@ -30,7 +30,13 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - Typescript/Flow
 - React hook feature
 
-## What is expected of You
+## Format of this Workshop
+
+- do it without tools
+- feel the pain
+- introduce tooling and learn to use it
+
+## What is Expected of You
 
 - :pencil: Do the coding exercise
 - :raising_hand: Ask questions
@@ -41,6 +47,11 @@ This course is "A Complete Introduction to React JS", which will teach you the c
 - It trains you to be a good JS developer - learn functional programming and JS standards
 - It is popular - good job prospect! :moneybag:
 
-## Why this course
+## My Goal for this Workshop
 
-Being productive in React requires more than familiar with React API, you also need to know the tooling around React and the value they bring, so you know when to use and modify them.
+I believe that being productive in React requires more than familiar with React API, you also need to know the tooling around React and the value they bring, so you know when to use and modify them.
+
+My hope is that at the end of this workshop,
+
+- you understand when to use the modern frontend development tools, regardless if you're using React, JQuery, or Vue.
+- you have sufficient understandings of React and the ecosystem around it that you know what to search for when you encounters a problem
