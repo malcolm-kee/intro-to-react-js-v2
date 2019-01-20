@@ -409,6 +409,8 @@ this.setState({ show: true }, () => {
 1. Enhance your `App` component to show/hide movies when button is clicked and display different button text, as described above.
 1. Verify that the application works as expected.
 
+> [:octocat: `100-toggle-movies`](https://github.com/malcolm-kee/react-movie-app/tree/100-toggle-movies)
+
 <hr >
 
 ### Getting Data from Backend API
@@ -607,6 +609,8 @@ To show loading indicator when waiting API response:
 1. Get the movie data for your `App` from backend API instead of hand-coding them.
 1. Create `BusyContainer` as described and use it in your `App` component to show loading indicator.
 1. Verify that the application works as expected.
+
+> [:octocat: `110-ajax-calls`](https://github.com/malcolm-kee/react-movie-app/tree/110-ajax-calls)
 
 <hr >
 
