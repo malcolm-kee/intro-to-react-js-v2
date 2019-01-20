@@ -14,7 +14,10 @@ We will start learning React by using React with vanilla JS - which means we wil
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://codepen.io/malcolmkee/pen/xmvMNY.css"
+    />
     <title>React Movie App</title>
   </head>
 
@@ -66,14 +69,18 @@ Modify your code, so that it becomes
 
 ```js
 const Movie = () =>
-  React.createElement('div', {}, [
+  React.createElement('div', { className: 'movie-container' }, [
     React.createElement('h1', {}, 'Aquaman'),
     React.createElement('h2', {}, '2018-12-07')
   ]);
 
 const App = function() {
   return React.createElement('div', {}, [
-    React.createElement('h1', {}, 'React Movie App'),
+    React.createElement(
+      'div',
+      { className: 'title-bar' },
+      React.createElement('h1', {}, 'React Movie App')
+    ),
     React.createElement(Movie),
     React.createElement(Movie),
     React.createElement(Movie)
@@ -86,6 +93,7 @@ ReactDOM.render(React.createElement(App), document.getElementById('root'));
 - to make an element to have multiple children, just pass it an array of elements.
 - `Movie` is our second component. I use [arrow function][arrow-function] syntax here, which will have an implicit return if the function body is a single expression
 - We can have multiple `Movie` instances by calling `React.createElement` multiple times!
+- `className` props will be translated to `class` properties in HTML. This is the few instances where React properties and HTML properties are not the same to avoid complication due to reserved JS keywords (`class` is used to declare class in JS), the others are `htmlFor`, `tabIndex` etc.
 - If you're seeing console warning about keys, ignore it for now.
 
 <hr >
@@ -94,15 +102,18 @@ We have multiple movies but it's not very useful component yet, since not all mo
 
 ```js
 const Movie = props =>
-  React.createElement('div', {}, [
+  React.createElement('div', { className: 'movie-container' }, [
     React.createElement('h1', {}, props.name),
     React.createElement('h2', {}, props.releaseDate)
   ]);
 
 const App = function() {
   return React.createElement('div', {}, [
-    React.createElement('h1', {}, 'React Movie App'),
-    React.createElement('h1', {}, 'React Movie App'),
+    React.createElement(
+      'div',
+      { className: 'title-bar' },
+      React.createElement('h1', {}, 'React Movie App')
+    ),
     React.createElement(Movie, {
       name: 'Aquaman',
       releaseDate: '2018-12-07'
@@ -132,7 +143,11 @@ As mentioned before, there are 2 types of component - function component and cla
 class App extends React.Component {
   render() {
     return React.createElement('div', {}, [
-      React.createElement('h1', {}, 'React Movie App'),
+      React.createElement(
+        'div',
+        { className: 'title-bar' },
+        React.createElement('h1', {}, 'React Movie App')
+      ),
       React.createElement(Movie, {
         name: 'Aquaman',
         releaseDate: '2018-12-07'

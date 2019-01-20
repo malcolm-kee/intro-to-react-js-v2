@@ -80,7 +80,7 @@ export default App;
 - We define a function `loadCodeAndMoviesData`, which will use dynamic `import` to load the code and then use the loaded function `loadMovies` to make the ajax call.
 - In the `componentDidMount`, we use `loadCodeAndMoviesData` to get the movies from backend.
 
-When you try to compile the code by `npm start` now, you would get a syntax error. This is because babel does not understand dynamic `import` by default, so we need to add plugin to "teach" babel about the syntax.
+When you try to compile the code by `npm start` now, you would get a syntax error. This is because similar to class properties, dynamic `import` is not included as part of `preset-env` nor `preset-react`, so we need to install additional plugin
 
 1. install a babel plugin as devDependency:
    ```bash
@@ -90,7 +90,10 @@ When you try to compile the code by `npm start` now, you would get a syntax erro
    ```json
    {
      "presets": ["@babel/preset-env", "@babel/preset-react"],
-     "plugins": ["@babel/plugin-syntax-dynamic-import"]
+     "plugins": [
+       "@babel/plugin-proposal-class-properties",
+       "@babel/plugin-syntax-dynamic-import"
+     ]
    }
    ```
 1. run `npm start` again.
@@ -115,7 +118,7 @@ And from the Network tab of your DevTools, you should be able to see chunk `0.bu
 
 Now your dynamic `import` statement has some ESLint error, because ESLint doesn't understand dynamic `import` by default. We need to allow ESLint to understand the syntax:
 
-1. `npm install -D babel-eslint`. `babel-eslint` enables ESLint to utilize babel to parse code.
+1. `npm install -D babel-eslint`. `babel-eslint` enables ESLint to use babel to parse code.
 1. add `parser` to `.eslintrc`:
    ```json
    {

@@ -17,7 +17,7 @@ Let's convert `Movie` component to using JSX. It will look like this:
 import React from 'react';
 
 const Movie = props => (
-  <div>
+  <div className="movie-container">
     <h1>{props.name}</h1>
     <h2>{props.releaseDate}</h2>
   </div>
@@ -38,7 +38,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>React Movie App</h1>
+        <div className="title-bar">
+          <h1>React Movie App</h1>
+        </div>
         <Movie name="Aquaman" releaseDate="2018-12-07" />
         <Movie name="Bumblebee" releaseDate="2018-12-15" />
         <Movie
@@ -82,64 +84,11 @@ Now when you start webpack-dev-server, the compilation should succeeds and your 
 1. Configure Babel to compile JSX.
 1. Restart webpack-dev-server and verify that the application still works as before.
 
-<hr >
-
-### Configure ESLint for React App
-
-Currently ESLint is yelling at us about React not being used. Let's configure ESLint to understand that.
-
-1. run `npm install -D eslint-plugin-react`
-2. update `.eslintrc`:
-
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": ["react"],
-  "rules": {
-    "react/prop-types": 0
-  },
-  "parserOptions": {
-    "ecmaVersion": 2016,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
-  },
-  "settings": {
-    "react": {
-      "version": "16.7"
-    }
-  }
-}
-```
-
-- `plugin:react/recommended` are set of rules included as part of `eslint-plugin-react`.
-- `react` is added to the `plugins`, in which ESLint will lookup `eslint-plugin-react`.
-- React version will be added to `settings`, in which `eslint-plugin-react` depends on to suggest applicable rules.
-- `react/prop-types` rules is overwritten, as we're not going to use `prop-types` in this workshop. In addition, I personally think that prop-types does not worth the investment &mdash; I recommend [Typescript] if you want to introduce type-checking in your project.
-
-<hr >
-
-## :pencil: Do It: fix ESLint configuration
-
-1. Configure ESLint as described above.
-1. Run `npm run lint` and verify that no more linting error is shown.
+> [:octocat: `070-jsx-config`](https://github.com/malcolm-kee/react-movie-app/tree/070-jsx-config)
 
 <hr >
 
 ## React States and Lifecycle Methods
-
-Let us get back to React now.
 
 Our current app is too simple, as it's just rendering a list of movies. In an actual webapp, our application need to be more complex, e.g.:
 
@@ -188,8 +137,14 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1>React Movie App</h1>
-        <button onClick={this.showMovies}>Show Movies</button>
+        <div className="title-bar">
+          <h1>React Movie App</h1>
+        </div>
+        <div className="button-container">
+          <button onClick={this.showMovies} className="button">
+            Show Movies
+          </button>
+        </div>
         {movies}
       </div>
     );
@@ -235,8 +190,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>React Movie App</h1>
-        <button onClick={this.showMovies}>Show Movies</button>
+        <div className="title-bar">
+          <h1>React Movie App</h1>
+        </div>
+        <div className="button-container">
+          <button onClick={this.showMovies} className="button">
+            Show Movies
+          </button>
+        </div>
         {this.state.showMovies && (
           <>
             <Movie name="Aquaman" releaseDate="2018-12-07" />
@@ -261,9 +222,9 @@ Convert your `App` component as below:
 
 ```jsx
 class App extends React.Component {
-    state = {
-      showMovies: false
-    };
+  state = {
+    showMovies: false
+  };
 
   showMovies = () => {
     this.setState({
@@ -273,11 +234,11 @@ class App extends React.Component {
 
   render() {
     ...
-    }
+  }
 }
 ```
 
-This is much more terse than previous code. However, you would see some compilation error now because class properties is still at proposal phase and babel doesn't understand it by default. To make babel understand additonal syntax, we need to install plugin to "teach" it to parse the syntax.
+This is much more terse than previous code. However, you would see some compilation error now because class properties is still at proposal phase and it is not included as part of `preset-env` nor `preset-react`. To make babel understand additonal syntax, we need to install plugin to "teach" it to parse the syntax.
 
 1. Install the babel plugin:
 
@@ -313,6 +274,65 @@ One last thing before you write your code, install browser extension for [React 
 1. Modify your `App` component to show movies only when clicked as described above.
 1. Verify that the application works as expected.
 
+> [:octocat: `080-hide-movies`](https://github.com/malcolm-kee/react-movie-app/tree/080-hide-movies)
+
+<hr >
+
+### Configure ESLint for React App
+
+Currently ESLint is having parsing error. Let's configure ESLint before proceed further.
+
+1. run `npm install -D eslint-plugin-react babel-eslint`
+2. update `.eslintrc`:
+
+```json
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": ["react"],
+  "rules": {
+    "react/prop-types": 0
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2016,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "16.7"
+    }
+  }
+}
+```
+
+- `plugin:react/recommended` are set of rules included as part of `eslint-plugin-react`.
+- `react` is added to the `plugins`, in which ESLint will lookup `eslint-plugin-react`. This plugin "teach" ESLint to recognize all the JSX are using `React.createElement` under the hood, so it doesn't show `React is not being used` error.
+- `babel-eslint` is specified as the parser. This allows eslint to use babel to parse the code, which will process the code based on our `.babelrc` config.
+- React version is added to `settings`, in which `eslint-plugin-react` depends on to suggest applicable rules.
+- `react/prop-types` rules is overwritten, as we're not going to use `prop-types` in this workshop. I personally think that prop-types does not worth the investment &mdash; I recommend [Typescript] if you want to introduce type-checking in your project.
+
+<hr >
+
+## :pencil: Do It: fix ESLint configuration
+
+1. Configure ESLint as described above.
+1. Run `npm run lint` and verify that no more linting error is shown.
+
+> [:octocat: `090-eslint-react`](https://github.com/malcolm-kee/react-movie-app/tree/090-eslint-react)
+
 <hr >
 
 ### More on setState
@@ -323,27 +343,26 @@ Modify `App` to be following:
 
 ```jsx
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMovies: false
-    };
-    this.toggleMovies = this.toggleMovies.bind(this);
-  }
+  state = {
+    showMovies: false
+  };
 
-  toggleMovies() {
+  toggleMovies = () =>
     this.setState(prevState => ({
       showMovies: !prevState.showMovies
     }));
-  }
 
   render() {
     return (
       <div>
-        <h1>React Movie App</h1>
-        <button onClick={this.toggleMovies}>
-          {this.state.showMovies ? 'Hide' : 'Show'} Movies
-        </button>
+        <div className="title-bar">
+          <h1>React Movie App</h1>
+        </div>
+        <div className="button-container">
+          <button onClick={this.toggleMovies} className="button">
+            {this.state.showMovies ? 'Hide' : 'Show'} Movies
+          </button>
+        </div>
         {this.state.showMovies && (
           <>
             <Movie name="Aquaman" releaseDate="2018-12-07" />
@@ -374,11 +393,11 @@ In short, you can pass `setState` either of the following:
    this.setState(prevState => ({ show: !prevState.show }));
    ```
 
-Another things about `setState` that may surprise React begineer is that it is asynchronous, which means that when you call `setState`, the state will not be updated straight-away (you can verify this by adding `console.log(this.state)` after `setState` call). If you want to perform some action whenever state is updated, you can provide a callback as second parameter to `setState`:
+Another things about `setState` that may surprise React beginner is that it is asynchronous, which means that when you call `setState`, the state will not be updated straight-away (you can verify this by adding `console.log(this.state)` after `setState` call). If you want to perform some action whenever state is updated, you can provide a callback as second parameter to `setState`:
 
 ```js
 this.setState({ show: true }, () => {
-  // this will only be called when React apply state change
+  // this will only be called after React apply the state change
   console.log(this.state);
 });
 ```
@@ -449,14 +468,10 @@ To load data from backend API:
    import { loadMovies } from './api';
 
    class App extends React.Component {
-     constructor(props) {
-       super(props);
-       this.state = {
+     state = {
          showMovies: false,
          movies: []
-       };
-       this.toggleMovies = this.toggleMovies.bind(this);
-     }
+     };
 
      componentDidMount() {
        loadMovies().then(movies => this.setState({ movies }));
@@ -477,10 +492,14 @@ To load data from backend API:
       render() {
         return (
           <div>
-            <h1>React Movie App</h1>
-            <button onClick={this.toggleMovies}>
-              {this.state.showMovies ? 'Hide' : 'Show'} Movies
-            </button>
+            <div className="title-bar">
+              <h1>React Movie App</h1>
+            </div>
+            <div className="button-container">
+              <button onClick={this.toggleMovies} className="button">
+                {this.state.showMovies ? 'Hide' : 'Show'} Movies
+              </button>
+            </div>
             {this.state.showMovies &&
               this.state.movies.map(movie => (
                 <Movie
@@ -533,33 +552,33 @@ To show loading indicator when waiting API response:
    import Movie from './movie';
 
    class App extends React.Component {
-     constructor(props) {
-       super(props);
-       this.state = {
-         showMovies: false,
-         isLoading: true,
-         movies: []
-       };
-       this.toggleMovies = this.toggleMovies.bind(this);
-     }
+     state = {
+       showMovies: false,
+       isLoading: true,
+       movies: []
+     };
 
      componentDidMount() {
        loadMovies().then(movies => this.setState({ movies, isLoading: false }));
      }
 
-     toggleMovies() {
+     toggleMovies = () => {
        this.setState(prevState => ({
          showMovies: !prevState.showMovies
        }));
-     }
+     };
 
      render() {
        return (
          <div>
-           <h1>React Movie App</h1>
-           <button onClick={this.toggleMovies}>
-             {this.state.showMovies ? 'Hide' : 'Show'} Movies
-           </button>
+           <div className="title-bar">
+             <h1>React Movie App</h1>
+           </div>
+           <div className="button-container">
+             <button onClick={this.toggleMovies} className="button">
+               {this.state.showMovies ? 'Hide' : 'Show'} Movies
+             </button>
+           </div>
            {this.state.showMovies && (
              <BusyContainer isLoading={this.state.isLoading}>
                {this.state.movies.map(movie => (
