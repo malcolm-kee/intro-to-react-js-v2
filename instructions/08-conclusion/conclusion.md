@@ -23,7 +23,7 @@ What we've learnt:
 - Use Cases:
   1. making ajax call (add the `componentDidMount` lifecycle methods)
   1. showing loading indicator (using React state to track status)
-  1. write test for React and Javascript in general
+  1. write test for Javascript code and React components
   1. code splitting (using dynamic `import`, `React.lazy` and `React.Suspense`)
 
 ## Next Step
@@ -32,10 +32,9 @@ What we've learnt:
 - If you prefer video, there is a free [egghead.io course][eggheadio-react-intro] by Kent C. Dodds. I never go though this course myself, but I learnt from the instructor via other course, and he is a good teacher.
 - If you like to read, there is a curated list of resources at [this repo][react-redux-links]. There are too many articles to read there (I never finished them myself), just browse through the list and read what interest you.
 - If you want to ask question, [reactiflux] is a good place as there are many helpful people there. It's actually React community that hang out on Discord (a messenger app like Telegram). I hang out there sometimes too.
-- Give tech talk at our next meetup! Teaching is the best way to learn.
 
 <hr >
-<h1 align="center">The End</h1>
+<h1 align="center">:tada: The End :tada:</h1>
 <hr >
 
 [react-docs]: https://reactjs.org/docs

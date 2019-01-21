@@ -12,7 +12,6 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 ## Who am I
 
 - A Javascript developer (primarily in React), OSS contributor
-- Ex BA and Scrum Master
 - Start my developer role in jquery, then fall in love with React
 - Find me at [malcolmkee.com](https://malcolmkee.com)
 
