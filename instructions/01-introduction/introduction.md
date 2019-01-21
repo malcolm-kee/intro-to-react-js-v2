@@ -13,6 +13,20 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 
 - A Javascript developer (primarily in React), OSS contributor
 - Start my developer role in jquery, then fall in love with React
+- Things I love :grin:
+  - React
+  - Redux
+  - Typescript
+  - GatsbyJS
+  - webpack
+  - prettier
+- Things I don't love (yet) :neutral_face:
+  - CSS-in-JS
+  - React Native
+  - Angular
+  - Vue
+  - MobX
+  - web components
 - Find me at [malcolmkee.com](https://malcolmkee.com)
 
 ## This Workshop will Cover:
