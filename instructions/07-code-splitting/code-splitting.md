@@ -168,5 +168,13 @@ That's it!
 
 <hr >
 
+## (Optional) Fix Failing Jest Tests due to Dynamic Import
+
+Because Jest runs in NodeJS, which doesn't understand dynamic import syntax, you would encounter syntax error if you try to run the tests now. Some tweaks is required in Babel.
+
+See the following branch for the required changes.
+
+> [:octocat: `151-lazyload-jest-fix`](https://github.com/malcolm-kee/react-movie-app/tree/151-lazyload-jest-fix)
+
 [dynamic-import]: https://developers.google.com/web/updates/2017/11/dynamic-import
 [webpack-dynamic-imports]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
