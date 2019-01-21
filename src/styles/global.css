@@ -16,6 +16,13 @@ h2 a {
   margin-top: 16px;
 }
 
+.instruction-template-nav--top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+
 .instruction-template-nav a {
   padding: 8px;
   display: flex;

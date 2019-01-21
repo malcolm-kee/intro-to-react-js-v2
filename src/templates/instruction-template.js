@@ -1,11 +1,17 @@
 import { graphql } from 'gatsby';
+import { joinClassName } from 'join-string';
 import React from 'react';
 import { LinkButton } from '../components/button';
 import { MaterialIcons } from '../components/material-icons';
 import { PageContainer } from '../components/page-container';
 
-const InstructionNav = ({ pageContext }) => (
-  <nav className="instruction-template-nav">
+const InstructionNav = ({ pageContext, top }) => (
+  <nav
+    className={joinClassName(
+      'instruction-template-nav',
+      top && 'instruction-template-nav--top'
+    )}
+  >
     {pageContext.previous ? (
       <LinkButton to={pageContext.previous.frontmatter.path}>
         <MaterialIcons name="arrow_back" />
@@ -30,6 +36,7 @@ const InstructionNav = ({ pageContext }) => (
 const InstructionTemplate = ({ data, pageContext }) => (
   <PageContainer>
     <div className="instruction-template">
+      <InstructionNav pageContext={pageContext} top />
       <main>
         <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
       </main>
