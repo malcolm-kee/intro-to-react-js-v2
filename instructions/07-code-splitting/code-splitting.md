@@ -24,53 +24,23 @@ import React from 'react';
 import { BusyContainer } from './busy-container';
 import Movie from './movie';
 
-const loadCodeAndMoviesData = () =>
+const loadCodeAndMovies = () =>
   import('./api').then(({ loadMovies }) => loadMovies());
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMovies: false,
-      isLoading: true,
-      movies: []
-    };
-    this.toggleMovies = this.toggleMovies.bind(this);
-  }
+  state = {
+    showMovies: false,
+    movies: [],
+    isLoading: true
+  };
 
   componentDidMount() {
-    loadCodeAndMoviesData().then(movies =>
+    loadCodeAndMovies().then(movies =>
       this.setState({ movies, isLoading: false })
     );
   }
 
-  toggleMovies() {
-    this.setState(prevState => ({
-      showMovies: !prevState.showMovies
-    }));
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>React Movie App</h1>
-        <button onClick={this.toggleMovies}>
-          {this.state.showMovies ? 'Hide' : 'Show'} Movies
-        </button>
-        {this.state.showMovies && (
-          <BusyContainer isLoading={this.state.isLoading}>
-            {this.state.movies.map(movie => (
-              <Movie
-                name={movie.name}
-                releaseDate={movie.releaseDate}
-                key={movie.id}
-              />
-            ))}
-          </BusyContainer>
-        )}
-      </div>
-    );
-  }
+  ...
 }
 
 export default App;
@@ -102,54 +72,34 @@ Now you would see the following output:
 
 ```bash
 Hash: f9f3a764f70be0b6cc25
-Version: webpack 4.28.2
+Version: webpack 4.28.4
 Time: 1229ms
 Built at: 2019-01-07 21:45:12
-    Asset        Size  Chunks             Chunk Names
-0.bundle.js    57.2 KiB       0  [emitted]
-1.bundle.js  1000 bytes       1  [emitted]
-    main.js     870 KiB    main  [emitted]  main
+Asset        Size  Chunks             Chunk Names
+      0.js    57.2 KiB       0  [emitted]
+      1.js  1000 bytes       1  [emitted]
+index.html   470 bytes          [emitted]
+   main.js    1.18 MiB    main  [emitted]  main
 Entrypoint main = main.js
 ```
 
-And from the Network tab of your DevTools, you should be able to see chunk `0.bundle.js` and `1.bundle.js` are loaded.
-
-### Fixing ESLint
-
-Now your dynamic `import` statement has some ESLint error, because ESLint doesn't understand dynamic `import` by default. We need to allow ESLint to understand the syntax:
-
-1. `npm install -D babel-eslint`. `babel-eslint` enables ESLint to use babel to parse code.
-1. add `parser` to `.eslintrc`:
-   ```json
-   {
-       ...
-       "parser": "babel-eslint",
-       "parserOptions": {
-           "ecmaVersion": 2017,
-           "sourceType": "module",
-           "ecmaFeatures": {
-           "jsx": true
-           }
-       },
-       ...
-   }
-   ```
-
-The ESLint error should be fixed now.
+And from the Network tab of your DevTools, you should be able to see chunk `0.js` and `1.js` are loaded.
 
 <hr >
 
 ## :pencil: Do It: lazy loading ajax call code
 
 1. modify `app.js` to lazy-load `api.js`.
-1. install and configure babel, webpack, and ESLint as described.
+1. configure Babel as described.
 1. test the application and ensure the code still works as before.
+
+> [:octocat: `140-lazyload-code`](https://github.com/malcolm-kee/react-movie-app/tree/140-lazyload-code)
 
 <hr >
 
 ## Lazy Loading React Component
 
-Once you understand dynamic `import()` for JS code, lazy-loading React Components is a no-brainer.
+Once you understand dynamic `import()` for JS code, lazy-loading React Components is just using it with some React helper.
 
 Let's lazy load our `Movie` components by modify `app.js`:
 
@@ -161,41 +111,25 @@ const Movie = React.lazy(() =>
   import(/* webpackChunkName: "Movie" */ './movie')
 );
 
-const loadCodeAndMoviesData = () =>
+const loadCodeAndMovies = () =>
   import(/* webpackChunkName: "api" */ './api').then(({ loadMovies }) =>
     loadMovies()
   );
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMovies: false,
-      isLoading: true,
-      movies: []
-    };
-    this.toggleMovies = this.toggleMovies.bind(this);
-  }
-
-  componentDidMount() {
-    loadCodeAndMoviesData().then(movies =>
-      this.setState({ movies, isLoading: false })
-    );
-  }
-
-  toggleMovies() {
-    this.setState(prevState => ({
-      showMovies: !prevState.showMovies
-    }));
-  }
+  ...
 
   render() {
     return (
       <div>
-        <h1>React Movie App</h1>
-        <button onClick={this.toggleMovies}>
-          {this.state.showMovies ? 'Hide' : 'Show'} Movies
-        </button>
+        <div className="title-bar">
+          <h1>React Movie App</h1>
+        </div>
+        <div className="button-container">
+          <button onClick={this.toggleMovies} className="button">
+            {this.state.showMovies ? 'Hide' : 'Show'} Movies
+          </button>
+        </div>
         {this.state.showMovies && (
           <React.Suspense fallback={<span>Loading Component...</span>}>
             <BusyContainer isLoading={this.state.isLoading}>
@@ -219,7 +153,7 @@ export default App;
 
 - We wrap dynamic `import` statement with `React.lazy`, so that React knows this is a lazy-loaded Component.
 - We wrap lazy-loaded component with `React.Suspense` so that React will fallback to the loading indicator whenever any component within the `React.Suspense` is waiting to be loaded.
-- The comment `/* webpackChunkName: "Movie" */` is known as webpack magic comments. It allows us to name our chunk with a desired name like `api.js` instead of `0.js`. You can read it in [this section of webpack docs][webpack-dynamic-imports].
+- The comment `/* webpackChunkName: "Movie" */` is known as _webpack magic comment_. It allows us to name our chunk with a meaningful name like `api.js` instead of `0.js`. You can read about it in [this section of webpack docs][webpack-dynamic-imports].
 
 That's it!
 
@@ -229,6 +163,8 @@ That's it!
 
 1. modify `app.js` to lazy-load `Movie` component.
 1. test the application and ensure the code still works as before.
+
+> [:octocat: `150-lazyload-component`](https://github.com/malcolm-kee/react-movie-app/tree/150-lazyload-component)
 
 <hr >
 
