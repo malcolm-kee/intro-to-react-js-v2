@@ -282,7 +282,10 @@ One last thing before you write your code, install browser extension for [React 
 
 Currently ESLint is having parsing error. Let's configure ESLint before proceed further.
 
-1. run `npm install -D eslint-plugin-react babel-eslint`
+1. install required packages
+   ```bash
+   npm install -D eslint-plugin-react babel-eslint
+   ```
 2. update `.eslintrc`:
 
 ```json

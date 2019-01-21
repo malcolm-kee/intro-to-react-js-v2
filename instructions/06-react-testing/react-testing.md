@@ -13,7 +13,7 @@ Testing used to be something that requires a lot efforts to setup, because there
 1. test coverage reports
 1. provide a browser or browser-like environment
 
-However, thanks to [Jest], all of these are included in single library with minimal configuration.
+Thanks to [Jest], all of these are included in single library with minimal configuration.
 
 ## Setup Jest
 
@@ -149,7 +149,10 @@ You may want to explore how many of your code is covered.
 
 To generate code coverage report:
 
-1. add a new npm script: `"test:coverage": "jest --coverage"`
+1. add a new npm script:
+   ```bash
+   "test:coverage": "jest --coverage"
+   ```
 1. run `npm run test:coverage`
 1. explore the `coverage/lcov-report` folder that has been generated. Open the `index.html` file with your browser.
 
@@ -164,6 +167,9 @@ To generate code coverage report:
 1. run test in watch mode as described
 1. generate code coverage report as described
 1. (optional) write unit tests for the function `joinString`.
+1. (optional) increase conditional coverage of `lib.js` to 100%.
+
+> [:octocat: `120-jest-setup-and-test`](https://github.com/malcolm-kee/react-movie-app/tree/120-jest-setup-and-test)
 
 <hr >
 
