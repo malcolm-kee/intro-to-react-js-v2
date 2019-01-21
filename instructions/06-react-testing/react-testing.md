@@ -175,11 +175,11 @@ To generate code coverage report:
 
 ## Testing React Components
 
-Before we start writing tests for React components, let's take a step back and discuss how we organize a test.
+Before we start writing tests for React components, let's take a step back and discuss how we write a test.
 
-When writing tests for a function, it is mostly about asserting the returns of the function given a specific parameters. The convention is `given X, when Y, then Z`. Given parameters of 'btn' and 'btn--default', when run `classNames`, then it will returns the result of `'btn btn--default'`.
+When writing tests for a function, it is mostly about asserting the returns of the function given a specific parameters. The convention is `When Y, then Z`. For instance, when calling `classNames` with parameters of 'btn' and 'btn--default', then it will returns the result of `'btn btn--default'`.
 
-There is no difference when writing tests for React Components. The difference of React components is that the output of the component is not returned to us, but being passed to `ReactDOM` to decide what to append/update in the DOM.
+Same test structure would applies when writing tests for React Components. The difference of React components is we do not call React Component itself directly and get the output of the component, but pass the output to `ReactDOM.render`, which will decide what to append/update in the DOM.
 
 Let's explore how to do that.
 
@@ -260,13 +260,13 @@ describe('BusyContainer', () => {
 ```
 
 - `describe` and `it` are two other global helpers injected by Jest in all test files. `describe` is used to group tests into logical group, while `it` is equivalent to `test`.
-- As Jest will run the test in [jsdom] (a environment to be run in NodeJS that supports many features listed in web standards), so we have access to DOM API like `document.createElement` and `document.body.appendChild`.
+- As Jest will run the test in [jsdom] (a environment that runs in NodeJS and supports most browser features listed in web standards), so we have access to DOM API like [`document.createElement`][document-createelement], [`querySelector`][document-queryselector] and [`appendChild`][appendchild].
 - For each test, we need to
   - setup our DOM by creating a div and append to body, then we use `ReactDOM` to render our components
   - use `querySelector` to check the current state of the DOM and assert it.
   - unmount the component with `ReactDOM.unmountComponentAtNode`, then remove the container from the body
 
-As the setup and cleanup are required and similar for all tests, there are a library that already implements them with a bunch of helpers. The library name is [`react-testing-library`][react-testing-library] (surprise, surprise!). Let's install that:
+As the setup and cleanup are required and similar for all tests, there is a library that already implements them with a bunch of helpers. The library is [`react-testing-library`][react-testing-library] (surprise, surprise!). Let's install that:
 
 `npm install -D react-testing-library`
 
@@ -321,6 +321,8 @@ describe('BusyContainer', () => {
 1. install `react-testing-library` as described.
 1. modify `BusyContainer` and write the test for it.
 1. ensure all the tests are passed
+
+> [:octocat: `130-react-test`](https://github.com/malcolm-kee/react-movie-app/tree/130-react-test)
 
 <hr >
 
@@ -383,6 +385,7 @@ describe('<App />', () => {
 
     fireEvent.click(getByText('Show Movies'));
 
+    // Note: assertion below requires `data-testid` attribute in Movie component
     expect(getAllByTestId('movie').length).toBe(mockMovieData.length);
   });
 });
@@ -394,9 +397,14 @@ describe('<App />', () => {
 - we use `wait` helper from `react-testing-library` to introduce some delay. This is because the `loadMovies` returns a promise, which will only be resolve in next ticks on the JS event cycle.
 - we use `getAllByTestId` to get the count of the mounted movie components and asserts the count is equal to the number of movies in our mock data.
 
+> [:octocat: `131-react-test-stateful`](https://github.com/malcolm-kee/react-movie-app/tree/131-react-test-stateful)
+
 [jest]: https://jestjs.io/en/
 [classnames]: https://www.npmjs.com/package/classnames
 [jest-expect]: https://jestjs.io/docs/en/expect
 [react-testing-library]: https://testing-library.com/react
 [jsdom]: https://github.com/jsdom/jsdom
+[document-createelement]: https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+[document-queryselector]: https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+[appendchild]: https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
 [react-testing-library-queries]: https://testing-library.com/docs/api-queries
