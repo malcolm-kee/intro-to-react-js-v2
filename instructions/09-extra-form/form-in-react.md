@@ -1,6 +1,7 @@
 ---
 title: Bonus - Form in React
 path: '/form-in-react'
+description: 'Learn how form works in React and how to implement search in React'
 ---
 
 # Bonus - Form in React

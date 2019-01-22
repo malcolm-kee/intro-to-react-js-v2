@@ -59,6 +59,9 @@ blockquote {
   background: #61dafb;
   padding: 16px;
   position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   top: 0;
   width: 100%;
   z-index: 1;
@@ -68,6 +71,10 @@ blockquote {
   font-family: 'Roboto', 'Helvetica', 'Arial', 'sans serif';
   text-decoration: none;
   color: black;
+}
+
+.main-container {
+  padding: 64px 32px 32px;
 }
 
 .report-issue-link-container {

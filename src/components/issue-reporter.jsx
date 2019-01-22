@@ -10,8 +10,8 @@ export const IssueReporter = ({ title }) => (
   <div className="report-issue-link-container">
     <a
       href={getReportIssueLink(title)}
-      target="_BLANK"
       className="report-issue-link"
+      target="_BLANK"
       rel="noopener noreferrer"
     >
       <MaterialIcons name="report_problem" />

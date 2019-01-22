@@ -1,6 +1,7 @@
 import { Link, StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { MaterialIcons } from './material-icons';
 
 export const PageContainer = ({ children }) => (
   <StaticQuery
@@ -9,6 +10,8 @@ export const PageContainer = ({ children }) => (
         site {
           siteMetadata {
             title
+            author
+            description
           }
         }
       }
@@ -17,11 +20,23 @@ export const PageContainer = ({ children }) => (
       <div>
         <Helmet>
           <title>{data.site.siteMetadata.title}</title>
+          <meta name="author" content={data.site.siteMetadata.author} />
+          <meta
+            name="description"
+            content={data.site.siteMetadata.description}
+          />
         </Helmet>
         <header className="navbar">
           <Link to="/">{data.site.siteMetadata.title}</Link>
+          <a
+            href="https://github.com/malcolm-kee/intro-to-react-js"
+            target="_BLANK"
+            rel="noopener noreferrer"
+          >
+            <MaterialIcons name="code" />
+          </a>
         </header>
-        <main style={{ padding: '64px 32px 32px' }}>{children}</main>
+        <main className="main-container">{children}</main>
       </div>
     )}
   />

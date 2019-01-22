@@ -1,6 +1,7 @@
 ---
 title: React Core
 path: '/react-core'
+description: 'Learn JSX, React states, lifecycle methods, and configuring Babel and ESLint to work with React'
 ---
 
 # React Core

@@ -1,6 +1,7 @@
 ---
 title: React Tooling Part 2
 path: '/react-tooling-part2'
+description: 'Learn how to configure webpack for a React project'
 ---
 
 # React Tooling Part 2

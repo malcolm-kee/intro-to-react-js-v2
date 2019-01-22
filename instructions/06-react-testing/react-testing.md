@@ -1,6 +1,7 @@
 ---
 title: React Testing
 path: '/react-testing'
+description: 'Learn to configure Jest and write unit tests in Javascript and React components.'
 ---
 
 # React Testing

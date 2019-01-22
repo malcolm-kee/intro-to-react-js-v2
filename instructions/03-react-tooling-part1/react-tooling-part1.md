@@ -1,6 +1,7 @@
 ---
 title: React Tooling Part 1
 path: '/react-tooling-part1'
+description: 'Getting to know NodeJS, npm, prettier, ESLint and their role in development with React.'
 ---
 
 # React Tooling Part 1
