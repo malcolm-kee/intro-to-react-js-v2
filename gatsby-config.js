@@ -3,7 +3,7 @@ const packageJson = require('./package.json');
 
 module.exports = {
   siteMetadata: {
-    title: `Introduction to React JS`,
+    title: `Intro to React`,
     author: packageJson.author,
     description: packageJson.description,
     siteUrl: packageJson.homepage
@@ -55,6 +55,7 @@ module.exports = {
         pathToConfigModule: 'src/config/typography'
       }
     },
+    'gatsby-plugin-catch-links',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',

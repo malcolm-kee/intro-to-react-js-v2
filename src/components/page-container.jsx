@@ -18,19 +18,8 @@ export const PageContainer = ({ children }) => (
         <Helmet>
           <title>{data.site.siteMetadata.title}</title>
         </Helmet>
-        <header
-          style={{
-            background: '#61dafb',
-            padding: 16,
-            position: 'fixed',
-            top: 0,
-            width: '100%',
-            zIndex: 1
-          }}
-        >
-          <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-            {data.site.siteMetadata.title}
-          </Link>
+        <header className="navbar">
+          <Link to="/">{data.site.siteMetadata.title}</Link>
         </header>
         <main style={{ padding: '64px 32px 32px' }}>{children}</main>
       </div>

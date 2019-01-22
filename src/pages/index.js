@@ -1,5 +1,6 @@
 import { graphql, Link } from 'gatsby';
 import React from 'react';
+import { IssueReporter } from '../components/issue-reporter';
 import { PageContainer } from '../components/page-container';
 
 const IndexPage = ({ data }) => (
@@ -17,6 +18,7 @@ const IndexPage = ({ data }) => (
           ))}
       </ol>
     </section>
+    <IssueReporter title="Home Page" />
   </PageContainer>
 );
 

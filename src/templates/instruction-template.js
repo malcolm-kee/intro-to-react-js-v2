@@ -1,7 +1,9 @@
 import { graphql } from 'gatsby';
 import { joinClassName } from 'join-string';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { LinkButton } from '../components/button';
+import { IssueReporter } from '../components/issue-reporter';
 import { MaterialIcons } from '../components/material-icons';
 import { PageContainer } from '../components/page-container';
 
@@ -35,10 +37,14 @@ const InstructionNav = ({ pageContext, top }) => (
 
 const InstructionTemplate = ({ data, pageContext }) => (
   <PageContainer>
+    <Helmet>
+      <title>{data.markdownRemark.frontmatter.title}</title>
+    </Helmet>
     <div className="instruction-template">
       <InstructionNav pageContext={pageContext} top />
       <main>
         <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+        <IssueReporter title={data.markdownRemark.frontmatter.title} />
       </main>
       <InstructionNav pageContext={pageContext} />
     </div>
@@ -51,6 +57,9 @@ export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
+      frontmatter {
+        title
+      }
     }
   }
 `;
