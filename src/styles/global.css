@@ -65,6 +65,8 @@ blockquote {
   top: 0;
   width: 100%;
   z-index: 1;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 .navbar a {
@@ -102,8 +104,70 @@ blockquote {
   margin-right: 4px;
 }
 
+.landing-page-header {
+  display: flex;
+  height: 100vh;
+  background: #282c34;
+  background: -moz-linear-gradient(45deg, #282c34 50%, #61dafb 50%);
+  background: -webkit-linear-gradient(45deg, #282c34 50%, #61dafb 50%);
+  background: linear-gradient(45deg, #282c34 50%, #61dafb 50%);
+}
+
+.logo-section,
+.landing-title-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#react-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80vmax;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.landing-title {
+  font-size: 6rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+  padding-right: 16px;
+  transform: translateY(20px);
+}
+
+@media screen and (max-width: 700px) {
+  .landing-page-header {
+    flex-flow: column-reverse;
+    height: 50vh;
+  }
+
+  .landing-title {
+    font-size: 3rem;
+    margin-top: 56px;
+    padding: 8px;
+  }
+
+  #react-logo {
+    height: 100px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .hide-small {
     display: none;
+  }
+
+  .landing-title {
+    font-size: 2rem;
   }
 }
