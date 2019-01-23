@@ -3,7 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Navbar } from './navbar';
 
-export const PageContainer = ({ children }) => (
+export const PageContainer = ({ pageTitle, children }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
@@ -26,7 +26,10 @@ export const PageContainer = ({ children }) => (
             content={data.site.siteMetadata.description}
           />
         </Helmet>
-        <Navbar title={data.site.siteMetadata.title} />
+        <Navbar
+          siteTitle={data.site.siteMetadata.title}
+          pageTitle={pageTitle}
+        />
         <main className="main-container">{children}</main>
       </div>
     )}

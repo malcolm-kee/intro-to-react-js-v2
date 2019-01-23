@@ -55,7 +55,7 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 - :pencil: Do the coding exercise
 - :raising_hand: Ask questions
 - :two_men_holding_hands: Help others
-- :warning: Report issue (using the link at the bottom of each page)
+- :warning: Report issue (using the red icon at the top right of the page)
 
 > While following along the code exercise, whenever you're lost, look for the :octocat: emoji, which will point you to the branch in this [repo][code-along-repo] at the point of the workshop. Example below:
 

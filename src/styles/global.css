@@ -64,6 +64,24 @@ h2 a {
   margin-right: 0;
 }
 
+.icon-button {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.icon-button--danger {
+  color: #b71c1c;
+}
+
 .table-of-content-section {
   padding: 16px;
   background: #fff;
@@ -108,7 +126,7 @@ blockquote {
 
 .navbar {
   background: #61dafb;
-  padding: 16px;
+  padding: 8px 16px;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -120,10 +138,20 @@ blockquote {
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.navbar a {
+.navbar > a {
   font-family: 'Roboto', 'Helvetica', 'Arial', 'sans serif';
   text-decoration: none;
   color: black;
+}
+
+.navbar-toolbar {
+  padding: 0 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-toolbar > .icon-button {
+  margin: 0 8px;
 }
 
 .main-container {
