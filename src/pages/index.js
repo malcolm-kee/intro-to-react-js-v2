@@ -1,9 +1,8 @@
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Navbar } from '../components/navbar';
-import { IssueReporter } from '../components/issue-reporter';
-import reactLogo from '../images/logo.svg';
+import { LandingPageHeader } from '../components/landing-page-header';
+import { TableOfContents } from '../components/table-of-contents';
 
 const IndexPage = ({ data }) => (
   <div className="landing-page">
@@ -12,31 +11,14 @@ const IndexPage = ({ data }) => (
       <meta name="author" content={data.site.siteMetadata.author} />
       <meta name="description" content={data.site.siteMetadata.description} />
     </Helmet>
-    <Navbar title={data.site.siteMetadata.title} />
-    <header className="landing-page-header">
-      <div className="logo-section">
-        <img src={reactLogo} id="react-logo" alt="React Logo" />
-      </div>
-      <div className="landing-title-container">
-        <h1 className="landing-title">Introduction to React</h1>
-      </div>
-    </header>
-    <main className="main-container">
-      <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
-      <section className="table-of-content-section">
-        <h2>Table of Contents</h2>
-        <ol>
-          {data.instructions.edges
-            .map(edge => edge.node.frontmatter)
-            .map(({ path, title }) => (
-              <li key={path}>
-                <Link to={path}>{title}</Link>
-              </li>
-            ))}
-        </ol>
-      </section>
-      <IssueReporter title="Home Page" />
-    </main>
+    <LandingPageHeader />
+    <div className="landing-page-content">
+      <article
+        className="main-container"
+        dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
+      />
+      <TableOfContents />
+    </div>
   </div>
 );
 
@@ -53,19 +35,6 @@ export const pageQuery = graphql`
     }
     markdownRemark(frontmatter: { path: { eq: "/" } }) {
       html
-    }
-    instructions: allMarkdownRemark(
-      sort: { fields: fileAbsolutePath, order: ASC }
-      filter: { frontmatter: { path: { ne: "/" } } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-            path
-          }
-        }
-      }
     }
   }
 `;

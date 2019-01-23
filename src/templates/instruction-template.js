@@ -49,7 +49,9 @@ const InstructionTemplate = ({ data, pageContext }) => (
     <div className="instruction-template">
       <InstructionNav pageContext={pageContext} top />
       <main>
-        <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+        <article
+          dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
+        />
         <IssueReporter title={data.markdownRemark.frontmatter.title} />
       </main>
       <InstructionNav pageContext={pageContext} />

@@ -6,13 +6,77 @@ h2 a {
   text-decoration: none;
 }
 
+.button {
+  background-color: #fff;
+  color: #007997;
+  padding: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 4px;
+  line-height: 0;
+}
+
+.button:hover {
+  background-color: #eee;
+}
+
+.button--large {
+  min-height: 56px;
+  min-width: 180px;
+  font-size: 1.3rem;
+  padding: 8px 16px;
+}
+
+.button--primary {
+  background-color: #0d47a1;
+  color: #fff;
+}
+
+.button--primary:hover {
+  background-color: #002171;
+}
+
+.button img {
+  margin: 0 4px;
+}
+
+.button i {
+  margin: 0 4px;
+}
+
+.button-toolbar {
+  padding: 16px 0 16px 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.button-toolbar > .button {
+  margin: 0 8px;
+}
+
+.button-toolbar > .button:first-child {
+  margin-left: 0;
+}
+
+.button-toolbar > .button:last-child {
+  margin-right: 0;
+}
+
 .table-of-content-section {
-  margin: 32px auto;
+  padding: 16px;
+  background: #fff;
+  background-color: #eeffff;
+}
+
+.table-of-content-inner-container {
   max-width: 300px;
+  margin: 0px auto;
 }
 
 .table-of-content-section a {
-  color: #007997;
+  color: #000;
   text-decoration: none;
 }
 
@@ -34,21 +98,8 @@ h2 a {
 .instruction-template-nav--top {
   display: flex;
   justify-content: space-between;
-  margin-top: 0px;
-  margin-bottom: 16px;
-}
-
-.instruction-template-nav a {
-  padding: 8px;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  color: #007997;
-  border-radius: 4px;
-}
-
-.instruction-template-nav a:hover {
-  background-color: #eee;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 blockquote {
@@ -113,12 +164,33 @@ blockquote {
   background: linear-gradient(45deg, #282c34 50%, #61dafb 50%);
 }
 
+.landing-page-content {
+  position: relative;
+}
+
+.landing-page-content article {
+  margin-right: 250px;
+}
+
+.landing-page .table-of-content-section {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0px;
+  padding-right: 32px;
+}
+
 .logo-section,
 .landing-title-container {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.landing-title-container .button-toolbar {
+  align-self: flex-start;
 }
 
 @keyframes App-logo-spin {
@@ -137,6 +209,14 @@ blockquote {
   margin-bottom: 0;
 }
 
+.github-logo-container {
+  line-height: 0;
+}
+
+.github-logo {
+  margin: 0;
+}
+
 .landing-title {
   font-size: 6rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -146,19 +226,50 @@ blockquote {
 }
 
 @media screen and (max-width: 700px) {
+  .landing-title-container {
+    flex: 2;
+  }
+
   .landing-page-header {
     flex-flow: column-reverse;
-    height: 50vh;
+    height: 60vh;
   }
 
   .landing-title {
     font-size: 3rem;
-    margin-top: 56px;
+    margin-top: 16px;
     padding: 8px;
   }
 
   #react-logo {
     height: 100px;
+  }
+
+  .button--large {
+    min-width: auto;
+    min-height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .button-toolbar .button {
+    flex: 1;
+  }
+
+  .landing-title-container .button-toolbar {
+    align-self: auto;
+  }
+
+  .button-toolbar {
+    padding: 8px;
+  }
+
+  .landing-page-content article {
+    margin-right: 0;
+  }
+
+  .landing-page .table-of-content-section {
+    padding: 8px;
+    position: relative;
   }
 }
 
