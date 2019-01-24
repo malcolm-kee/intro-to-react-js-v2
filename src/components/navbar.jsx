@@ -14,14 +14,18 @@ export const Navbar = ({ siteTitle, pageTitle }) => (
     <div className="navbar-toolbar">
       <a
         href="https://github.com/malcolm-kee/intro-to-react-js"
-        className="github-logo-container icon-button"
+        aria-label="Github repo of this site"
+        title="Github repo of this site"
         target="_BLANK"
         rel="noopener noreferrer"
+        className="github-logo-container icon-button"
       >
         <img className="github-logo" src={githubLogo} alt="github logo" />
       </a>
       <a
         href={getReportIssueLink(pageTitle)}
+        aria-label="report issue on this page"
+        title="report issue on this page"
         target="_BLANK"
         rel="noopener noreferrer"
         className="icon-button icon-button--danger"

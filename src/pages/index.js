@@ -1,7 +1,8 @@
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { LandingPageHeader } from '../components/landing-page-header';
+import { MaterialIcons } from '../components/material-icons';
 import { TableOfContents } from '../components/table-of-contents';
 
 const IndexPage = ({ data }) => (
@@ -17,6 +18,14 @@ const IndexPage = ({ data }) => (
         className="main-container"
         dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
       />
+      <div className="button-toolbar">
+        <Link
+          to="/introduction"
+          className="button button--large button--primary"
+        >
+          Start Learning <MaterialIcons name="arrow_forward" />
+        </Link>
+      </div>
       <TableOfContents />
     </div>
   </div>

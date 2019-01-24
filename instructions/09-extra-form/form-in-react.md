@@ -16,7 +16,13 @@ Our current movie list will displays all movies. It would be nice if our user ca
 
 First of all, filtering result is usually done via backend as frontend application usually doesn't have all the data (if it is, it would be very slow to use your application).
 
-Luckily, our current movies API supports search. Open a new browser tab with this URL [`https://react-intro-movies.herokuapp.com/movies?q=aqua`](https://react-intro-movies.herokuapp.com/movies?q=aqua) and you would see only Aquaman is in the movie list. The end part of the URL (`q=aqua`) is how we search the list. Providing different value (e.g. `q=bumble`) would returns you different results.
+Luckily, our current movies API supports search. Open a new browser tab with the following [URL](https://react-intro-movies.herokuapp.com/movies?q=aqua) and you would see only Aquaman is in the movie list:
+
+```
+https://react-intro-movies.herokuapp.com/movies?q=aqua
+```
+
+The end part of the URL (`q=aqua`) is how we search the list. Providing different value (e.g. `q=bumble`) would returns you different results.
 
 ### Passing Extra Parameter in Ajax Call
 

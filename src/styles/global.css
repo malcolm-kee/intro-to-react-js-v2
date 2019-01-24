@@ -8,7 +8,7 @@ h2 a {
 
 .button {
   background-color: #fff;
-  color: #007997;
+  color: #0d47a1;
   padding: 8px;
   display: inline-flex;
   justify-content: center;
@@ -93,14 +93,22 @@ h2 a {
   margin: 0px auto;
 }
 
-.table-of-content-section a {
+.toc-link {
   color: #000;
   text-decoration: none;
 }
 
-.table-of-content-section a::after {
+.toc-link::after {
   content: ' > ';
+}
+
+.toc-link.toc-link--active {
+  color: #0d47a1;
   font-weight: bold;
+}
+
+.toc-link.toc-link--active::after {
+  content: none;
 }
 
 .table-of-content-section li {
@@ -118,6 +126,23 @@ h2 a {
   justify-content: space-between;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.instruction-article,
+.instruction-template-nav {
+  margin-right: 250px;
+}
+
+.instruction-template .table-of-content-header {
+  display: none;
+}
+
+.instruction-template .table-of-content-section {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  right: 0px;
+  padding-right: 32px;
 }
 
 blockquote {
@@ -145,13 +170,21 @@ blockquote {
 }
 
 .navbar-toolbar {
-  padding: 0 8px;
+  padding: 0;
   display: flex;
   justify-content: center;
 }
 
 .navbar-toolbar > .icon-button {
   margin: 0 8px;
+}
+
+.navbar-toolbar > .icon-button:first-child {
+  margin-left: 0;
+}
+
+.navbar-toolbar > .icon-button:last-child {
+  margin-right: 0;
 }
 
 .main-container {
@@ -196,7 +229,12 @@ blockquote {
   position: relative;
 }
 
-.landing-page-content article {
+.landing-page-content .button-toolbar {
+  padding: 16px;
+}
+
+.landing-page-content article,
+.landing-page-content .button-toolbar {
   margin-right: 250px;
 }
 
@@ -291,13 +329,23 @@ blockquote {
     padding: 8px;
   }
 
-  .landing-page-content article {
+  .landing-page-content article,
+  .landing-page-content .button-toolbar {
     margin-right: 0;
   }
 
   .landing-page .table-of-content-section {
     padding: 8px;
     position: relative;
+  }
+
+  .instruction-template .table-of-content-section {
+    display: none;
+  }
+
+  .instruction-article,
+  .instruction-template-nav {
+    margin-right: 0;
   }
 }
 

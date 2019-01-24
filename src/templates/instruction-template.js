@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { LinkButton } from '../components/button';
 import { MaterialIcons } from '../components/material-icons';
 import { PageContainer } from '../components/page-container';
+import { TableOfContents } from '../components/table-of-contents';
 
 const InstructionNav = ({ pageContext, top }) => (
   <nav
@@ -14,18 +15,22 @@ const InstructionNav = ({ pageContext, top }) => (
     )}
   >
     {pageContext.previous ? (
-      <LinkButton to={pageContext.previous.frontmatter.path}>
+      <LinkButton
+        to={pageContext.previous.frontmatter.path}
+        aria-label="previous section"
+        title="previous section"
+      >
         <MaterialIcons name="arrow_back" />
-        <span className="hide-small">
-          {pageContext.previous.frontmatter.title}
-        </span>
       </LinkButton>
     ) : (
       <span />
     )}
     {pageContext.next ? (
-      <LinkButton to={pageContext.next.frontmatter.path}>
-        <span className="hide-small">{pageContext.next.frontmatter.title}</span>
+      <LinkButton
+        to={pageContext.next.frontmatter.path}
+        aria-label="next section"
+        title="next section"
+      >
         <MaterialIcons name="arrow_forward" />
       </LinkButton>
     ) : (
@@ -49,8 +54,10 @@ const InstructionTemplate = ({ data, pageContext }) => (
       <InstructionNav pageContext={pageContext} top />
       <main>
         <article
+          className="instruction-article"
           dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
         />
+        <TableOfContents />
       </main>
       <InstructionNav pageContext={pageContext} />
     </div>

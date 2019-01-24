@@ -17,6 +17,8 @@ export const LandingPageHeader = () => (
         </LinkButton>
         <a
           href="https://github.com/malcolm-kee/intro-to-react-js"
+          aria-label="Github repo of this site"
+          title="Github repo of this site"
           className="button button--large"
           target="_BLANK"
           rel="noopener noreferrer"

@@ -33,7 +33,7 @@ const typography = new Typograph({
       paddingTop: rhythm(1 / 2),
       paddingBottom: rhythm(1 / 2),
       borderLeftColor: '#8d8d8d',
-      borderLeftWidth: rhythm(1 / 2),
+      borderLeftWidth: rhythm(1 / 3),
       borderLeftStyle: 'solid'
     }
   })
