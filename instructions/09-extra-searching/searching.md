@@ -1,10 +1,10 @@
 ---
-title: Bonus - Form in React
-path: '/form-in-react'
-description: 'Learn how form works in React and how to implement search in React'
+title: Bonus - Searching
+path: '/searching'
+description: 'Learn how to implements search function in React'
 ---
 
-# Bonus - Form in React
+# Bonus - Searching
 
 This section will only be covered if we have additional time during the workshop.
 
