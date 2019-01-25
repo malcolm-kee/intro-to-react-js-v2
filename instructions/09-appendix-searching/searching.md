@@ -1,10 +1,10 @@
 ---
-title: Bonus - Searching
+title: Appendix - Searching
 path: '/searching'
 description: 'Learn how to implements search function in React'
 ---
 
-# Bonus - Searching
+# Appendix - Searching
 
 This section will only be covered if we have additional time during the workshop.
 

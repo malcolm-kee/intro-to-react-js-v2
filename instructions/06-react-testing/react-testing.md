@@ -48,7 +48,7 @@ The offical packages to do that is a package known as [classnames], however, for
 
 Create a file `lib.js` with the content from [this gist](https://gist.github.com/malcolm-kee/30cd26b80c5f45e443ae44dd5a3b4f01).
 
-- `classNames` is a function that take any number of arguments, and join them together as a string. Only string and number will be included in final results and falsy value will be excluded. String will be flattened
+- `classNames` is a function that take any number of arguments, and join them together as a string. Only string and number will be included in final results and falsy value will be excluded. Array will be flattened
 - Example usage:
 
   ```js
