@@ -44,12 +44,6 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 - Typescript/Flow
 - React hook feature
 
-## Format of this Workshop
-
-- do it without tools
-- feel the pain
-- introduce tooling and learn to use it
-
 ## What is Expected of You
 
 - :pencil: Do the coding exercise

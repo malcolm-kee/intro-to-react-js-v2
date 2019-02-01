@@ -24,6 +24,11 @@ const typography = new Typograph({
     }
   ],
   overrideStyles: ({ rhythm }) => ({
+    h1: {
+      marginTop: rhythm(1 / 2),
+      marginBottom: rhythm(3 / 2),
+      fontSize: rhythm(2)
+    },
     blockquote: {
       color: '#000000',
       marginLeft: 0,

@@ -3,7 +3,7 @@ title: README
 path: '/'
 ---
 
-# Introduction to React JS V2
+# Introduction to React JS v2
 
 A complete introduction to React (version 2) - up and running with React by learning React core API and common how-to e.g. making ajax calls, writing tests, and code splitting.
 

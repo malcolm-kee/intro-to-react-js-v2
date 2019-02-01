@@ -10,13 +10,13 @@ export const LandingPageHeader = () => (
       <img src={reactLogo} id="react-logo" alt="React Logo" />
     </div>
     <div className="landing-title-container">
-      <h1 className="landing-title">Introduction to React</h1>
+      <h1 className="landing-title">Introduction to React v2</h1>
       <div className="button-toolbar">
         <LinkButton to="/introduction" primary large>
           Start <MaterialIcons name="arrow_forward" />
         </LinkButton>
         <a
-          href="https://github.com/malcolm-kee/intro-to-react-js"
+          href="https://github.com/malcolm-kee/intro-to-react-js-v2"
           aria-label="Github repo of this site"
           title="Github repo of this site"
           className="button button--large"
