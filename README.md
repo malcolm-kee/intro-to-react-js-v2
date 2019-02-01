@@ -25,5 +25,8 @@ To avoid the workshop time being spent on downloading and installing tools, make
 - git ([Download](https://git-scm.com/downloads))
 - VS code ([Download](https://code.visualstudio.com/Download)) - you can use other editor if you wish, but when discussing editor integration, this workshop will focus on VS code only.
 
+Besides, sign up a [Github] account if you doesn't have one.
+
 [v1-website]: https://intro-to-react-js.netlify.com/
 [code-along-repo]: https://github.com/malcolm-kee/react-movie-app
+[github]: https://github.com/
