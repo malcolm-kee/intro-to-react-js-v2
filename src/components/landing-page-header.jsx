@@ -24,7 +24,7 @@ export const LandingPageHeader = () => (
           rel="noopener noreferrer"
           style={{ color: 'black' }}
         >
-          <img className="github-logo" src={githubLogo} alt="Github Logo" />
+          <img className="github-logo" src={githubLogo} alt="GitHub Logo" />
           <span className="hide-small">Source</span>
         </a>
       </div>

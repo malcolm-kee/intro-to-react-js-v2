@@ -1,12 +1,12 @@
 ---
 title: Create A React Project
 path: '/create-react-project'
-description: 'Learn to create a React project with create-react-app CLI and host it in Github'
+description: 'Learn to create a React project with create-react-app CLI and host it in GitHub'
 ---
 
 # Create A React Project
 
-We will now learn how to create a React project and host the repo in Github
+We will now learn how to create a React project and host the repo in GitHub
 
 ## Create React App
 
@@ -40,6 +40,14 @@ You should see the project structure as below:
 
 ![Default Create React App Project Structure](cra-default-project-structure.png)
 
+Run the following command in the CLI, and your browser should open with the default Create React App application:
+
+```bash
+npm start
+```
+
+![Default Create React App Application](cra-default-application.png)
+
 ## Host Your Repo in GitHub
 
 Now that we've created the project, it's always good practice to host your repo somewhere instead of just on your PC, as you would never know when your PC will give you a surprise.
@@ -47,7 +55,7 @@ Now that we've created the project, it's always good practice to host your repo 
 We will host our repo in GitHub.
 
 1. Create a new repo in GitHub (via [this link][create-github-repo] or Click the New button in your GitHub profile).
-1. Name the repo as `react-movie-app` (or something else if you wish). Click "Create Repository" button.
+1. Name the repo as "react-movie-app" (or something else if you wish). Click "Create Repository" button.
 1. Follow the "...push an existing repository from the command line" instruction on the page by running the command in your `react-movie-app` folder. It should be something like this:
 
    ```bash
