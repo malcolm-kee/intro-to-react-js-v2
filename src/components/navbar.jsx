@@ -16,8 +16,8 @@ export const Navbar = ({ siteTitle, pageTitle }) => (
     <div className="navbar-toolbar">
       <a
         href="https://github.com/malcolm-kee/intro-to-react-js-v2"
-        aria-label="Github repo of this site"
-        title="Github repo of this site"
+        aria-label="GitHub repo of this site"
+        title="GitHub repo of this site"
         target="_BLANK"
         rel="noopener noreferrer"
         className="github-logo-container icon-button"

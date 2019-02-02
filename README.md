@@ -29,6 +29,6 @@ To avoid the workshop time being spent on downloading and installing tools, make
 Besides, sign up a [GitHub] account if you doesn't have one yet.
 
 [v1-website]: https://intro-to-react-js.netlify.com/
-[code-along-repo]: https://github.com/malcolm-kee/react-movie-app
+[code-along-repo]: https://github.com/malcolm-kee/react-movie-app-v2
 [cli-course]: https://www.codecademy.com/learn/learn-the-command-line
 [github]: https://github.com/
