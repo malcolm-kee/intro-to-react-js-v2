@@ -1,10 +1,10 @@
 ---
-title: Create React Project
+title: Create A React Project
 path: '/create-react-project'
 description: 'Learn to create a React project with create-react-app CLI and host it in Github'
 ---
 
-# Create React Project
+# Create A React Project
 
 We will now learn how to create a React project and host the repo in Github
 
@@ -12,17 +12,51 @@ We will now learn how to create a React project and host the repo in Github
 
 [Create React App][create-react-app] is a CLI tools that help you to create a project with all the required configurations for a typical React applications, e.g. webpack, Babel, and ESLint.
 
-In you're interested to learn how to configure those, you can refer to [version 1 of this workshop][v1-website], where I will guide you through step-by-step on how to do that.
+> In you're interested on basic understanding on those tools and how to configure them, you can refer to [version 1 of this workshop][v1-website], where I will guide you through step-by-step on the purpose of each of them and how to do configure them for a React project.
 
 ### Create the Project
 
-To create the project for our app, run the following in your CLI:
+To create the project for our app, in your CLI, go to the directory that you want to create the project, and run the following command:
 
 ```bash
 npx create-react-app react-movie-app
 ```
 
-## Host Your Repo in Github
+- the command will create a folder `react-movie-app` and install all the required dependencies for your project. Have fun waiting :)
+- `npx` is a `npm` utility that allows you to run CLI tools conveniently. Without `npx`, you need to run 2 commands:
+  ```bash
+  npm install -g create-react-app
+  create-react-app react-movie-app
+  ```
+
+After the command finish running, go into the folder and open it with VS code:
+
+```bash
+cd react-movie-app
+code .
+```
+
+You should see the project structure as below:
+
+![Default Create React App Project Structure](cra-default-project-structure.png)
+
+## Host Your Repo in GitHub
+
+Now that we've created the project, it's always good practice to host your repo somewhere instead of just on your PC, as you would never know when your PC will give you a surprise.
+
+We will host our repo in GitHub.
+
+1. Create a new repo in GitHub (via [this link][create-github-repo] or Click the New button in your GitHub profile).
+1. Name the repo as `react-movie-app` (or something else if you wish). Click "Create Repository" button.
+1. Follow the "...push an existing repository from the command line" instruction on the page by running the command in your `react-movie-app` folder. It should be something like this:
+
+   ```bash
+   git remote add origin https://github.com/malcolm-kee/react-movie-app.git
+   git push -u origin master
+   ```
+
+1. Refresh the GitHub page. You should be able to see your code is available at the GitHub repo now.
 
 [create-react-app]: https://facebook.github.io/create-react-app/
 [v1-website]: https://intro-to-react-js.netlify.com/
+[create-github-repo]: https://github.com/new
