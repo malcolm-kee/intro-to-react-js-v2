@@ -26,7 +26,6 @@ export const TableOfContents = () => (
     render={data => (
       <nav className="table-of-content-section">
         <div className="table-of-content-inner-container">
-          <h2 className="table-of-content-header">Table of Contents</h2>
           <ol>
             {data.instructions.edges
               .map(edge => edge.node.frontmatter)

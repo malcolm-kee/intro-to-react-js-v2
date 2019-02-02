@@ -3,7 +3,7 @@ const packageJson = require('./package.json');
 
 module.exports = {
   siteMetadata: {
-    title: `Intro to React`,
+    title: `Intro to React V2`,
     author: packageJson.author,
     description: packageJson.description,
     siteUrl: packageJson.homepage

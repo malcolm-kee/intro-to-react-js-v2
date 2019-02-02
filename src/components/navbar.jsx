@@ -5,17 +5,19 @@ import { MaterialIcons } from './material-icons';
 
 const getReportIssueLink = pageTitle =>
   pageTitle
-    ? `https://github.com/malcolm-kee/intro-to-react-js/issues/new?title=Issue%20On%20${pageTitle}`
-    : 'https://github.com/malcolm-kee/intro-to-react-js/issues/new';
+    ? encodeURI(
+        `https://github.com/malcolm-kee/intro-to-react-js-v2/issues/new?title=Issue On ${pageTitle}`
+      )
+    : 'https://github.com/malcolm-kee/intro-to-react-js-v2/issues/new';
 
 export const Navbar = ({ siteTitle, pageTitle }) => (
   <header className="navbar">
     <Link to="/">{siteTitle}</Link>
     <div className="navbar-toolbar">
       <a
-        href="https://github.com/malcolm-kee/intro-to-react-js"
-        aria-label="Github repo of this site"
-        title="Github repo of this site"
+        href="https://github.com/malcolm-kee/intro-to-react-js-v2"
+        aria-label="GitHub repo of this site"
+        title="GitHub repo of this site"
         target="_BLANK"
         rel="noopener noreferrer"
         className="github-logo-container icon-button"

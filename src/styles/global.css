@@ -2,7 +2,7 @@ img.emoji-icon {
   margin: 0;
 }
 
-h2 a {
+h2 > a {
   text-decoration: none;
 }
 
@@ -31,12 +31,12 @@ h2 a {
 }
 
 .button--primary {
-  background-color: #0d47a1;
+  background-color: #306b7b;
   color: #fff;
 }
 
 .button--primary:hover {
-  background-color: #002171;
+  background-color: #1f4d5a;
 }
 
 .button img {
@@ -85,9 +85,23 @@ h2 a {
 }
 
 .table-of-content-section {
-  padding: 16px;
-  background: #fff;
-  background-color: #eeffff;
+  padding: 24px 0;
+  background-color: #efefef;
+}
+
+.table-of-content-section ol {
+  margin: 0;
+}
+
+.table-of-content-section li {
+  list-style-type: none;
+  padding: 8px 8px;
+  margin-bottom: 0;
+}
+
+.table-of-content-section li a {
+  display: block;
+  padding: 4px 16px;
 }
 
 .table-of-content-inner-container {
@@ -98,23 +112,13 @@ h2 a {
 .toc-link {
   color: #000;
   text-decoration: none;
-}
-
-.toc-link::after {
-  content: ' > ';
+  border-left: 3px solid transparent;
 }
 
 .toc-link.toc-link--active {
   color: #0d47a1;
   font-weight: bold;
-}
-
-.toc-link.toc-link--active::after {
-  content: none;
-}
-
-.table-of-content-section li {
-  margin-bottom: 1.45em;
+  border-left: 3px solid #0d47a1;
 }
 
 .instruction-template-nav {
@@ -135,16 +139,11 @@ h2 a {
   margin-right: 250px;
 }
 
-.instruction-template .table-of-content-header {
-  display: none;
-}
-
 .instruction-template .table-of-content-section {
   position: fixed;
   top: 64px;
   bottom: 0;
   right: 0px;
-  padding-right: 32px;
 }
 
 blockquote {
@@ -222,9 +221,6 @@ blockquote {
   display: flex;
   height: 100vh;
   background: #282c34;
-  background: -moz-linear-gradient(45deg, #282c34 50%, #61dafb 50%);
-  background: -webkit-linear-gradient(45deg, #282c34 50%, #61dafb 50%);
-  background: linear-gradient(45deg, #282c34 50%, #61dafb 50%);
 }
 
 .landing-page-content {
@@ -240,12 +236,15 @@ blockquote {
   margin-right: 250px;
 }
 
+.landing-page-content article {
+  padding-top: 32px;
+}
+
 .landing-page .table-of-content-section {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0px;
-  padding-right: 32px;
 }
 
 .logo-section,
@@ -259,6 +258,32 @@ blockquote {
 
 .landing-title-container .button-toolbar {
   align-self: flex-start;
+}
+
+@keyframes moving-background {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 60px;
+  }
+}
+
+.landing-title-container .button--primary:hover,
+.landing-title-container .button--primary:focus {
+  background-color: #306b7b;
+  background-size: 30px 30px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.1) 75%,
+    transparent 75%,
+    transparent
+  );
+  animation: moving-background 2s linear 0s infinite normal none running;
 }
 
 @keyframes App-logo-spin {
@@ -288,7 +313,8 @@ blockquote {
 .landing-title {
   font-size: 6rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-shadow: 1px 1px 10px #fff, 1px 1px 10px #ccc;
+  color: #61dafb;
+  text-shadow: 1px 1px 10px #000, 1px 1px 10px #bbb;
   padding-right: 16px;
   transform: translateY(20px);
 }
@@ -307,6 +333,7 @@ blockquote {
     font-size: 3rem;
     margin-top: 16px;
     padding: 8px;
+    text-align: center;
   }
 
   #react-logo {
