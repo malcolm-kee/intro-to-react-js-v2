@@ -12,7 +12,7 @@ We will now learn how to create a React project and host the repo in Github
 
 [Create React App][create-react-app] is a CLI tools that help you to create a project with all the required configurations for a typical React applications, e.g. webpack, Babel, and ESLint.
 
-> In you're interested on basic understanding on those tools and how to configure them, you can refer to [version 1 of this workshop][v1-website], where I will guide you through step-by-step on the purpose of each of them and how to do configure them for a React project.
+> In you're interested on basic understanding on those tools and how to configure them, you can refer to [version 1 of this workshop][v1-website], where I will explain the purpose of each tools and guide you through step-by-step on how to configure them for a React project.
 
 ### Create the Project
 
