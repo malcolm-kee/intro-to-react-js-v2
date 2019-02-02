@@ -1,7 +1,7 @@
 {
-  "name": "intro-to-react-js",
+  "name": "intro-to-react-js-v2",
   "version": "1.0.0",
-  "description": "A complete introduction to ReactJS - up and running with ReactJS by learning tooling that improves your development workflow, ReactJS core API, and common how-to e.g. writing tests, routing, and code splitting.",
+  "description": "A complete introduction to ReactJS - up and running with ReactJS by learning ReactJS core API and common how-to e.g. writing tests, routing, and code splitting.",
   "scripts": {
     "start": "npm run dev",
     "dev": "gatsby develop",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/malcolm-kee/intro-to-react-js.git"
+    "url": "git+https://github.com/malcolm-kee/intro-to-react-js-v2"
   },
   "keywords": [
     "react workshop",
@@ -18,9 +18,9 @@
   "author": "Malcolm Kee <malcolm.keeweesiong@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/malcolm-kee/intro-to-react-js/issues"
+    "url": "https://github.com/malcolm-kee/intro-to-react-js-v2/issues"
   },
-  "homepage": "https://intro-to-react-js.netlify.com/",
+  "homepage": "https://intro-to-react-js-v2.netlify.com/",
   "dependencies": {
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.25",

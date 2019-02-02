@@ -3,7 +3,7 @@ const packageJson = require('./package.json');
 
 module.exports = {
   siteMetadata: {
-    title: `Intro to React V2`,
+    title: `Intro to React v2`,
     author: packageJson.author,
     description: packageJson.description,
     siteUrl: packageJson.homepage
@@ -60,8 +60,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Intro to ReactJS',
-        short_name: 'React Intro',
+        name: 'Intro to ReactJS v2',
+        short_name: 'React Intro v2',
         start_url: '/',
         background_color: '#fdf6e3',
         theme_color: '#61dafb',
