@@ -54,7 +54,7 @@ Now that we've created the project, it's always good practice to host your repo 
 
 We will host our repo in GitHub.
 
-1. Create a new repo in GitHub (via [this link][create-github-repo] or Click the New button in your GitHub profile).
+1. Create a new repo in GitHub (via [this link][create-github-repo] or click the New button in your GitHub profile).
 1. Name the repo as "react-movie-app" (or something else if you wish). Click "Create Repository" button.
 1. Follow the "...push an existing repository from the command line" instruction on the page by running the command in your `react-movie-app` folder. It should be something like this:
 
