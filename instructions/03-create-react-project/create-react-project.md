@@ -65,6 +65,26 @@ We will host our repo in GitHub.
 
 1. Refresh the GitHub page. You should be able to see your code is available at the GitHub repo now.
 
+## Transferring Code to the Project
+
+Now that we have a project, let's move our code to this project.
+
+1. Include our html code into `public/index.html` except the `script` tags.
+1. Replace the content of `src/index.js` with our code within the `script` tag. Remove all imports except `React` and `ReactDOM` imports. If you don't know what these imports statements are, no worries, I'll explain them shortly.
+1. Delete all the files in `src` folder except `index.js` file.
+
+> [:octocat: `5ae9a873a15d907a9c202fa6435b80ad37b3980d`](https://github.com/malcolm-kee/react-movie-app-v2/commit/5ae9a873a15d907a9c202fa6435b80ad37b3980d)
+
+Now when you run `npm start` the application should be as per before.
+
+Commit your code and push to your GitHub repo.
+
+```bash
+git add .
+git commit -m "transfer code to project"
+git push
+```
+
 [create-react-app]: https://facebook.github.io/create-react-app/
 [v1-website]: https://intro-to-react-js.netlify.com/
 [create-github-repo]: https://github.com/new
