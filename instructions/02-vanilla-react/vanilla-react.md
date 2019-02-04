@@ -163,9 +163,7 @@ const App = function() {
   ]);
 };
 
-const appElement = React.createElement(App);
-
-ReactDOM.render(appElement, document.getElementById('root'));
+ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
 
 - to make an element to have multiple children, just pass it an array of elements.
@@ -211,10 +209,8 @@ ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
 
 - Now `Movie` is a more flexible component that accepts props from its parent.
-- `props` (stands for properties) are variables that parent component (`App`) pass to its children (`Movie`).
-- All React component accepts `props` as input, and produces the markup (result of `React.createElement`) as its output.
 
-<hr >
+## Class Component
 
 As mentioned before, there are 2 types of component - function component and class component. Let's convert `App` to class component.
 
