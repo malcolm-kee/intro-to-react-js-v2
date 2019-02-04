@@ -1,10 +1,10 @@
 ---
-title: React Core
-path: '/react-core'
+title: Components & Props
+path: '/components-and-props'
 description: 'Learn JSX, React states, and lifecycle methods'
 ---
 
-# React Core
+# Components & Props
 
 In this section, we will discuss the core API of React.
 
