@@ -1,12 +1,12 @@
 ---
 title: Components & Props
 path: '/components-and-props'
-description: 'Learn JSX, React states, and lifecycle methods'
+description: 'Learn JSX and how to write and compose React components'
 ---
 
 # Components & Props
 
-In this section, we will discuss the core API of React.
+In this section, we will discuss JSX, the basic rule of a component, and how to create a complex UI by composing component.
 
 ## JSX
 
@@ -58,6 +58,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 - Notice that first letter of `Movie` is capitalized. It _must_ be. Compare to use `React.createElement` directly, when using JSX there is no way for you to specify if the tag is a string (`'div'`) or a variable (`Movie`), so the convention is that if it is capitalized, then it is a React component assigned to the variable; else if it is lowercase, it will try to have `movie` as a web component.
 - We now pass props down as we add attributes to an HTML tag.
+
+> JSX is not part of Javascript, it's a special syntax introduced by React. Currently your code works because the development tools setup by Create React App will automatically compile it to `React.createElement`.
 
 ## React States and Lifecycle Methods
 

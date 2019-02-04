@@ -12,6 +12,8 @@ export const PageContainer = ({ pageTitle, children }) => (
             title
             author
             description
+            repositoryUrl
+            bugUrl
           }
         }
       }
@@ -29,6 +31,8 @@ export const PageContainer = ({ pageTitle, children }) => (
         <Navbar
           siteTitle={data.site.siteMetadata.title}
           pageTitle={pageTitle}
+          repositoryUrl={data.site.siteMetadata.repositoryUrl}
+          bugUrl={data.site.siteMetadata.bugUrl}
         />
         <main className="main-container">{children}</main>
       </div>

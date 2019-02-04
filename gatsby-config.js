@@ -6,7 +6,9 @@ module.exports = {
     title: `Intro to React v2`,
     author: packageJson.author,
     description: packageJson.description,
-    siteUrl: packageJson.homepage
+    siteUrl: packageJson.homepage,
+    repositoryUrl: packageJson.repository.url,
+    bugUrl: packageJson.bugs.url
   },
   plugins: [
     {

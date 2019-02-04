@@ -8,7 +8,7 @@ description: ''
 
 ![React logo](react-logo.png)
 
-This workshop is "A Complete Introduction to React JS", which will introduces you the core of React and the tools around React.
+This workshop is "An Introduction to React JS", which will introduces you the core of React.
 
 ## Who am I
 
@@ -39,7 +39,7 @@ This workshop is "A Complete Introduction to React JS", which will introduces yo
 
 - Basics of HTML, CSS, & Javascript
 - Advanced React Patterns e.g. Higher Order Components and Render Props
-- Tooling to use with React. If you're interested, refer to [version 1][v1-website] of this workshop.
+- Tooling to use with React, e.g. webpack, Babel, ESLint. We'll use Create React App to abstract away all the tooling. If you're interested to learn about those tools, refer to [version 1][v1-website] of this workshop.
 - Redux
 - Typescript/Flow
 - React hook feature
