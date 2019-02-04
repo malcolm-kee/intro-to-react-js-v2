@@ -3,19 +3,17 @@ import React from 'react';
 import githubLogo from '../images/github-small.png';
 import { MaterialIcons } from './material-icons';
 
-const getReportIssueLink = pageTitle =>
+const getReportIssueLink = (bugUrl, pageTitle) =>
   pageTitle
-    ? encodeURI(
-        `https://github.com/malcolm-kee/intro-to-react-js-v2/issues/new?title=Issue On ${pageTitle}`
-      )
-    : 'https://github.com/malcolm-kee/intro-to-react-js-v2/issues/new';
+    ? encodeURI(`${bugUrl}/new?title=Issue On ${pageTitle}`)
+    : `${bugUrl}/new`;
 
-export const Navbar = ({ siteTitle, pageTitle }) => (
+export const Navbar = ({ siteTitle, pageTitle, repositoryUrl, bugUrl }) => (
   <header className="navbar">
     <Link to="/">{siteTitle}</Link>
     <div className="navbar-toolbar">
       <a
-        href="https://github.com/malcolm-kee/intro-to-react-js-v2"
+        href={repositoryUrl}
         aria-label="GitHub repo of this site"
         title="GitHub repo of this site"
         target="_BLANK"
@@ -25,7 +23,7 @@ export const Navbar = ({ siteTitle, pageTitle }) => (
         <img className="github-logo" src={githubLogo} alt="github logo" />
       </a>
       <a
-        href={getReportIssueLink(pageTitle)}
+        href={getReportIssueLink(bugUrl, pageTitle)}
         aria-label="report issue on this page"
         title="report issue on this page"
         target="_BLANK"

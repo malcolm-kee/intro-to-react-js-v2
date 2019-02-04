@@ -1,36 +1,34 @@
 ---
-title: React Core
-path: '/react-core'
-description: 'Learn JSX, React states, lifecycle methods, and configuring Babel and ESLint to work with React'
+title: Components & Props
+path: '/components-and-props'
+description: 'Learn JSX and how to write and compose React components'
 ---
 
-# React Core
+# Components & Props
 
-In this section, we will discuss the core API of React.
+In this section, we will discuss JSX, the basic rule of a component, and how to create a complex UI by composing component.
 
 ## JSX
 
 You do not need JSX to use React, as I've shown you in [previous section](/vanilla-react). However, JSX would make your code a bit more readable.
 
-Let's convert `Movie` component to using JSX. It will look like this:
+Let's convert `Movie` component to use JSX. It will look like this:
 
 ```jsx
 import React from 'react';
 
-const Movie = props => (
+export const Movie = props => (
   <div className="movie-container">
     <h1>{props.name}</h1>
     <h2>{props.releaseDate}</h2>
   </div>
 );
-
-export default Movie;
 ```
 
 - Personally, I feel this is more readable. You may feel uncomfortable to introduce HTML in Javascript, I invite you to give it a shot until the end of this workshop.
 - Comparing with the previous code, now you know what actually JSX does &mdash; it is just translating those HTML tags into `React.createElement` calls. That's it.
 - Note the strange `{props.name}` syntax: this is how you output Javascript expression. It you take away `{}`, it will literally output the string `props.name`.
-- Notice you still have to import React despite React not being explicitly used. As JSX is compiled to `React.createElement`, anywhere you use JSX, you need to import React. However, ESLint doesn't understand this relationship by default, thus it is yelling at you that "React is defined but never used". We will fix this later.
+- Notice you still have to import React despite React not being explicitly used. As JSX is compiled to `React.createElement`, anywhere you use JSX, you need to import React.
 
 So now JSX is demystified a bit, let's go convert `App` and `index.js`.
 
@@ -58,40 +56,14 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-- Notice that why first letter of `Movie` is capitalized. It _must_ be. If you make it lowercase, it will try to have `movie` as a web component and not a React component.
+- Notice that first letter of `Movie` is capitalized. It _must_ be. Compare to use `React.createElement` directly, when using JSX there is no way for you to specify if the tag is a string (`'div'`) or a variable (`Movie`), so the convention is that if it is capitalized, then it is a React component assigned to the variable; else if it is lowercase, it will try to have `movie` as a web component.
 - We now pass props down as we add attributes to an HTML tag.
 
-### Configure Babel to compile JSX
-
-If you try to compile the code by running `npm run build` now, it will throw `SyntaxError`. This is because Babel does not recognize JSX by default since JSX is not part of Javascript &mdash; it's just a syntatic sugar introduced to make React code more readable.
-
-Therefore, we need to configure Babel so that it will recognize JSX and compile them to `React.createElement` calls.
-
-1. run `npm install -D @babel/preset-react`
-2. add `@babel/preset-react` into `.babelrc` presets.
-   ```json
-   {
-     "presets": ["@babel/preset-env", "@babel/preset-react"]
-   }
-   ```
-
-Now when you start webpack-dev-server, the compilation should succeeds and your app should work as before.
-
-<hr >
-
-## :pencil: Do It: convert components to use JSX and configure Babel
-
-1. Update `index.js`, `app.js`, and `movie.js` to use JSX as described above.
-1. Configure Babel to compile JSX.
-1. Restart webpack-dev-server and verify that the application still works as before.
-
-> [:octocat: `070-jsx-config`](https://github.com/malcolm-kee/react-movie-app/tree/070-jsx-config)
-
-<hr >
+> JSX is not part of Javascript, it's a special syntax introduced by React. Currently your code works because the development tools setup by Create React App will automatically compile it to `React.createElement`.
 
 ## React States and Lifecycle Methods
 
-Our current app is too simple, as it's just rendering a list of movies. In an actual webapp, our application need to be more complex, e.g.:
+Our current application is too simple, as it's just rendering a list of movies. An actual application is usually more complex, e.g.:
 
 - hide some information by default to declutter your page, but allow user click to show more
 - loading data from backend api, and showing loading indicator while waiting for response
@@ -106,24 +78,20 @@ To achieve that, let's modify our `App` component to:
 
 ```jsx
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMovies: false
-    };
-    this.showMovies = this.showMovies.bind(this);
-  }
+  state = {
+    moviesShown: false
+  };
 
-  showMovies() {
+  showMovies = () => {
     this.setState({
-      showMovies: true
+      moviesShown: true
     });
-  }
+  };
 
   render() {
     let movies;
 
-    if (this.state.showMovies) {
+    if (this.state.moviesShown) {
       movies = (
         <React.Fragment>
           <Movie name="Aquaman" releaseDate="2018-12-07" />
@@ -153,41 +121,24 @@ class App extends React.Component {
 }
 ```
 
-- We declare `constructor` for our `App` and initialize our state with `this.state = { showMovies: false }`. Note that I've told you previously that class component is more powerful, and state is one of the functionality that only available for class component (at least for now).
+- We initial state for our `App` component with `state = { moviesShown: false }`. Note that I've told you previously that class component is more powerful, and state is one of the functionality that only available for class component (at least for now).
 - React state should always be a plain Object, while the value of the properties it totally up to you.
-- Because `this` is dynamic in Javascript, we need to bind `this` keywords in `showMovies` methods to the component with the following code:
-  ```js
-  this.showMovies = this.showMovies.bind(this);
-  ```
-  (This binding is required for _each_ custom method that you define for React component. I will show you how to avoid those tedious repetitions slightly later.)
 - We declare a `showMovies` methods, which will call `this.setState`. `setState` is a method that is available to all React class component (the component inherit this method via `extends React.Component`), and it's only way for you to update states. If you update state directly (`this.state.showMovies = true`), React will not be notified that the state has been change and thus will not re-render your component, then what is displayed will be incorrect.
 - When we call `setState`, React will merge the object we provide it with its current state, then it will rerender the component.
+- Note that `showMovies` method is declared with arrow-function syntax. This is because `this` is dynamic in Javascript, and arrow-function will make sure `this` within the method always refer to our component. If this doesn't make sense to you, it is fine, just make sure custom methods you declare in your React component should always use arrow function syntax.
 - In the `render` method, we create a `button` element which will call `showMovies` method when it is clicked.
-- Besides, we declare `movies` variable in `render` method, which be a list of movies if `this.state.showMovies` is true. `React.Fragment` is a container that renders nothing but allows you to wrap a list of React elements.
+- Besides, we declare `movies` variable in `render` method, which be a list of movies if `this.state.moviesShown` is true. `React.Fragment` is a container that renders nothing but allows you to wrap a list of React elements.
 
 Before we proceed, there is some cleanup that I want to suggest:
 
 1. Get rid of `movies` variable and just inline it with `&&` expression.
-1. You can replace `React.Fragment` with `<>`, Babel would understand that `<>` is actually `React.Fragment`. I prefer this way, as this expresses what `React.Fragment` really is &mdash; an empty container.
+1. You can replace `React.Fragment` with `<>`, a shorthand for `React.Fragment`. I prefer this way, as this expresses what `React.Fragment` really is &mdash; an empty container.
 
-The `App` component should be as below now:
+The `App` component `render` should be as below now:
 
 ```jsx
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMovies: false
-    };
-    this.showMovies = this.showMovies.bind(this);
-  }
-
-  showMovies() {
-    this.setState({
-      showMovies: true
-    });
-  }
-
+  ...
   render() {
     return (
       <div>
@@ -199,14 +150,11 @@ class App extends React.Component {
             Show Movies
           </button>
         </div>
-        {this.state.showMovies && (
+        {this.state.moviesShown && (
           <>
             <Movie name="Aquaman" releaseDate="2018-12-07" />
             <Movie name="Bumblebee" releaseDate="2018-12-15" />
-            <Movie
-              name="Fantastic Beasts: The Crimes of Grindelwald"
-              releaseDate="2018-11-14"
-            />
+            <Movie name="Fantastic Beasts: The Crimes of Grindelwald" releaseDate="2018-11-14" />
           </>
         )}
       </div>
@@ -215,54 +163,9 @@ class App extends React.Component {
 }
 ```
 
-### Use Class Properties Syntax
+## React DevTools
 
-It is tedious and error-prone to remember and write the binding for each of your component methods. Luckily, you could use the class properties syntax.
-
-Convert your `App` component as below:
-
-```jsx
-class App extends React.Component {
-  state = {
-    showMovies: false
-  };
-
-  showMovies = () => {
-    this.setState({
-      showMovies: true
-    });
-  }
-
-  render() {
-    ...
-  }
-}
-```
-
-This is much more terse than previous code. However, you would see some compilation error now because class properties is still at proposal phase and it is not included as part of `preset-env` nor `preset-react`. To make babel understand additonal syntax, we need to install plugin to "teach" it to parse the syntax.
-
-1. Install the babel plugin:
-
-   ```bash
-   npm install -D @babel/plugin-proposal-class-properties
-   ```
-
-1. Update `.babelrc` as below:
-
-   ```json
-   {
-     "presets": ["@babel/preset-env", "@babel/preset-react"],
-     "plugins": ["@babel/plugin-proposal-class-properties"]
-   }
-   ```
-
-1. Restart webpack-dev-server.
-
-Your code should works now, but with terser code.
-
-### React DevTools
-
-One last thing before you write your code, install browser extension for [React DevTools][react-devtools]. The extension will add a new tab in your browser Devtools with title "React", which you can used to inspect your React component props and states.
+Before proceed further, let me introduce you to the must-have debugging tools for React developers &mdash; React DevTools. [React DevTools][react-devtools] is a browser extensions maintained by React core team to help you inspect your React components. Once installed, it will add a new tab in your browser Devtools with title "React", which you can used to inspect your React component props and states.
 
 ![React DevTools](react-devtools.png)
 
@@ -271,71 +174,10 @@ One last thing before you write your code, install browser extension for [React 
 ## :pencil: Do It: enhance App
 
 1. Install React DevTools.
-1. Configure babel to parse class properties syntax.
 1. Modify your `App` component to show movies only when clicked as described above.
 1. Verify that the application works as expected.
 
-> [:octocat: `080-hide-movies`](https://github.com/malcolm-kee/react-movie-app/tree/080-hide-movies)
-
-<hr >
-
-### Configure ESLint for React App
-
-Currently ESLint is having parsing error. Let's configure ESLint before proceed further.
-
-1. install required packages
-   ```bash
-   npm install -D eslint-plugin-react babel-eslint
-   ```
-2. update `.eslintrc`:
-
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/react"
-  ],
-  "plugins": ["react"],
-  "rules": {
-    "react/prop-types": 0
-  },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2016,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
-  },
-  "settings": {
-    "react": {
-      "version": "16.7"
-    }
-  }
-}
-```
-
-- `plugin:react/recommended` are set of rules included as part of `eslint-plugin-react`.
-- `react` is added to the `plugins`, in which ESLint will lookup `eslint-plugin-react`. This plugin "teach" ESLint to recognize all the JSX are using `React.createElement` under the hood, so it doesn't show `React is not being used` error.
-- `babel-eslint` is specified as the parser. This allows eslint to use babel to parse the code, which will process the code based on our `.babelrc` config.
-- React version is added to `settings`, in which `eslint-plugin-react` depends on to suggest applicable rules.
-- `react/prop-types` rules is overwritten, as we're not going to use `prop-types` in this workshop. I personally think that prop-types does not worth the investment &mdash; I recommend [Typescript] if you want to introduce type-checking in your project.
-
-<hr >
-
-## :pencil: Do It: fix ESLint configuration
-
-1. Configure ESLint as described above.
-1. Run `npm run lint` and verify that no more linting error is shown.
-
-> [:octocat: `090-eslint-react`](https://github.com/malcolm-kee/react-movie-app/tree/090-eslint-react)
+> [:octocat: `1d524846f4f2129fc57742c77b8a4c6108a1ab0e`](https://github.com/malcolm-kee/react-movie-app-v2/commit/1d524846f4f2129fc57742c77b8a4c6108a1ab0e)
 
 <hr >
 
@@ -348,13 +190,14 @@ Modify `App` to be following:
 ```jsx
 class App extends React.Component {
   state = {
-    showMovies: false
+    moviesShown: false
   };
 
-  toggleMovies = () =>
+  toggleMovies = () => {
     this.setState(prevState => ({
-      showMovies: !prevState.showMovies
+      moviesShown: !prevState.moviesShown
     }));
+  };
 
   render() {
     return (
@@ -364,10 +207,10 @@ class App extends React.Component {
         </div>
         <div className="button-container">
           <button onClick={this.toggleMovies} className="button">
-            {this.state.showMovies ? 'Hide' : 'Show'} Movies
+            {this.state.moviesShown ? 'Hide' : 'Show'} Movies
           </button>
         </div>
-        {this.state.showMovies && (
+        {this.state.moviesShown && (
           <>
             <Movie name="Aquaman" releaseDate="2018-12-07" />
             <Movie name="Bumblebee" releaseDate="2018-12-15" />
@@ -388,7 +231,7 @@ class App extends React.Component {
 
 In short, you can pass `setState` either of the following:
 
-1. the change that you wish React to apply (use this if the new value doesn't depends on previous value), OR
+1. the change that you wish React to apply (use this if the new value doesn't depends on previous value),
    ```js
    this.setState({ show: true });
    ```
@@ -413,7 +256,7 @@ this.setState({ show: true }, () => {
 1. Enhance your `App` component to show/hide movies when button is clicked and display different button text, as described above.
 1. Verify that the application works as expected.
 
-> [:octocat: `100-toggle-movies`](https://github.com/malcolm-kee/react-movie-app/tree/100-toggle-movies)
+> [:octocat: `123bbbe2dec4810e2cb7048902d17ad89d804d77`](https://github.com/malcolm-kee/react-movie-app-v2/commit/123bbbe2dec4810e2cb7048902d17ad89d804d77)
 
 <hr >
 
