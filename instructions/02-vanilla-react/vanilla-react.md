@@ -243,10 +243,6 @@ class App extends React.Component {
 - `App` is functionally same as before. However, a class component unlocks more powers, like having state and defining lifecycle methods, which will be explained later.
 - Each class component must have a `render` method, which must return the result of `React.createElement` call.
 - For function component, props are available as first parameter of the function. For class component, props are available via `this.props`.
-- Both function component and render method of class component must be pure function, i.e.:
-  - given the same input, it always return the same output (markup)
-  - it does not have any side effect - you should not make ajax call / add event listener here.
-- So, when you should make an ajax call in a React app? That will be answered in part 3 of this course. But before that, let's dive into the tooling around React.
 
 > **Note: React component must starts with capital later.** React treats components starting with lowercase letters as DOM tags, e.g. `<div />`.
 
