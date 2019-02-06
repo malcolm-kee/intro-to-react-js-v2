@@ -95,13 +95,17 @@ h2 > a {
 
 .table-of-content-section li {
   list-style-type: none;
-  padding: 8px 8px;
+  padding: 0 8px;
   margin-bottom: 0;
 }
 
 .table-of-content-section li a {
   display: block;
   padding: 4px 16px;
+}
+
+.table-of-content-section li a:hover {
+  color: #0d47a1;
 }
 
 .table-of-content-inner-container {
@@ -117,7 +121,6 @@ h2 > a {
 
 .toc-link.toc-link--active {
   color: #0d47a1;
-  font-weight: bold;
   border-left: 3px solid #0d47a1;
 }
 
@@ -366,6 +369,10 @@ blockquote {
   .landing-page .table-of-content-section {
     padding: 8px;
     position: relative;
+  }
+
+  .table-of-content-section li {
+    padding: 8px 8px;
   }
 
   .instruction-template .table-of-content-section {
