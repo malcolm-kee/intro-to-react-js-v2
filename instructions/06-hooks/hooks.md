@@ -11,9 +11,13 @@ Our current application is too simple, as it's just rendering a list of movies. 
 - hide some information by default to declutter your page, but allow user click to show more
 - loading data from backend api, and showing loading indicator while waiting for response
 
-We will do that by using React Hooks
+We will do that by using React Hooks.
 
-## Use React States to track UI states e.g. show/hide
+## What's a Hook?
+
+A Hook is a special function that lets you "hook into" React features. For example, `useState` is a Hook that lets you add React state to function components. `useEffect` allows you to make side effects, e.g. making API calls. We will explore these two hooks, but you should at least skim through the [Hooks API docs][hooks-api] after this workshop to know what is available.
+
+## Track Component State with useState hook
 
 Let's assume the design of our app is to display "React Movie App" title and a "Show Movies" button only by default. When user clicks the button, the movies will be shown.
 
@@ -24,23 +28,14 @@ To achieve that, let's modify our `App` component to:
 import { Button } from './components/button';
 ...
 
-class App extends React.Component {
-  state = {
-    moviesShown: false
-  };
+function App() {
+  const [moviesShown, setShowMovies] = React.useState(false);
 
-  showMovies = () => {
-    this.setState({
-      moviesShown: true
-    });
-  };
+  let movies;
 
-  render() {
-    let movies;
-
-    if (this.state.moviesShown) {
-      movies = (
-        <React.Fragment>
+  if (moviesShown) {
+    movies = (
+      <React.Fragment>
           <Movie name="Aquaman" releaseDate="2018-12-07" />
           <Movie name="Bumblebee" releaseDate="2018-12-15" />
           <Movie
@@ -48,166 +43,153 @@ class App extends React.Component {
             releaseDate="2018-11-14"
           />
         </React.Fragment>
-      );
-    }
-
-    return (
-      <div>
-        <TitleBar>
-          <h1>React Movie App</h1>
-        </TitleBar>
-        <div className="button-container">
-          <Button onClick={this.showMovies}>
-            Show Movies
-          </Button>
-        </div>
-        {movies}
-      </div>
     );
   }
+
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="button-container">
+        <Button onClick={() => setShowMovies(true)}>
+          Show Movies
+        </Button>
+      </div>
+      {movies}
+    </div>
+  );
 }
 ```
 
-- We initial state for our `App` component with `state = { moviesShown: false }`. Note that I've told you previously that class component is more powerful, and state is one of the functionality that only available for class component (at least for now).
-- React state should always be a plain Object, while the value of the properties it totally up to you.
-- We declare a `showMovies` methods, which will call `this.setState`. `setState` is a method that is available to all React class component (the component inherit this method via `extends React.Component`), and it's only way for you to update states. If you update state directly (`this.state.showMovies = true`), React will not be notified that the state has been change and thus will not re-render your component, then what is displayed will be incorrect.
-- When we call `setState`, React will merge the object we provide it with its current state, then it will rerender the component.
-- Note that `showMovies` method is declared with arrow-function syntax. This is because `this` is dynamic in Javascript, and arrow-function will make sure `this` within the method always refer to our component. If this doesn't make sense to you, it is fine, just make sure custom methods you declare in your React component should always use arrow function syntax.
-- In the `render` method, we renders `Button` element, which will call `showMovies` method when it is clicked.
-- Besides, we declare `movies` variable in `render` method, which be a list of movies if `this.state.moviesShown` is true. `React.Fragment` is a container that renders nothing but allows you to wrap a list of React elements.
+- We declare a state for our `App` component with `useState` hook.
+  ```js
+  const [state, setState] = useState(initialState);
+  ```
+- `useState` returns a stateful value, and a function to update it. Note that the `useState` actually returns an array of 2 item, and we use the "[array destructuring][array-destructuring]" syntax to get the 2 items separately.
+- When the component is rendered for the first time, returned state (`state`) will be the value pass as the first argument (`initialState`).
+- The `setState` function is used to update the state. It accepts a new state value and enqueues a re-render of the component.
+  ```js
+  setState(newState);
+  ```
+- In subsequent render, the `state` value will always be the most recent state after applying updates.
+- In the returned result, we renders `Button` element, which will call `setShowMovies(true)` method when it is clicked.
+- Besides, we declare `movies` variable, which be a list of movies if `moviesShown` is true. `React.Fragment` is a container that renders nothing but allows you to wrap a list of React elements.
 
-Before we proceed, there is some cleanup that I want to suggest:
+Let's do some cleanup to make our code terser:
 
-1. Get rid of `movies` variable and just inline it with `&&` expression.
+1. Get rid of `movies` variable and just inline it with `&&` expression. This is because if you returns `undefined`, `null`, or a boolean value as React element, React will not renders anything.
 1. You can replace `React.Fragment` with `<>`, a shorthand for `React.Fragment`. I prefer this way, as this expresses what `React.Fragment` really is &mdash; an empty container.
 
-The `App` component `render` should be as below now:
+The `App` component should be as below now:
 
 ```jsx
-class App extends React.Component {
-  ...
-  render() {
-    return (
-      <div>
-        <TitleBar>
-          <h1>React Movie App</h1>
-        </TitleBar>
-        <div className="button-container">
-          <Button onClick={this.showMovies}>
-            Show Movies
-          </Button>
-        </div>
-        {this.state.moviesShown && (
-          <>
-            <Movie name="Aquaman" releaseDate="2018-12-07" />
-            <Movie name="Bumblebee" releaseDate="2018-12-15" />
-            <Movie name="Fantastic Beasts: The Crimes of Grindelwald" releaseDate="2018-11-14" />
-          </>
-        )}
+function App() {
+  const [moviesShown, setShowMovies] = React.useState(false);
+
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="button-container">
+        <Button onClick={() => setShowMovies(true)}>Show Movies</Button>
       </div>
-    );
-  }
+      {moviesShown && (
+        <>
+          <Movie name="Aquaman" releaseDate="2018-12-07" />
+          <Movie name="Bumblebee" releaseDate="2018-12-15" />
+          <Movie
+            name="Fantastic Beasts: The Crimes of Grindelwald"
+            releaseDate="2018-11-14"
+          />
+        </>
+      )}
+    </div>
+  );
 }
 ```
+
+Our current hide-show functionality only allow us to show, but we can't hide it after that. Let's enhance it.
+
+Update the `Button` properties in `App` component:
+
+```jsx
+...
+<Button onClick={() => setShowMovies(wasShown => !wasShown)}>
+  {moviesShown ? 'Hide' : 'Show'} Movies
+</Button>
+...
+```
+
+- There are two ways to call the `setState` function:
+  - `setState(newValue)`, which is what we did initially.
+  - `setState(prevValue => { return newValue; })`, this should be how you call `setState` if your new value depends on previous value. In our case, because toggle the value is just negation of the previous value, so this should be how we call `setShowMovies`.
+
+Our `App` should works now where clicking the button will show movies if they are currently hidden, hide movies if they are currently shown.
 
 ## React DevTools
 
-Before proceed further, let me introduce you to the must-have debugging tools for React developers &mdash; React DevTools. [React DevTools][react-devtools] is a browser extensions maintained by React core team to help you inspect your React components. Once installed, it will add a new tab in your browser Devtools with title "React", which you can used to inspect your React component props and states.
+Before proceed further, let me introduce you to the must-have debugging tools for React developers &mdash; React DevTools. [React DevTools][react-devtools] is a browser extensions maintained by React core team to help you inspect your React components. Once installed, it will add a new tab in your browser Devtools with title "React", which you can used to inspect your React component props and hooks.
 
 ![React DevTools](react-devtools.png)
 
 <hr >
 
-## :pencil: Do It: enhance App
+## :pencil: Do It: use React.useState hook
 
 1. Install React DevTools.
 1. Modify your `App` component to show movies only when clicked as described above.
 1. Verify that the application works as expected.
 
-> [:octocat: `1d524846f4f2129fc57742c77b8a4c6108a1ab0e`](https://github.com/malcolm-kee/react-movie-app-v2/commit/1d524846f4f2129fc57742c77b8a4c6108a1ab0e)
+> [:octocat: `useState hook`](https://github.com/malcolm-kee/react-movie-app-v2/commit/f4727ed27b89c21a7e53b5d6c8c5cef6c884ce9e)
 
 <hr >
 
-## More on setState
+## Creating Your Own Hook
 
-Our current hide-show functionality only allow us to show, but we can't hide it after that. Let's enhance it.
+Building your own Hooks lets you extract component logic into reusable functions.
 
-Modify `App` to be following:
+Currently our `moviesShown` state works fine, but we can actually foreseen toggle state is a very common use-case. Let's create a custom hook that allows us to do that.
+
+Let's create a `hooks` folder within `src` folder, and add a file `use-toggle.js`:
+
+```js
+// src/hooks/use-toggle.js
+import React from 'react';
+
+export const useToggle = initialOn => {
+  const [on, setOn] = React.useState(initialOn);
+  return [on, () => setOn(prevOn => !prevOn)];
+};
+```
+
+- `useToggle` is a custom hook that wrap the React hooks within it.
+- Similar to `useState` hook, `useToggle` hook returns state and an update function. However, the update function of `useToggle` doesn't requires parameter, as it will just negate the previous value.
+
+Let's update our `App` component to use the `useToggle` hook:
 
 ```jsx
-class App extends React.Component {
-  state = {
-    moviesShown: false
-  };
+import { useToggle } from './hooks/use-toggle';
 
-  toggleMovies = () => {
-    this.setState(prevState => ({
-      moviesShown: !prevState.moviesShown
-    }));
-  };
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
 
-  render() {
-    return (
-      <div>
-        <TitleBar>
-          <h1>React Movie App</h1>
-        </TitleBar>
-        <div className="button-container">
-          <Button onClick={this.toggleMovies}>
-            {this.state.moviesShown ? 'Hide' : 'Show'} Movies
-          </Button>
-        </div>
-        {this.state.moviesShown && (
-          <>
-            <Movie name="Aquaman" releaseDate="2018-12-07" />
-            <Movie name="Bumblebee" releaseDate="2018-12-15" />
-            <Movie
-              name="Fantastic Beasts: The Crimes of Grindelwald"
-              releaseDate="2018-11-14"
-            />
-          </>
-        )}
-      </div>
-    );
-  }
+  return (
+    ...
+    <Button onClick={toggleShowMovies}>
+      {moviesShown ? 'Hide' : 'Show'} Movies
+    </Button>
+    ...
+  )
 }
 ```
 
-- Button content has been enhanced to show different text based on the state. As explained previously, we need `{}` to code JS expression, else it would be treated as string.
-- `showMovies` method is renamed to `toggleMovies` and its content changed. Now the parameters to `setState` is no longer an object but a function. This is because [React may batch multiple `setState` calls into a single update for performance][react-docs-batch-update]. Therefore, if our `setState` is dependent on previous value of state, the correct way to call `setState` is to pass it a function, in which the parameters of the function would be the previous state (`prevState`).
+- The `App` component still works as before. However, whenever we need a state that is toggle between true/false, we can reuse the `useToggle` hook.
 
-In short, you can pass `setState` either of the following:
+> [:octocat: `custom hook`](https://github.com/malcolm-kee/react-movie-app-v2/commit/e262eb5dbe6bfe767b3905bb564e677fedb5126c)
 
-1. the change that you wish React to apply (use this if the new value doesn't depends on previous value),
-   ```js
-   this.setState({ show: true });
-   ```
-1. a function that returns the change (use this if the new value depends on previous value)
-   ```js
-   this.setState(prevState => ({ show: !prevState.show }));
-   ```
-
-Another things about `setState` that may surprise React beginner is that it is asynchronous, which means that when you call `setState`, the state will not be updated straight-away (you can verify this by adding `console.log(this.state)` after `setState` call). If you want to perform some action whenever state is updated, you can provide a callback as second parameter to `setState`:
-
-```js
-this.setState({ show: true }, () => {
-  // this will only be called after React apply the state change
-  console.log(this.state);
-});
-```
-
-<hr >
-
-## :pencil: Do It: enhance App to able to show and hide
-
-1. Enhance your `App` component to show/hide movies when button is clicked and display different button text, as described above.
-1. Verify that the application works as expected.
-
-> [:octocat: `123bbbe2dec4810e2cb7048902d17ad89d804d77`](https://github.com/malcolm-kee/react-movie-app-v2/commit/123bbbe2dec4810e2cb7048902d17ad89d804d77)
-
-<hr >
-
-## Getting Data from Backend API
+## Make Side Effect with useEffect hook
 
 Currently our movies data are hardcoded in our `App`:
 
@@ -256,61 +238,55 @@ To load data from backend API:
      );
    ```
 
-1. modify your `App` constructor and define a `componentDidMount` method as below:
+1. add `useEffect` hook and another `useState` hook in `App` component as below:
 
    ```jsx
    ...
    import { loadMovies } from './api';
 
-   class App extends React.Component {
-     state = {
-         showMovies: false,
-         movies: []
-     };
+   function App() {
+     const [moviesShown, toggleShowMovies] = useToggle(false);
+     const [movies, setMovies] = React.useState([]);
+     React.useEffect(() => {
+      loadMovies().then(movieData => {
+        setMovies(movieData);
+      })
+     }, []);
 
-     componentDidMount() {
-       loadMovies().then(movies => this.setState({ movies }));
-     }
-
-     ...
-   ```
-
-   - `componentDidMount` is one of the [React component lifecycle methods][react-docs-lifecycle-methods]. `componentDidMount` will be called immediately after a component is mounted (inserted into DOM).
-   - There are a few lifecycle methods that you can define to invoke functions at certain lifecycles of React component, e.g. `componentWillUnmount` (which will be called before component is removed) and `componentDidUpdate` (which will be called when the props/states of a component has been changed). Read through the [docs][react-docs-lifecycle-methods] to get a rough idea what each method does, and refer back whenever you are unsure.
-   - Verify in "Network" tab of your browser devtools an API call has been made. Inspect the state of your `App` with React DevTools, and you should able to see the `movies` states is loaded with the data from the API.
-
-1. Update `render` method of your `App`:
-
-   ```jsx
-   class App extends React.Component {
-     ...
-      render() {
-        return (
-          <div>
-            <TitleBar>
-              <h1>React Movie App</h1>
-            </TitleBar>
-            <div className="button-container">
-              <Button onClick={this.toggleMovies}>
-                {this.state.showMovies ? 'Hide' : 'Show'} Movies
-              </Button>
-            </div>
-            {this.state.showMovies &&
-              this.state.movies.map(movie => (
+     return (
+       <div>
+          <TitleBar>
+            <h1>React Movie App</h1>
+          </TitleBar>
+          <div className="button-container">
+            <Button onClick={toggleShowMovies}>
+              {moviesShown ? 'Hide' : 'Show'} Movies
+            </Button>
+          </div>
+          {moviesShown && (
+            <BusyContainer isLoading={isLoading}>
+              {movies.map(movie => (
                 <Movie
                   name={movie.name}
                   releaseDate={movie.releaseDate}
                   key={movie.id}
                 />
               ))}
-          </div>
-        );
-      }
+            </BusyContainer>
+          )}
+        </div>
+     );
    }
+
+   ...
    ```
 
-   - as `this.state.movies` is an array, we use [`Array.map`][array-map] method to loop through the array and render a list of `Movie` component instances.
-   - when you render a dynamic list of component, you need to provide a special props, `key`. `key` is used by React to identify a specific component instance so that it can decide whether an item need to be unmount or just reorder the dom whenever the list change.
+We declare a state as `movies` with `useState` hook, which is an empty array by default.
+
+- `movies` will be used to generate a list of `<Movie>` elements with [`Array.map`][array-map] method.
+- when we render a dynamic list of React elements, we need to provide a special props, `key`. `key` is used by React to identify a specific elements so that it can decide whether an item need to be unmount or just reorder the dom during reconciliation.
+
+We use `useEffect` hook to make api call and then set the `movies` state with the response of the api call.
 
 ## Touching Up UI by Adding Loading Indicator
 
@@ -404,6 +380,8 @@ To show loading indicator when waiting API response:
 
 <hr >
 
+[hooks-api]: https://reactjs.org/docs/hooks-reference.html
+[array-destructuring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Array_destructuring
 [react-devtools]: https://github.com/facebook/react-devtools
 [react-docs-batch-update]: https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous
 [fetch-api-docs]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
