@@ -73,8 +73,6 @@ Now that we have a project, let's move our code to this project.
 1. Replace the content of `src/index.js` with our code within the `script` tag. Remove all imports except `React` and `ReactDOM` imports. If you don't know what these imports statements are, no worries, I'll explain them shortly.
 1. Delete all the files in `src` folder except `index.js` file.
 
-> [:octocat: `5ae9a873a15d907a9c202fa6435b80ad37b3980d`](https://github.com/malcolm-kee/react-movie-app-v2/commit/5ae9a873a15d907a9c202fa6435b80ad37b3980d)
-
 Now when you run `npm start` the application should be as per before.
 
 Commit your code and push to your GitHub repo.

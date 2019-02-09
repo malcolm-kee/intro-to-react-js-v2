@@ -53,7 +53,7 @@ This workshop is "An Introduction to React JS", which will introduces you the co
 
 > While following along the code exercise, whenever you're lost, look for the :octocat: emoji, which will point you to the branch in this [repo][code-along-repo] at the point of the workshop. Example below:
 
-> [:octocat: `master`](https://github.com/malcolm-kee/react-movie-app/tree/master)
+> [:octocat: `master`](https://github.com/malcolm-kee/react-movie-app-v2/tree/master)
 
 ## Why Learn React
 
@@ -61,4 +61,4 @@ This workshop is "An Introduction to React JS", which will introduces you the co
 - It is popular - good job prospect! :moneybag:
 
 [v1-website]: https://intro-to-react-js.netlify.com/
-[code-along-repo]: https://github.com/malcolm-kee/react-movie-app
+[code-along-repo]: https://github.com/malcolm-kee/react-movie-app-v2
