@@ -1,17 +1,17 @@
 ---
-title: State & Lifecycle
-path: '/state-and-lifecycle'
-description: 'Learn React states and lifecycle methods'
+title: Hooks
+path: '/hooks'
+description: 'Learn React Hooks that are introduced in React 16.8'
 ---
 
-# State and Lifecycle
+# Hooks
 
 Our current application is too simple, as it's just rendering a list of movies. An actual application is usually more dynamic, e.g.:
 
 - hide some information by default to declutter your page, but allow user click to show more
 - loading data from backend api, and showing loading indicator while waiting for response
 
-We will do that by using React states and lifecycle methods
+We will do that by using React Hooks
 
 ## Use React States to track UI states e.g. show/hide
 

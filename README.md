@@ -5,7 +5,7 @@ path: '/'
 
 # Introduction to React JS v2
 
-An introduction to React (version 2) - up and running with React by learning React core API and common how-to e.g. making ajax calls, writing tests, and code splitting.
+An introduction to React (version 2) - up and running with React by learning React core API (including Hooks!) and common how-to e.g. making ajax calls, writing tests, and code splitting.
 
 [V1 website][v1-website]
 
