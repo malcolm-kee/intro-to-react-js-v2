@@ -11,6 +11,7 @@ module.exports = {
     bugUrl: packageJson.bugs.url
   },
   plugins: [
+    'gatsby-plugin-postcss',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -29,6 +30,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          'gatsby-remark-external-links',
           'gatsby-remark-autolink-headers',
           {
             resolve: 'gatsby-remark-images',
