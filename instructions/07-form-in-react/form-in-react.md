@@ -124,6 +124,50 @@ export const MovieForm = () => {
 - the state value is passed to the `value` attribute of the input, while the state setter is called in the `onChange` callback.
 - we define a `handleSubmit` function, which will be passed to `onSubmit` props of the form element. When form is submitted, we will call `createForm` with the state. We call `event.preventDefault` because by default form submission will cause a page refresh, and we doesn't want that.
 
+### Add MovieForm Into App
+
+Now import `MovieForm` and include it in `App` component:
+
+```jsx
+import { MovieForm } from './movie-form';
+
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
+  const { movies, isLoading } = useMovieData();
+
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="container">
+        <div>
+          <div className="button-container">
+            <Button onClick={toggleShowMovies}>
+              {moviesShown ? 'Hide' : 'Show'} Movies
+            </Button>
+          </div>
+          {moviesShown && (
+            <BusyContainer isLoading={isLoading}>
+              {movies.map(movie => (
+                <Movie
+                  name={movie.name}
+                  releaseDate={movie.releaseDate}
+                  key={movie.id}
+                />
+              ))}
+            </BusyContainer>
+          )}
+        </div>
+      </div>
+      <div>
+        <MovieForm />
+      </div>
+    </div>
+  );
+}
+```
+
 Now try to use the form, you can see the page is making the AJAX call, and after you refresh the page, the new movie will be there!
 
 ### Refresh Movie List after Submission
