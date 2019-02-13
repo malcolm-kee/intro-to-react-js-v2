@@ -128,7 +128,9 @@ Now try to use the form, you can see the page is making the AJAX call, and after
 
 ### Refresh Movie List after Submission
 
-To Be Continued
+Currently the movie list is not updated after you create the new movie, which is a bug.
+Therefore, we need to somehow let me `App` component know that the `MovieForm` has created a record, and it should refresh the list.
+We can achieve this by passing a callback from `App` to `MovieForm`.
 
 ### Error Handling for Form Submission
 
