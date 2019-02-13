@@ -61,6 +61,8 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 > JSX is not part of Javascript, it's a special syntax introduced by React. Currently your code works because the development tools setup by Create React App will automatically compile it to `React.createElement`.
 
+> [:octocat: `use jsx`](https://github.com/malcolm-kee/react-movie-app-v2/commit/3bbdb03122a2179918241780fa8a278a4d679308)
+
 ## Composing Components
 
 Components can refer to other components in their output, like how we use `Movie` component in our `App` now.
@@ -197,9 +199,11 @@ function addRandomAmount(a) {
 }
 ```
 
-A React component has a rule: the function must be pure (for class component, the `render` method must be pure), which means:
+A React component has a rule: it must be a pure function, which means:
 
 1. you should make sure the generated React elements is the same, given same props
 1. you should never modify props in your React Component or make any side-effects (`addEventListener`, calling some other function etc.)
 
-Of course, application UIs are dynamic and change over time. In [next section](/state-and-lifecycle), we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule.
+Of course, application UIs are dynamic and change over time. In [next section](/hooks), we will introduce a new concept of “state”. State allows React components to change their output over time in response to user actions, network responses, and anything else, without violating this rule.
+
+> [:octocat: `extracting component`](https://github.com/malcolm-kee/react-movie-app-v2/commit/03a117818ed9aaef04e88af3615404ac0d0d9ab7)

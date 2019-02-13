@@ -63,8 +63,7 @@ const appElement = React.createElement(App);
 ReactDOM.render(appElement, document.getElementById('root'));
 ```
 
-- We create a component, call it as `App`. React is all about creating component, and a component can be as simple as a function.
-- There are two types of component - function component & class component. This is a function component.
+- We create a component, call it as `App`. React is all about creating component, and a React component is just a function.
 - A component must return a _React element_, the output of `React.createElement`. You can understand React element as a virtual markup, as it's just a representation of how the markup for the component should be, it doesn't create the markup.
 - `React.createElement` is a function that takes three parameters: component type, properties, and children. For HTML element and web component, the component type would be a string (`React.createElement('h1')`); for a React component, it's the variable that refer to the component (`React.createElement(App)`).
 - `ReactDOM.render` is used to render our React component to HTML. It takes two parameters:
@@ -208,50 +207,13 @@ const App = function() {
 ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
 
-- Now `Movie` is a more flexible component that accepts props from its parent.
-
-## Class Component
-
-As mentioned before, there are 2 types of component - function component and class component. Let's convert `App` to class component.
-
-```js
-class App extends React.Component {
-  render() {
-    return React.createElement('div', {}, [
-      React.createElement(
-        'div',
-        { className: 'title-bar' },
-        React.createElement('h1', {}, 'React Movie App')
-      ),
-      React.createElement(Movie, {
-        name: 'Aquaman',
-        releaseDate: '2018-12-07'
-      }),
-      React.createElement(Movie, {
-        name: 'Bumblebee',
-        releaseDate: '2018-12-15'
-      }),
-      React.createElement(Movie, {
-        name: 'Fantastic Beasts: The Crimes of Grindelwald',
-        releaseDate: '2018-11-14'
-      })
-    ]);
-  }
-}
-```
-
-- `App` is functionally same as before. However, a class component unlocks more powers, like having state and defining lifecycle methods, which will be explained later.
-- Each class component must have a `render` method, which must return the result of `React.createElement` call.
-- For function component, props are available as first parameter of the function. For class component, props are available via `this.props`.
-
-> **Note: React component must starts with capital later.** React treats components starting with lowercase letters as DOM tags, e.g. `<div />`.
+- Now `Movie` is a more flexible component that renders different content based on props.
 
 <hr >
 
 ## :pencil: Do It: Create your Movie Component
 
 1. Add `Movie` component in your code and use it as explained above.
-1. Modify your `App` component to a class component
 1. (Bonus) Add a new props `genres` in your `Movie` component and render it in a `span` tag.
 
 <hr >

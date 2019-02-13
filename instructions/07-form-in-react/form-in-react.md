@@ -62,78 +62,67 @@ Now that we have function to make the API call, let's create the form component.
 Add a file `movie-form.js` with the following content:
 
 ```jsx
+// src/movie-form.js
 import React from 'react';
 import { createMovie } from './api';
 
-class MovieForm extends React.Component {
-  state = {
-    name: '',
-    releaseDate: ''
-  };
+export const MovieForm = () => {
+  const [name, setName] = React.useState('');
+  const [releaseDate, setReleaseDate] = React.useState('');
 
-  handleInputChange = ev => {
-    const { name, value } = ev.target;
-    this.setState({
-      [name]: value
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    createMovie(values).then(() => {
+      setName('');
+      setReleaseDate('');
     });
   };
 
-  handleSubmit = ev => {
-    ev.preventDefault();
-    createMovie(this.state);
-  };
-
-  render() {
-    return (
-      <div className="movie-form">
-        <form onSubmit={this.handleSubmit}>
-          <legend>Create Movie</legend>
-          <div className="field">
-            <label htmlFor="name" className="label">
-              Name
-            </label>
-            <input
-              className="input"
-              value={this.state.name}
-              id="name"
-              name="name"
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="releaseDate" className="label">
-              Release Date
-            </label>
-            <input
-              className="input"
-              value={this.state.releaseDate}
-              id="releaseDate"
-              name="releaseDate"
-              type="date"
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-          <div className="button-container">
-            <button type="submit" className="submit-button">
-              Create
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
-
-export default MovieForm;
+  return (
+    <div className="movie-form">
+      <form onSubmit={handleSubmit}>
+        <legend>Create Movie</legend>
+        <div className="field">
+          <label htmlFor="name" className="label">
+            Name
+          </label>
+          <input
+            className="input"
+            value={name}
+            id="name"
+            name="name"
+            onChange={ev => setName(ev.target.value)}
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="releaseDate" className="label">
+            Release Date
+          </label>
+          <input
+            className="input"
+            value={releaseDate}
+            id="releaseDate"
+            name="releaseDate"
+            type="date"
+            onChange={ev => setReleaseDate(ev.target.value)}
+            required
+          />
+        </div>
+        <div className="button-container">
+          <button type="submit" className="submit-button">
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 ```
 
-- we initialize the state with the values for the form.
-- we define a `handleInputChange` method, which will be passed to `onChange` props of the input element.
-  - This method will extract the `value` and the `name` of the input when you make any change to the input value. We use the name and the value to `setState`.
-  - Take note of the `[name]`, which means `name` should be evaluated to its value. Without the `[]`, the setState call will always the value of `name` instead of depending on the `name` properties of the input.
-- we define a `handleSubmit` method, which will be passed to `onSubmit` props of the form element. When form is submitted, we will call `createForm` with the state. We call `event.preventDefault` because by default form submission will cause a page refresh, and we doesn't want that.
+- we declare two states: `name` and `releaseDate` for the 2 values for the form.
+- the state value is passed to the `value` attribute of the input, while the state setter is called in the `onChange` callback.
+- we define a `handleSubmit` function, which will be passed to `onSubmit` props of the form element. When form is submitted, we will call `createForm` with the state. We call `event.preventDefault` because by default form submission will cause a page refresh, and we doesn't want that.
 
 Now try to use the form, you can see the page is making the AJAX call, and after you refresh the page, the new movie will be there!
 
