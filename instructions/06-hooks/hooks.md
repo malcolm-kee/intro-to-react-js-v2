@@ -357,6 +357,55 @@ To show loading indicator when waiting API response:
    - when ajax call returns, we set `isLoading` to `false`.
    - `isLoading` is passed to `BusyContainer` as props.
 
+Let's extract out the code related to loading the movie data to a custom hook:
+
+```jsx
+function useMovieData() {
+  const [movies, setMovies] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  React.useEffect(() => {
+    loadMovies().then(movieData => {
+      setMovies(movieData);
+      setIsLoading(false);
+    });
+  }, []);
+
+  return {
+    movies,
+    isLoading
+  };
+}
+
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
+  const { movies, isLoading } = useMovieData();
+
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="button-container">
+        <Button onClick={toggleShowMovies}>
+          {moviesShown ? 'Hide' : 'Show'} Movies
+        </Button>
+      </div>
+      {moviesShown && (
+        <BusyContainer isLoading={isLoading}>
+          {movies.map(movie => (
+            <Movie
+              name={movie.name}
+              releaseDate={movie.releaseDate}
+              key={movie.id}
+            />
+          ))}
+        </BusyContainer>
+      )}
+    </div>
+  );
+}
+```
+
 <hr >
 
 ## :pencil: Do It: Getting Data from Backend API
