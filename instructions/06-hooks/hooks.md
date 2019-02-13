@@ -263,17 +263,15 @@ To load data from backend API:
               {moviesShown ? 'Hide' : 'Show'} Movies
             </Button>
           </div>
-          {moviesShown && (
-            <BusyContainer isLoading={isLoading}>
-              {movies.map(movie => (
+          {moviesShown &&
+            movies.map(movie => (
                 <Movie
                   name={movie.name}
                   releaseDate={movie.releaseDate}
                   key={movie.id}
                 />
-              ))}
-            </BusyContainer>
-          )}
+              ))
+          }
         </div>
      );
    }
@@ -305,66 +303,57 @@ To show loading indicator when waiting API response:
 
    export const BusyContainer = ({ isLoading, children }) => (
      <div>
-       {isLoading && <span>loading...</span>}
+       {isLoading && <span className="spinner" />}
        {children}
      </div>
    );
    ```
 
-   - `BusyContainer` is a simple component that will render "loading..." text when its `isLoading` props is `true`. In an actual application, you may want to add some fancy spinner svg here.
+   - `BusyContainer` is a simple component that will render a spinning circle when its `isLoading` props is `true`.
 
 1. update `App` component:
 
    ```jsx
-   ...
    import { BusyContainer } from './components/busy-container';
 
-   class App extends React.Component {
-     state = {
-       showMovies: false,
-       isLoading: true,
-       movies: []
-     };
+   function App() {
+     const [moviesShown, toggleShowMovies] = useToggle(false);
+     const [movies, setMovies] = React.useState([]);
+     const [isLoading, setIsLoading] = React.useState(true);
+     React.useEffect(() => {
+       loadMovies().then(movieData => {
+         setMovies(movieData);
+         setIsLoading(false);
+       });
+     }, []);
 
-     componentDidMount() {
-       loadMovies().then(movies => this.setState({ movies, isLoading: false }));
-     }
-
-     toggleMovies = () => {
-       this.setState(prevState => ({
-         showMovies: !prevState.showMovies
-       }));
-     };
-
-     render() {
-       return (
-         <div>
-           <TitleBar>
-             <h1>React Movie App</h1>
-           </TitleBar>
-           <div className="button-container">
-             <Button onClick={this.toggleMovies}>
-               {this.state.showMovies ? 'Hide' : 'Show'} Movies
-             </Button>
-           </div>
-           {this.state.showMovies && (
-             <BusyContainer isLoading={this.state.isLoading}>
-               {this.state.movies.map(movie => (
-                 <Movie
-                   name={movie.name}
-                   releaseDate={movie.releaseDate}
-                   key={movie.id}
-                 />
-               ))}
-             </BusyContainer>
-           )}
+     return (
+       <div>
+         <TitleBar>
+           <h1>React Movie App</h1>
+         </TitleBar>
+         <div className="button-container">
+           <Button onClick={toggleShowMovies}>
+             {moviesShown ? 'Hide' : 'Show'} Movies
+           </Button>
          </div>
-       );
-     }
+         {moviesShown && (
+           <BusyContainer isLoading={isLoading}>
+             {movies.map(movie => (
+               <Movie
+                 name={movie.name}
+                 releaseDate={movie.releaseDate}
+                 key={movie.id}
+               />
+             ))}
+           </BusyContainer>
+         )}
+       </div>
+     );
    }
    ```
 
-   - we initiate state with additional props, `isLoading` and set it as `true`.
+   - we declare another state `isLoading` and default it to true.
    - when ajax call returns, we set `isLoading` to `false`.
    - `isLoading` is passed to `BusyContainer` as props.
 
@@ -376,7 +365,7 @@ To show loading indicator when waiting API response:
 1. Create `BusyContainer` as described and use it in your `App` component to show loading indicator.
 1. Verify that the application works as expected.
 
-> [:octocat: `110-ajax-calls`](https://github.com/malcolm-kee/react-movie-app/tree/110-ajax-calls)
+> [:octocat: `load data from api`](https://github.com/malcolm-kee/react-movie-app-v2/commit/a4b3f4a686b2f152c73ead1d2c0fe34ffcff45a7)
 
 <hr >
 
