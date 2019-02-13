@@ -176,8 +176,167 @@ Currently the movie list is not updated after you create the new movie, which is
 Therefore, we need to somehow let me `App` component know that the `MovieForm` has created a record, and it should refresh the list.
 We can achieve this by passing a callback from `App` to `MovieForm`.
 
-### Error Handling for Form Submission
+1. Update `useMovieData` custom hook in `App` to return `loadMoviesData`:
 
-To Be Continued
+   ```js
+   function useMovieData() {
+     const [movies, setMovies] = React.useState([]);
+     const [isLoading, setIsLoading] = React.useState(true);
+     const loadMoviesData = () => {
+       loadMovies().then(movieData => {
+         setMovies(movieData);
+         setIsLoading(false);
+       });
+     };
+     React.useEffect(loadMoviesData, []);
+
+     return {
+       movies,
+       isLoading,
+       loadMoviesData
+     };
+   }
+   ```
+
+1. Pass `loadMoviesData` function to `MovieForm` component as `onSubmitSuccess` props;
+
+   ```jsx
+   function App() {
+     const [moviesShown, toggleShowMovies] = useToggle(false);
+     const { movies, isLoading, loadMoviesData } = useMovieData();
+
+     return (
+       <div>
+         <TitleBar>
+           <h1>React Movie App</h1>
+         </TitleBar>
+         <div className="container">
+           <div>
+             <div className="button-container">
+               <Button onClick={toggleShowMovies}>
+                 {moviesShown ? 'Hide' : 'Show'} Movies
+               </Button>
+             </div>
+             {moviesShown && (
+               <BusyContainer isLoading={isLoading}>
+                 {movies.map(movie => (
+                   <Movie
+                     name={movie.name}
+                     releaseDate={movie.releaseDate}
+                     key={movie.id}
+                   />
+                 ))}
+               </BusyContainer>
+             )}
+           </div>
+         </div>
+         <div>
+           <MovieForm onSubmitSuccess={loadMoviesData} />
+         </div>
+       </div>
+     );
+   }
+   ```
+
+1. In `MovieForm`, call `onSubmitSuccess` when `createMovie` ajax succeeds:
+
+   ```jsx
+   export const MovieForm = ({ onSubmitSuccess }) => {
+     const [name, setName] = React.useState('');
+     const [releaseDate, setReleaseDate] = React.useState('');
+
+     const handleSubmit = ev => {
+       ev.preventDefault();
+       createMovie(values).then(() => {
+         onSubmitSuccess();
+         setName('');
+         setReleaseDate('');
+       });
+     };
+
+     return (
+       ...
+     );
+   }
+   ```
+
+Now the movie list should be updated once you submit create movie!
+
+### Extract Form State to Custom Hook
+
+Let's extract out some code in `MovieForm`:
+
+```jsx
+import React from 'react';
+import { createMovie } from './api';
+
+const useMovieFormData = () => {
+  const [name, setName] = React.useState('');
+  const [releaseDate, setReleaseDate] = React.useState('');
+  return {
+    setName,
+    setReleaseDate,
+    values: {
+      name,
+      releaseDate
+    }
+  };
+};
+
+export const MovieForm = ({ onSubmitSuccess }) => {
+  const { values, setName, setReleaseDate } = useMovieFormData();
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    createMovie(values).then(() => {
+      onSubmitSuccess();
+      setName('');
+      setReleaseDate('');
+    });
+  };
+
+  return (
+    <div className="movie-form">
+      <form onSubmit={handleSubmit}>
+        <legend>Create Movie</legend>
+        <div className="field">
+          <label htmlFor="name" className="label">
+            Name
+          </label>
+          <input
+            className="input"
+            value={values.name}
+            id="name"
+            name="name"
+            onChange={ev => setName(ev.target.value)}
+            required
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="releaseDate" className="label">
+            Release Date
+          </label>
+          <input
+            className="input"
+            value={values.releaseDate}
+            id="releaseDate"
+            name="releaseDate"
+            type="date"
+            onChange={ev => setReleaseDate(ev.target.value)}
+            required
+          />
+        </div>
+        <div className="button-container">
+          <button type="submit" className="submit-button">
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+```
+
+- we extract out the two form input states into `useMovieFormData` custom hook, and use that in `MovieForm` component.
 
 [restlet-client]: https://chrome.google.com/webstore/detail/restlet-client-rest-api-t/aejoelaoggembcahagimdiliamlcdmfm?hl=en
