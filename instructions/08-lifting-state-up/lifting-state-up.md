@@ -80,12 +80,13 @@ Let's discuss how we want the edit movie interaction be like.
 
 Now that we understand the interaction, let's discuss how are we going to implements it before we write the code.
 
-We need
+We need to complete the following tasks:
 
 1. a state to track if any movie is selected. If a movie selected, make the form as an edit form, else is a create form.
 1. enhance `MovieForm` so it will display different text based on if movie is selected, e.g. submit button is labelled "Save" instead of "Create", the form title is "Edit Movie" instead of "Create Movie".
-1. add a Reset button in `MovieForm` to make the unselect Movie and clear out all its current form value.
+1. add a Reset button in `MovieForm` to unselect Movie and clear out all its current form value.
 1. a way to update the form values when movie is selected, so that the values will be defaulted to the movie data.
+1. when it is edit, call `saveMovie` instead of `createMovie` api function.
 
 Let's implements these.
 
@@ -150,13 +151,28 @@ Let's update `Movie` component to call the `onClick` props:
 
 ```jsx
 export const Movie = props => (
-  {/* highlight-next-line */}
-  <div className="movie-container" onClick={props.onClick}>
+  <div
+    {/* highlight-start */}
+    className="movie-container selectable"
+    onClick={props.onClick}
+    onKeyDown={e => {
+      if (
+        e.keyCode === 32 || // space
+        e.keyCode === 13 // enter
+      ) {
+        props.onClick();
+      }
+    }}
+    tabIndex={0} >
+    {/* highlight-end */}
     <h1>{props.name}</h1>
     <h2>{props.releaseDate}</h2>
   </div>
 );
 ```
+
+- the `selectable` class is added for better visual hint during mouse hover.
+- `onClick` props on `div` will be called when the `div` and its descendents are clicked. `tabIndex` is added so that so that it will be target of keyboard tab, and `onKeyDown` is to handle keyboard press enter or space.
 
 And update `MovieForm` component to show different text and ability to resetForm:
 
@@ -223,5 +239,234 @@ export const MovieForm = ({ isEdit, onSubmitSuccess, resetForm }) => {
   );
 };
 ```
+
+If you try your app now, when you click the "Cancel" button, you would realize it would actually cause the page to reload.
+
+This is because by default, clicking button in form would cause the form to be submitted. To avoid this behavior, you need to pass `type="button` to the button element. And since we would prefer this to be default behavior, let's update our `Button` component to default the `type` to `"button"`:
+
+```jsx
+export const Button = ({ type = 'button', ...props }) => (
+  <button className="button" type={type} {...props} />
+);
+```
+
+Now try your app, you should able to click any movie and the form labels will be updated to edit mode, and click "Cancel" will make it create mode again.
+
+Our current status:
+
+1. ~~a state to track if any movie is selected. If a movie selected, make the form as an edit form, else is a create form.~~
+1. ~~enhance `MovieForm` so it will display different text based on if movie is selected, e.g. submit button is labelled "Save" instead of "Create", the form title is "Edit Movie" instead of "Create Movie".~~
+1. add a Reset button in `MovieForm` to ~~unselect Movie~~ and clear out all its current form value.
+1. a way to update the form values when movie is selected, so that the values will be defaulted to the movie data.
+1. when it is edit, call `saveMovie` instead of `createMovie` api function.
+
+The next changes (clear form value and set form values with movie data) requires us to update the form value when movie is clicked (which is defined in `App` component), but currently the movie form data is inside `MovieForm` component, how do we do that?
+
+### Raising State Up
+
+For us to achieve updating form data in App, the solution is **raising state up**, i.e. move the states related to the form data from `MovieForm` component to `App` component:
+
+```jsx
+// src/app.js
+...
+
+// highlight-start
+// the following code is just cut and paste from movie-form.js
+const useMovieForm = () => {
+  const [name, setName] = React.useState('');
+  const [releaseDate, setReleaseDate] = React.useState('');
+  return {
+    setName,
+    setReleaseDate,
+    values: {
+      name,
+      releaseDate
+    }
+  };
+};
+// highlight-end
+
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
+  const { movies, isLoading, loadMoviesData } = useMovieData();
+  const [isEdit, setIsEdit] = React.useState(false);
+  // highlight-start
+  const { setName, setReleaseDate, values } = useMovieForm();
+
+  const selectMovie = movie => {
+    setIsEdit(true);
+    setName(movie.name);
+    setReleaseDate(movie.releaseDate);
+  };
+  // highlight-end
+
+  const resetForm = () => {
+    setIsEdit(false);
+    // highlight-start
+    setName('');
+    setReleaseDate('');
+    // highlight-end
+  };
+
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="container">
+        <div>
+          <div className="button-container">
+            <Button onClick={toggleShowMovies}>
+              {moviesShown ? 'Hide' : 'Show'} Movies
+            </Button>
+          </div>
+          {moviesShown && (
+            <BusyContainer isLoading={isLoading}>
+              {movies.map(movie => (
+                <Movie
+                  name={movie.name}
+                  releaseDate={movie.releaseDate}
+                  {/* highlight-next-line */}
+                  onClick={() => selectMovie(movie)}
+                  key={movie.id}
+                />
+              ))}
+            </BusyContainer>
+          )}
+        </div>
+        <div>
+          <MovieForm
+            onSubmitSuccess={loadMoviesData}
+            onReset={resetForm}
+            isEdit={isEdit}
+            {/* highlight-start */}
+            values={values}
+            setName={setName}
+            setReleaseDate={setReleaseDate}
+            {/* highlight-end */}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+Update `MovieForm` to use the props from parent:
+
+```jsx
+export const MovieForm = ({
+  isEdit,
+  onSubmitSuccess,
+  resetForm,
+  // highlight-start
+  values,
+  setName,
+  setReleaseDate
+  // highlight-end
+}) => {
+  // highlight-next-line
+  // const { values, setName, setReleaseDate } = useMovieFormData();
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    createMovie(values).then(() => {
+      onSubmitSuccess();
+      // highlight-next-line
+      resetForm();
+    });
+  };
+
+  ...
+};
+```
+
+Our current status:
+
+1. ~~a state to track if any movie is selected. If a movie selected, make the form as an edit form, else is a create form.~~
+1. ~~enhance `MovieForm` so it will display different text based on if movie is selected, e.g. submit button is labelled "Save" instead of "Create", the form title is "Edit Movie" instead of "Create Movie".~~
+1. ~~add a Reset button in `MovieForm` to unselect Movie and clear out all its current form value.~~
+1. ~~a way to update the form values when movie is selected, so that the values will be defaulted to the movie data.~~
+1. when it is edit, call `saveMovie` instead of `createMovie` api function.
+
+### Calling different API for edit
+
+Let's update our `MovieForm` component:
+
+```jsx
+// highlight-next-line
+import { createMovie, saveMovie } from './api';
+...
+
+export const MovieForm = ({
+  isEdit,
+  onSubmitSuccess,
+  resetForm,
+  values,
+  setName,
+  setReleaseDate
+}) => {
+
+  const handleSubmit = ev => {
+    ev.preventDefault();
+    // highlight-start
+    const req = isEdit ? saveMovie(values) : createMovie(values);
+    req.then(() => {
+    // highlight-end
+      onSubmitSuccess();
+      resetForm();
+    });
+  };
+
+  ...
+};
+```
+
+If you try it now, you may realize the save movie doesn't work. This is because saveMovie call actually require id properties in your movie data. Let's update the required code in `App` component:
+
+```jsx
+...
+
+const useMovieForm = () => {
+  const [name, setName] = React.useState('');
+  const [releaseDate, setReleaseDate] = React.useState('');
+  const [id, setId] = React.useState(undefined); // highlight-line
+  return {
+    setName,
+    setReleaseDate,
+    setId,  // highlight-line
+    values: {
+      id, // highlight-line
+      name,
+      releaseDate
+    }
+  };
+};
+
+function App() {
+  ...
+  const { setName, setReleaseDate, setId, values } = useMovieForm(); // highlight-line
+
+  const selectMovie = movie => {
+    setIsEdit(true);
+    setName(movie.name);
+    setReleaseDate(movie.releaseDate);
+    setId(movie.id); // highlight-line
+  };
+
+  const resetForm = () => {
+    setIsEdit(false);
+    setName('');
+    setReleaseDate('');
+    setId(undefined); // highlight-line
+  };
+
+  return (
+    ...
+  );
+}
+```
+
+The app should works as expected now!
 
 [restlet-client]: https://chrome.google.com/webstore/detail/restlet-client-rest-api-t/aejoelaoggembcahagimdiliamlcdmfm?hl=en
