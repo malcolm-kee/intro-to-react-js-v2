@@ -83,9 +83,9 @@ Now that we understand the interaction, let's discuss how are we going to implem
 We need
 
 1. a state to track if any movie is selected. If a movie selected, make the form as an edit form, else is a create form.
-1. a way to update the form values when movie is selected, so that the values will be defaulted to the movie data.
 1. enhance `MovieForm` so it will display different text based on if movie is selected, e.g. submit button is labelled "Save" instead of "Create", the form title is "Edit Movie" instead of "Create Movie".
 1. add a Reset button in `MovieForm` to make the unselect Movie and clear out all its current form value.
+1. a way to update the form values when movie is selected, so that the values will be defaulted to the movie data.
 
 Let's implements these.
 
@@ -97,11 +97,13 @@ In the `App` component, let's add a `isEdit` state (which will be passed to `Mov
 function App() {
   const [moviesShown, toggleShowMovies] = useToggle(false);
   const { movies, isLoading, loadMoviesData } = useMovieData();
+  // highlight-start
   const [isEdit, setIsEdit] = React.useState(false);
 
   const resetForm = () => {
     setIsEdit(false);
   };
+  // highlight-end
 
   return (
     <div>
@@ -121,6 +123,7 @@ function App() {
                 <Movie
                   name={movie.name}
                   releaseDate={movie.releaseDate}
+                  {/* highlight-next-line */}
                   onClick={() => setIsEdit(true)}
                   key={movie.id}
                 />
@@ -131,8 +134,10 @@ function App() {
         <div>
           <MovieForm
             onSubmitSuccess={loadMoviesData}
+            {/* highlight-start */}
             onReset={resetForm}
             isEdit={isEdit}
+            {/* highlight-end */}
           />
         </div>
       </div>
@@ -145,6 +150,7 @@ Let's update `Movie` component to call the `onClick` props:
 
 ```jsx
 export const Movie = props => (
+  {/* highlight-next-line */}
   <div className="movie-container" onClick={props.onClick}>
     <h1>{props.name}</h1>
     <h2>{props.releaseDate}</h2>
@@ -155,10 +161,11 @@ export const Movie = props => (
 And update `MovieForm` component to show different text and ability to resetForm:
 
 ```jsx
-import { Button } from './components/button';
+import { Button } from './components/button'; // highlight-line
 
 ...
 
+// highlight-next-line
 export const MovieForm = ({ isEdit, onSubmitSuccess, resetForm }) => {
   const { values, setName, setReleaseDate } = useMovieFormData();
 
@@ -174,6 +181,7 @@ export const MovieForm = ({ isEdit, onSubmitSuccess, resetForm }) => {
   return (
     <div className="movie-form">
       <form onSubmit={handleSubmit}>
+        {/* highlight-next-line */}
         <legend>{isEdit ? 'Edit' : 'Create'} Movie</legend>
         <div className="field">
           <label htmlFor="name" className="label">
@@ -204,8 +212,10 @@ export const MovieForm = ({ isEdit, onSubmitSuccess, resetForm }) => {
         </div>
         <div className="button-container">
           <button type="submit" className="submit-button">
+            {/* highlight-next-line */}
             {isEdit ? 'Save' : 'Create'}
           </button>
+          {/* highlight-next-line */}
           <Button onClick={resetForm}>Cancel</Button>
         </div>
       </form>

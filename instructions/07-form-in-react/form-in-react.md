@@ -129,7 +129,10 @@ export const MovieForm = () => {
 Now import `MovieForm` and include it in `App` component:
 
 ```jsx
+// highlight-next-line
 import { MovieForm } from './movie-form';
+
+...
 
 function App() {
   const [moviesShown, toggleShowMovies] = useToggle(false);
@@ -161,6 +164,7 @@ function App() {
         </div>
       </div>
       <div>
+        {/* highlight-next-line */}
         <MovieForm />
       </div>
     </div>
@@ -182,6 +186,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
    function useMovieData() {
      const [movies, setMovies] = React.useState([]);
      const [isLoading, setIsLoading] = React.useState(true);
+     // highlight-start
      const loadMoviesData = () => {
        loadMovies().then(movieData => {
          setMovies(movieData);
@@ -189,11 +194,12 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
        });
      };
      React.useEffect(loadMoviesData, []);
+     // highlight-end
 
      return {
        movies,
        isLoading,
-       loadMoviesData
+       loadMoviesData // highlight-line
      };
    }
    ```
@@ -203,7 +209,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
    ```jsx
    function App() {
      const [moviesShown, toggleShowMovies] = useToggle(false);
-     const { movies, isLoading, loadMoviesData } = useMovieData();
+     const { movies, isLoading, loadMoviesData } = useMovieData(); // highlight-line
 
      return (
        <div>
@@ -231,6 +237,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
            </div>
          </div>
          <div>
+           {/* highlight-next-line */}
            <MovieForm onSubmitSuccess={loadMoviesData} />
          </div>
        </div>
@@ -241,6 +248,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
 1. In `MovieForm`, call `onSubmitSuccess` when `createMovie` ajax succeeds:
 
    ```jsx
+   // highlight-next-line
    export const MovieForm = ({ onSubmitSuccess }) => {
      const [name, setName] = React.useState('');
      const [releaseDate, setReleaseDate] = React.useState('');
@@ -248,7 +256,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
      const handleSubmit = ev => {
        ev.preventDefault();
        createMovie(values).then(() => {
-         onSubmitSuccess();
+         onSubmitSuccess(); // highlight-line
          setName('');
          setReleaseDate('');
        });
@@ -270,6 +278,7 @@ Let's extract out some code in `MovieForm`:
 import React from 'react';
 import { createMovie } from './api';
 
+// highlight-start
 const useMovieFormData = () => {
   const [name, setName] = React.useState('');
   const [releaseDate, setReleaseDate] = React.useState('');
@@ -282,9 +291,10 @@ const useMovieFormData = () => {
     }
   };
 };
+// highlight-end
 
 export const MovieForm = ({ onSubmitSuccess }) => {
-  const { values, setName, setReleaseDate } = useMovieFormData();
+  const { values, setName, setReleaseDate } = useMovieFormData(); // highlight-line
 
   const handleSubmit = ev => {
     ev.preventDefault();
