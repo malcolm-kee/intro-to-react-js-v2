@@ -20,7 +20,7 @@ Modern frontend development tools like Create React App enables us to:
 1. integrate JS, CSS, and HTML file automatically (no more manual change the script tag),
 1. enable a module system that we can use to structure our code effectively but at the same time produce a single bundled JS file so it can be loaded easily (more on this later),
 1. make powerful tactics like code-splitting possible (explained in later section), and
-1. many more that could be possibly explained here, e.g. typechecking, Hot Reload.
+1. many more than could be possibly explained here, e.g. typechecking, Hot Reload.
 
 ## The Module System
 

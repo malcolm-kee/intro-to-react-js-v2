@@ -6,7 +6,7 @@ description: 'Learn how to implements a simple form in React'
 
 # Form in React
 
-This section will be covered if we have additional time during the workshop.
+This section discuss how to implements a form in React.
 
 ## Allow User to Create Movie
 
