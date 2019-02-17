@@ -1,44 +1,14 @@
 ---
 title: React Testing
 path: '/react-testing'
-description: 'Learn to configure Jest and write unit tests in Javascript and React components.'
+description: 'Learn to write unit tests in Javascript and React components.'
 ---
 
 # React Testing
 
-Testing used to be something that requires a lot efforts to setup, because there are a few moving parts for you to write tests:
-
-1. test runner (the code that will extract all the test code from your code and run them, generate and display test results)
-1. assertion library (the utilities for you to make assertion about your result)
-1. mocking and spying (in a real-world application, you would definitely need mocking whenever there are indeterminate functionlities or it's expensive to setup end-to-end application)
-1. test coverage reports
-1. provide a browser or browser-like environment
-
-Thanks to [Jest], all of these are included in single library with minimal configuration.
-
-## Setup Jest
-
-To setup Jest for our application:
-
-1. install the packages as devDependencies:
-   ```bash
-     npm install -D jest babel-jest babel-core@7.0.0-bridge.0
-   ```
-1. add a `test` npm script in `package.json`
-
-   ```json
-   ...
-   "test": "jest"
-   ...
-   ```
-
-Now you're good to go to write your test and run them.
+In this section, we will discuss how to test javascript in general and then how to test React component.
 
 ## Testing Javascript (not React specific)
-
-Let's start with writing test for javascript function.
-
-Once you get an idea of how to test javascript, then we will go through how to test React component.
 
 ### Creating utility function to generate className
 
@@ -80,7 +50,7 @@ test('classNames', () => {
 });
 ```
 
-Now when you run `npm run test`, you should be able to see the following output:
+Now when you run `npm test`, you should be able to see the following output:
 
 ```bash
  PASS  src/lib.test.js
@@ -95,7 +65,7 @@ Ran all test suites.
 
 Congratulations! You just written your first test.
 
-- By default, Jest will look for any files that is inside folder `__test__` or file name end with `.test.js` or `spec.js`. Therefore by naming the file as `lib.test.js`, the file will be treated as test file that Jest need to run. I recommend to place the test file next to the code that it's testing with the naming convention `<code-under-test>.test.js`, so that it's clear on the purpose of the test, and what code has test associated with it.
+- By default, Jest (the underlying test framework of Create React App) will look for any files that is inside folder `__test__` or file name end with `.test.js` or `spec.js`. Therefore by naming the file as `lib.test.js`, the file will be treated as test file that Jest need to run. I recommend to place the test file next to the code that it's testing with the naming convention `<code-under-test>.test.js`, so that it's clear on the purpose of the test, and what code has test associated with it.
 - When Jest run the test file, it will injects few variables globally, e.g. `test` and `expect`.
 - `test` is used to wrap your unit test and give it a name. When your test fails, the test name will be displayed in the console.
 - `expect` is used to assert the result of your test. Common usages are:
@@ -113,37 +83,6 @@ Congratulations! You just written your first test.
 
   Read through the [Jest expect docs][jest-expect] to get an idea of the supported assertions.
 
-## Additional Configurations of Jest
-
-Let's explore some common configurations when using Jest.
-
-### Fix ESLint Error
-
-You may realize that ESLint is showing error in your test file that `'test' is not defined` and `'expect' is not defined`. However, to fix that error is just a line of code. Update your `.eslintrc` file `env` properties:
-
-```json
-...
-"env": {
-    "es6": true,
-    "browser": true,
-    "node": true,
-    "jest": true
-}
-...
-```
-
-Now the error should be gone now.
-
-### Watch mode
-
-It's common that you may want to keep Jest in watch mode while writing tests, so any change of the test will trigger a re-run and ensure the test is passed.
-
-To run Jest in watch mode:
-
-1. add a new npm script: `"test:watch": "jest --watch"`
-1. run `npm run test:watch`
-1. explore the watch mode options (`p` to filter filename, `t` to filter test name)
-
 ### Code Coverage Reports
 
 You may want to explore how many of your code is covered.
@@ -152,25 +91,22 @@ To generate code coverage report:
 
 1. add a new npm script:
    ```bash
-   "test:coverage": "jest --coverage"
+   "test:coverage": "npm run test -- --coverage"
    ```
 1. run `npm run test:coverage`
 1. explore the `coverage/lcov-report` folder that has been generated. Open the `index.html` file with your browser.
 
 <hr >
 
-## :pencil: Do It: configure Jest and write unit tests
+## :pencil: Do It: write unit tests
 
-1. install Jest as described and configure your npm scripts.
 1. copy the utility code as provided and write the tests to test the function.
 1. run `npm run test` and verify that the tests are passed.
-1. fix ESLint error as described
-1. run test in watch mode as described
 1. generate code coverage report as described
 1. (optional) write unit tests for the function `joinString`.
 1. (optional) increase conditional coverage of `lib.js` to 100%.
 
-> [:octocat: `120-jest-setup-and-test`](https://github.com/malcolm-kee/react-movie-app/tree/120-jest-setup-and-test)
+> [:octocat: `add unit test`](https://github.com/malcolm-kee/react-movie-app-v2/commit/837ba589d271517703016cb84faec788e2916db6)
 
 <hr >
 

@@ -279,7 +279,7 @@ import React from 'react';
 import { createMovie } from './api';
 
 // highlight-start
-const useMovieFormData = () => {
+const useMovieForm = () => {
   const [name, setName] = React.useState('');
   const [releaseDate, setReleaseDate] = React.useState('');
   return {
@@ -294,7 +294,7 @@ const useMovieFormData = () => {
 // highlight-end
 
 export const MovieForm = ({ onSubmitSuccess }) => {
-  const { values, setName, setReleaseDate } = useMovieFormData(); // highlight-line
+  const { values, setName, setReleaseDate } = useMovieForm(); // highlight-line
 
   const handleSubmit = ev => {
     ev.preventDefault();
@@ -347,7 +347,7 @@ export const MovieForm = ({ onSubmitSuccess }) => {
 };
 ```
 
-- we extract out the two form input states into `useMovieFormData` custom hook, and use that in `MovieForm` component.
+- we extract out the two form input states into `useMovieForm` custom hook, and use that in `MovieForm` component.
 
 <hr >
 
@@ -356,7 +356,7 @@ export const MovieForm = ({ onSubmitSuccess }) => {
 1. Create `MovieForm` component will will make API call to backend via `createMovie` function.
 1. Include `MovieForm` in `App` and make sure creation is working.
 1. Enhance application to auto refresh movie list when creation is success.
-1. Extract out form data to `useMovieFormData` custom hook.
+1. Extract out form data to `useMovieForm` custom hook.
 
 > [:octocat: `add movie form`](https://github.com/malcolm-kee/react-movie-app-v2/commit/06f4c8cb364c5851a70b2ddf640bfdd94e8d4281)
 

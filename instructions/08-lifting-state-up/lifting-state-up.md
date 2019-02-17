@@ -469,4 +469,19 @@ function App() {
 
 The app should works as expected now!
 
+<hr >
+
+## :pencil: Do It: Lifting State Up
+
+1. Declare `isEdit` state in `App` component.
+1. Display different text in `MovieForm` based on `isEdit` props.
+1. Move `useMovieForm` hook from `MovieForm` to `App` component.
+1. Declare `selectMovie` and `resetForm` function in `App` which will be passed on applicable component.
+1. Create `saveMovie` function.
+1. In `MovieForm` component, call `saveMovie` based on `isEdit` props.
+
+> [:octocat: `moving state up`](https://github.com/malcolm-kee/react-movie-app-v2/commit/a55513990ebd0de526324b273574a03fa566beaa)
+
+<hr >
+
 [restlet-client]: https://chrome.google.com/webstore/detail/restlet-client-rest-api-t/aejoelaoggembcahagimdiliamlcdmfm?hl=en
