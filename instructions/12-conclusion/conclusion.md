@@ -12,20 +12,17 @@ We have come to the conclusion of this workshop.
 
 What we've learnt:
 
-- Tooling
-  1. npm - manage project dependencies and task runner
-  1. prettier - keep your code base style consistent so it remove the overhead to maintain it
-  1. ESLint - help you to maintain coding standards for your project
-  1. webpack - bundling and managing all your assets in your project
-  1. babel - compile your code from latest syntax to older syntax so you can support backward compatibility
-  1. React - the happiness :satisfied:
-  1. Jest - test framework that supports most features you need when writing test for Javascript
-  1. react-testing-library - helpers to test React component
-- Use Cases:
-  1. making ajax call (add the `componentDidMount` lifecycle methods)
-  1. showing loading indicator (using React state to track status)
-  1. write test for Javascript code and React components
-  1. code splitting (using dynamic `import`, `React.lazy` and `React.Suspense`)
+- Start a new React project with Create React App
+- How to organize your JS code with module system
+- Declare React components with JSX
+- Extracting and composing React components
+- Declare state with `React.useState` hook
+- Make side effects e.g. ajax call with `React.useEffect` hook
+- Extracting hooks to custom hooks
+- Implement a form in React
+- Share states between React components
+- Write unit tests for React components
+- Code splitting using dynamic `import()`, `React.lazy` and `React.Suspense`
 
 ## Next Step
 

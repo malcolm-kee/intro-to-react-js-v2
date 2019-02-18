@@ -259,7 +259,7 @@ describe('BusyContainer', () => {
 1. modify `BusyContainer` and write the test for it.
 1. ensure all the tests are passed
 
-> [:octocat: `130-react-test`](https://github.com/malcolm-kee/react-movie-app/tree/130-react-test)
+> [:octocat: `add react component test example`](https://github.com/malcolm-kee/react-movie-app-v2/commit/1035bb7bdb743ac6d6b38cea8a5f5e3f91653514)
 
 <hr >
 
@@ -334,7 +334,7 @@ describe('<App />', () => {
 - we use `wait` helper from `react-testing-library` to introduce some delay. This is because the `loadMovies` returns a promise, which will only be resolve in next ticks on the JS event cycle.
 - we use `getAllByTestId` to get the count of the mounted movie components and asserts the count is equal to the number of movies in our mock data.
 
-> [:octocat: `131-react-test-stateful`](https://github.com/malcolm-kee/react-movie-app/tree/131-react-test-stateful)
+> [:octocat: `add stateful react component test`](https://github.com/malcolm-kee/react-movie-app-v2/commit/4ad4c4cc775992ffc207d49977beffc459c4940c)
 
 [jest]: https://jestjs.io/en/
 [classnames]: https://www.npmjs.com/package/classnames
