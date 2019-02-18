@@ -16,58 +16,41 @@ We will starts with lazy-loading some Javascript code, then lazy-loading React c
 
 To start lazy-loading JS code, the most straightforward way is through the dynamic [`import()`][dynamic-import] syntax.
 
-We will lazy load the code in `api.js`.
+We will lazy load the `axios` library in `api.js`.
 
-Let's update `app.js`:
+Let's update `api.js`:
 
 ```jsx
-import React from 'react';
-import { BusyContainer } from './busy-container';
-import Movie from './movie';
+const getAxios = () => import('axios'); // highlight-line
 
-const loadCodeAndMovies = () =>
-  import('./api').then(({ loadMovies }) => loadMovies());
+const MOVIE_ENDPOINT = 'https://react-intro-movies.herokuapp.com/movies';
 
-class App extends React.Component {
-  state = {
-    showMovies: false,
-    movies: [],
-    isLoading: true
-  };
+export const loadMovies = () =>
+  // highlight-start
+  getAxios()
+    .then(axios => axios.default(MOVIE_ENDPOINT))
+    // highlight-end
+    .then(res => res.data);
 
-  componentDidMount() {
-    loadCodeAndMovies().then(movies =>
-      this.setState({ movies, isLoading: false })
-    );
-  }
+export const createMovie = movie =>
+  // highlight-start
+  getAxios()
+    .then(axios => axios.post(MOVIE_ENDPOINT, movie))
+    // highlight-end
+    .then(res => res.data);
 
-  ...
-}
-
-export default App;
+export const saveMovie = movie =>
+  // highlight-start
+  getAxios()
+    .then(axios => axios.put(`${MOVIE_ENDPOINT}/${movie.id}`, movie))
+    // highlight-end
+    .then(res => res.data);
 ```
 
-- The `import { loadMovies } from './api';` statement at the beginning of the file is removed.
-- We define a function `loadCodeAndMoviesData`, which will use dynamic `import` to load the code and then use the loaded function `loadMovies` to make the ajax call.
-- In the `componentDidMount`, we use `loadCodeAndMoviesData` to get the movies from backend.
-
-When you try to compile the code by `npm start` now, you would get a syntax error. This is because similar to class properties, dynamic `import` is not included as part of `preset-env` nor `preset-react`, so we need to install additional plugin
-
-1. install a babel plugin as devDependency:
-   ```bash
-     npm install -D @babel/plugin-syntax-dynamic-import
-   ```
-1. update `.babelrc`:
-   ```json
-   {
-     "presets": ["@babel/preset-env", "@babel/preset-react"],
-     "plugins": [
-       "@babel/plugin-proposal-class-properties",
-       "@babel/plugin-syntax-dynamic-import"
-     ]
-   }
-   ```
-1. run `npm start` again.
+- The `import axios from 'axios';` statement at the beginning of the file is removed.
+- We define a function `getAxios`, which will use dynamic `import` to load the code.
+- For all the code that previously use `axios`, not it need to call `getAxios` function to get the axios code, then use it to make the api calls.
+- Note that for `loadMovies`, which previously call axios directly with `axios(MOVIE_ENDPOINT)`, it need to call `axios.default(MOVIE_ENDPOINT)` now as the result of dynamic import will cause default export to be associated to the `.default` properties.
 
 Now you would see the following output:
 
@@ -90,71 +73,82 @@ And from the Network tab of your DevTools, you should be able to see chunk `0.js
 
 ## :pencil: Do It: lazy loading ajax call code
 
-1. modify `app.js` to lazy-load `api.js`.
-1. configure Babel as described.
+1. modify `api.js` to lazy-load `axios`.
 1. test the application and ensure the code still works as before.
 
-> [:octocat: `140-lazyload-code`](https://github.com/malcolm-kee/react-movie-app/tree/140-lazyload-code)
+> [:octocat: `add dynamic import`](https://github.com/malcolm-kee/react-movie-app-v2/commit/55cfe8ae71ccfa452f0d7fd7e6f0d6ba733089d2)
 
 <hr >
 
 ## Lazy Loading React Component
 
-Once you understand dynamic `import()` for JS code, lazy-loading React Components is just using it with some React helper.
+Once you understand dynamic `import()` for JS code, lazy-loading React Components is just using it with helper from React.
 
-Let's lazy load our `Movie` components by modify `app.js`:
+We would like to lazy load our `Movie` component.
 
-```jsx
-import React from 'react';
-import { BusyContainer } from './busy-container';
+1. export default `Movie` component:
 
-const Movie = React.lazy(() =>
-  import(/* webpackChunkName: "Movie" */ './movie')
-);
+   ```jsx
+   ...
+   export const Movie = props => (
+     ...
+   );
 
-const loadCodeAndMovies = () =>
-  import(/* webpackChunkName: "api" */ './api').then(({ loadMovies }) =>
-    loadMovies()
-  );
+   export default Movie; // highlight-line
+   ```
 
-class App extends React.Component {
-  ...
+2. Modify `app.js`:
 
-  render() {
-    return (
-      <div>
-        <div className="title-bar">
-          <h1>React Movie App</h1>
-        </div>
-        <div className="button-container">
-          <button onClick={this.toggleMovies} className="button">
-            {this.state.showMovies ? 'Hide' : 'Show'} Movies
-          </button>
-        </div>
-        {this.state.showMovies && (
-          <React.Suspense fallback={<span>Loading Component...</span>}>
-            <BusyContainer isLoading={this.state.isLoading}>
-              {this.state.movies.map(movie => (
-                <Movie
-                  name={movie.name}
-                  releaseDate={movie.releaseDate}
-                  key={movie.id}
-                />
-              ))}
+   ```jsx
+   import React from 'react';
+   import { BusyContainer } from './busy-container';
+
+   const Movie = React.lazy(() => import('./components/movie')); // highlight-line
+
+   ...
+
+   function App() {
+     ...
+      return (
+        <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <div className="container">
+        <div>
+          <div className="button-container">
+            <Button onClick={toggleShowMovies}>
+              {moviesShown ? 'Hide' : 'Show'} Movies
+            </Button>
+          </div>
+          {moviesShown && (
+            <BusyContainer isLoading={isLoading}>
+              {/* highlight-next-line */}
+              <React.Suspense fallback={<span className="spinner" />}>
+                {movies.map(movie => (
+                  <Movie
+                    name={movie.name}
+                    releaseDate={movie.releaseDate}
+                    onClick={() => selectMovie(movie)}
+                    key={movie.id}
+                  />
+                ))}
+                {/* highlight-next-line */}
+              </React.Suspense>
             </BusyContainer>
-          </React.Suspense>
-        )}
+          )}
+        </div>
+        ...
       </div>
-    );
-  }
-}
+    </div>
+      );
+   }
 
-export default App;
-```
+   export default App;
+   ```
 
 - We wrap dynamic `import` statement with `React.lazy`, so that React knows this is a lazy-loaded Component.
 - We wrap lazy-loaded component with `React.Suspense` so that React will fallback to the loading indicator whenever any component within the `React.Suspense` is waiting to be loaded.
-- The comment `/* webpackChunkName: "Movie" */` is known as _webpack magic comment_. It allows us to name our chunk with a meaningful name like `api.js` instead of `0.js`. You can read about it in [this section of webpack docs][webpack-dynamic-imports].
 
 That's it!
 
@@ -162,20 +156,13 @@ That's it!
 
 ## :pencil: Do It: lazy loading React Component
 
+1. default export `Movie` component from `movie.js`.
 1. modify `app.js` to lazy-load `Movie` component.
 1. test the application and ensure the code still works as before.
 
-> [:octocat: `150-lazyload-component`](https://github.com/malcolm-kee/react-movie-app/tree/150-lazyload-component)
+> [:octocat: `lazy load react component`](https://github.com/malcolm-kee/react-movie-app-v2/commit/ec5994ed5df96b0ba7cfe1b68fd3c621f4238cdf)
 
 <hr >
-
-## (Optional) Fix Failing Jest Tests due to Dynamic Import
-
-Because Jest runs in NodeJS, which doesn't understand dynamic import syntax, you would encounter syntax error if you try to run the tests now. Some tweaks is required in Babel.
-
-See the following branch for the required changes.
-
-> [:octocat: `151-lazyload-jest-fix`](https://github.com/malcolm-kee/react-movie-app/tree/151-lazyload-jest-fix)
 
 [dynamic-import]: https://developers.google.com/web/updates/2017/11/dynamic-import
 [webpack-dynamic-imports]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
