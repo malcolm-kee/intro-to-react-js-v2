@@ -107,11 +107,72 @@ function App() {
 }
 ```
 
-- `searchTerm` is added to the state with initial value of `''`.
-- `handleSearchTermChange` method is declared. It takes the input change event as its parameter, and set `searchTerm` value by extracting the input value via `ev.target.value`. Once the setState is called, `updateMovieList` method will be called with the latest `searchTerm`.
-- `input` is rendered with `value` and `onChange` set accordingly.
+- A new state `searchKey` is declared with initial value of `''`.
+- An `input` is rendered with `value` and `onChange` set accordingly.
 
-Now we can filter our movie list by typing in the text input.
+### Make API call when searchKey change
+
+Currently we can type our search key in the input, but that doesn't update the movie list. To do that, let's move the ajax call effects from `useMovieData` hook into `App` component:
+
+```js
+...
+function useMovieData() {
+    const [movies, setMovies] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const loadMoviesData = searchKey => {
+        setIsLoading(true);
+        loadMovies(searchKey).then(movieData => {
+            setMovies(movieData);
+            setIsLoading(false);
+        });
+    };
+    // highlight-next-line
+    // React.useEffect(loadMoviesData, []);
+
+    return {
+       movies,
+       isLoading,
+       loadMoviesData
+    };
+}
+...
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
+  const { movies, isLoading, loadMoviesData } = useMovieData();
+  const { setName, setReleaseDate, setId, values } = useMovieForm();
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [searchKey, setSearchKey] = React.useState('');
+
+  React.useEffect(() => loadMoviesData(searchKey), [searchKey]); // highlight-line
+
+  ...
+}
+```
+
+Now our movie list will be updated based on what we type! Done? Nope.
+
+### Debounce Effect
+
+Our current code works, but it is unoptimal because we make an AJAX call for every keystroke. We need to "hold on" while user type, and only make the AJAX call after user stop typing.
+
+To do that, let's create a file `use-debounced-effect.js` in `src/hooks` folder:
+
+```js
+import React from 'react';
+
+export const useDebouncedEffect = (effect, deps, timeout = 500) => {
+  React.useEffect(() => {
+    let cleanup;
+    const timerId = setTimeout(() => {
+      cleanup = effect();
+    }, timeout);
+    return () => {
+      clearTimeout(timerId);
+      if (typeof cleanup === 'function') cleanup();
+    };
+  }, deps);
+};
+```
 
 <hr >
 
