@@ -29,97 +29,81 @@ The end part of the URL (`q=aqua`) is how we search the list. Providing differen
 Update `loadMovies` function in `api.js` to accept a `searchKey` parameters:
 
 ```js
+// highlight-next-line
 export const loadMovies = searchKey =>
-  axios('https://react-intro-movies.herokuapp.com/movies', {
-    params: { q: searchKey }
-  }).then(res => res.data);
+  getAxios()
+    .then(axios =>
+      axios.default('https://react-intro-movies.herokuapp.com/movies', {
+        params: { q: searchKey } // highlight-line
+      })
+    )
+    .then(res => res.data);
 ```
 
 - axios accept a second parameter to customize the ajax call. `params` is an object that will be transformed to query string and append to the end of the ajax call.
 
-Update `app.js`:
+Update `useMovieData` hook in `app.js`:
 
-```jsx
+```js
 ...
-const loadCodeAndMovies = searchKey =>
-  import(/* webpackChunkName: "api" */ './api').then(({ loadMovies }) =>
-    loadMovies(searchKey)
-  );
-
-class App extends React.Component {
+function useMovieData() {
     ...
-    componentDidMount() {
-        this.updateMovieList();
-    }
-
-    updateMovieList = searchKey =>
-        loadCodeAndMovies(searchKey).then(movies =>
-            this.setState({
-                movies,
-                isLoading: false
-            }));
-
-    ...
+    // highlight-next-line
+    const loadMoviesData = searchKey => {
+        setIsLoading(true);
+        // highlight-next-line
+        loadMovies(searchKey).then(movieData => {
+            setMovies(movieData);
+            setIsLoading(false);
+        });
+    };
 }
 ```
 
-- `loadCodeAndMovies` accepts `searchKey` parameter now, which will be passed to `loadMovies` call.
-- the code to load the ajax call is refactored out from `componentDidMount` into separate method `updateMovieList`.
+- `loadMoviesData` accepts `searchKey` parameter now, which will be passed to `loadMovies` call.
 
 ### Add an Input to Capture Search Key
 
 Now we need to add an input to our App to capture searchKey.
 
 ```jsx
-...
-class App extends React.Component {
-    state = {
-        showMovies: false,
-        isLoading: true,
-        movies: [],
-        searchTerm: ''
-    };
-    ...
-    handleSearchTermChange = ev =>
-        this.setState(
-            {
-                searchTerm: ev.target.value
-            },
-            () => {
-                this.setState({ isLoading: true });
-                this.updateMovieList(this.state.searchTerm);
-            }
-        );
-    ...
-    render() {
-        return (
-            <div>
-                ...
-                    {this.state.showMovies && (
-                        <React.Suspense fallback={<span>Loading Component...</span>}>
-                            <div className="field">
-                                <input
-                                    value={this.state.searchTerm}
-                                    onChange={this.handleSearchTermChange}
-                                    className="input"
-                                    placeholder="Search for movie..."
-                                />
-                            </div>
-                            <BusyContainer isLoading={this.state.isLoading}>
-                                {this.state.movies.map(movie => (
-                                    <Movie
-                                        name={movie.name}
-                                        releaseDate={movie.releaseDate}
-                                        key={movie.id}
-                                    />
-                                ))}
-                            </BusyContainer>
-                        </React.Suspense>
-                    )}
-                ...
-            </div>
-        );
-    }
+function App() {
+  const [moviesShown, toggleShowMovies] = useToggle(false);
+  const { movies, isLoading, loadMoviesData } = useMovieData();
+  const { setName, setReleaseDate, setId, values } = useMovieForm();
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [searchKey, setSearchKey] = React.useState(''); // highlight-line
+
+  ...
+
+  return (
+      ...
+        {moviesShown && (
+            <BusyContainer isLoading={isLoading}>
+              {/* highlight-start */}
+              <div className="field">
+                <input
+                  value={searchKey}
+                  onChange={ev => setSearchKey(ev.target.value)}
+                  className="input"
+                  placeholder="Search for movie..."
+                />
+              </div>
+              {/* highlight-end */}
+              <React.Suspense fallback={<span className="spinner" />}>
+                {movies.map(movie => (
+                  <Movie
+                    name={movie.name}
+                    releaseDate={movie.releaseDate}
+                    onClick={() => selectMovie(movie)}
+                    key={movie.id}
+                  />
+                ))}
+              </React.Suspense>
+            </BusyContainer>
+        )}
+      ...
+  );
 }
 ```
 

@@ -286,6 +286,10 @@ We declare a state as `movies` with `useState` hook, which is an empty array by 
 
 We use `useEffect` hook to make api call and then set the `movies` state with the response of the api call.
 
+- `useEffect` is the React hook to perform side effects, e.g. making api call, attaching event listener etc.
+- It has the function signature of `useEffect(fn, deps)`, whereby `fn` is the function that wraps the side effects call, while `deps` is an array that consists of all the dependencies that could cause the side effect to be rerun.
+- In our case, because we only want our ajax call to be called once, we will pass it an empty array so it will never be rerun.
+
 ## Touching Up UI by Adding Loading Indicator
 
 Our app is able to load data from backend API now, which is great. However, there is some problem that is not obvious to us.

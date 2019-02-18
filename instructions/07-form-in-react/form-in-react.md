@@ -188,6 +188,7 @@ We can achieve this by passing a callback from `App` to `MovieForm`.
      const [isLoading, setIsLoading] = React.useState(true);
      // highlight-start
      const loadMoviesData = () => {
+       setIsLoading(true);
        loadMovies().then(movieData => {
          setMovies(movieData);
          setIsLoading(false);
