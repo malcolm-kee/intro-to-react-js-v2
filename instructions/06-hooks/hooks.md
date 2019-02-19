@@ -125,9 +125,11 @@ Update the `Button` properties in `App` component:
 - There are two ways to call the `setState` function:
 
   - pass the new value as parameter, like what we did initially:
+
     ```js
     setState(newValue);
     ```
+
   - pass a function that will return the new value as parameter, like this:
 
     ```js
@@ -229,7 +231,7 @@ React doesn't dictate how you get data from backend, it's up to you to decide wh
 
 Common options:
 
-1. [`window.fetch`][fetch-api-docs] - no library required as it is supported by all modern browsers. However, polyfill required to support older browser
+1. [window.fetch][fetch-api-docs] - no library required as it is supported by all modern browsers. However, polyfill required to support older browser
 1. [Axios] - Promise based HTTP client.
 1. [jQuery AJAX][jquery-ajax] - good option if JQuery is already included in your page, else bad option as it doesn't make sense to include whole JQuery library for one function only.
 

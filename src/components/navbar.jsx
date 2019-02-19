@@ -1,6 +1,5 @@
 import { Link } from 'gatsby';
 import React from 'react';
-import githubLogo from '../images/github-small.png';
 import { MaterialIcons } from './material-icons';
 
 const getReportIssueLink = (bugUrl, pageTitle) =>
@@ -18,9 +17,9 @@ export const Navbar = ({ siteTitle, pageTitle, repositoryUrl, bugUrl }) => (
         title="GitHub repo of this site"
         target="_BLANK"
         rel="noopener noreferrer"
-        className="github-logo-container icon-button"
+        className="github-link"
       >
-        <img className="github-logo" src={githubLogo} alt="github logo" />
+        GitHub
       </a>
       <a
         href={getReportIssueLink(bugUrl, pageTitle)}

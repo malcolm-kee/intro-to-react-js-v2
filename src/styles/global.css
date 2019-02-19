@@ -29,6 +29,7 @@ h2 > a {
   border-radius: 4px;
   line-height: 0;
   user-select: none;
+  transition: background-color 300ms ease-in-out;
 }
 
 .button:hover {
@@ -86,6 +87,8 @@ h2 > a {
   text-decoration: none;
   border-radius: 50%;
   user-select: none;
+  background-color: transparent;
+  transition: background-color 300ms ease-in-out;
 }
 
 .icon-button:hover {
@@ -151,7 +154,25 @@ h2 > a {
 
 .instruction-article,
 .instruction-template-nav {
-  margin-right: 250px;
+  margin-right: 220px;
+}
+
+.instruction-article a,
+.landing-page-content article a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  border-bottom-color: transparent;
+  transition: border-bottom-color 300ms ease-in-out;
+}
+
+.instruction-article a:hover,
+.landing-page-content article a:hover {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
+}
+
+.instruction-article a.gatsby-resp-image-link:hover {
+  border-bottom-color: transparent;
 }
 
 .instruction-template .table-of-content-section {
@@ -189,6 +210,22 @@ blockquote {
   padding: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.github-link {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 2px solid;
+  border-bottom-color: transparent;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+  transition-property: color, border-bottom-color;
+}
+
+.github-link:hover {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
 }
 
 .navbar-toolbar > .icon-button {
@@ -248,7 +285,7 @@ blockquote {
 
 .landing-page-content article,
 .landing-page-content .button-toolbar {
-  margin-right: 250px;
+  margin-right: 220px;
 }
 
 .landing-page-content article {

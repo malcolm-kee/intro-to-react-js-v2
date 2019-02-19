@@ -1,4 +1,4 @@
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import { LinkButton } from '../components/button';
 import { MaterialIcons } from '../components/material-icons';
