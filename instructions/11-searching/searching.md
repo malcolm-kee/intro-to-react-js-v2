@@ -174,79 +174,33 @@ export const useDebouncedEffect = (effect, deps, timeout = 500) => {
 };
 ```
 
-<hr >
+- In its essence, `useDebouncedEffect` hook works almost like `useEffect` hook, with the ability to limits the rate at which the effect can be called. It achieves this by waiting for a buffer time before calling the effect, and if the effect is invoked again before the buffer time finishes, it will cancel the previous call and restart the buffer again. It is conceptually similar to `debounce` of most utility libraries such as [`lodash`][lodash] and [`underscore`][underscore].
 
-## :pencil: Do It: Implement Search Movies Functionalities
-
-1. Make the changes required to allow user to search movies.
-1. Verify that the movies is updated when you type to the input field.
-
-> [:octocat: `160-search-movie`](https://github.com/malcolm-kee/react-movie-app/tree/160-search-movie)
-
-<hr >
-
-### Debounce Ajax Call
-
-Our current code works, but it is unoptimal because we make an AJAX call for every keystroke. We need to "hold on" while user type, and only make the AJAX call after user stop typing.
-
-To do that, we need to use a common Javascript helper function, debounce. Let's add `debounce` function to our `lib.js`:
+In our `App` component, let's use `useDebouncedEffect` instead of `useEffect` hook:
 
 ```js
 ...
-export function debounce(func, wait) {
-  let timeout;
-  return function(...args) {
-    const context = this;
-    const later = function() {
-      timeout = null;
-      func.apply(context, args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
+import { useDebouncedEffect } from './hooks/use-debounced-effect';
+...
+
+function App() {
+  ...
+  useDebouncedEffect(() => loadMoviesData(searchKey), [searchKey]);
+  ...
 }
 ```
 
-- In its essence, `debounce` allows you to wrap a function to limits the rate at which the function can be called. It achieve this by waiting for a buffer time before calling the function. If the function is invoke again before the buffer time finish, it will cancel the previous call and restart the buffer again.
-- `debounce` is available in most utility libraries such as [`lodash`][lodash] and [`underscore`][underscore]. However it is overkill to include a library just for a single function, and this simple implementation is sufficient for our use case.
-
-Let's use `debounce` in our `App`:
-
-```jsx
-...
-import { debounce } from './lib';
-...
-
-class App extends React.Component {
-    ...
-    handleSearchTermChange = ev => {
-        this.setState(
-        {
-            searchTerm: ev.target.value
-        },
-        () => {
-            this.setState({ isLoading: true });
-            this.debouncedUpdateMovieList(this.state.searchTerm);
-        }
-        );
-    };
-    ...
-    debouncedUpdateMovieList = debounce(this.updateMovieList, 200);
-    ...
-}
-```
-
-- we create a debounced version of `updateMovieList` by wrapping it with `debounce` with a wait time of 200ms.
-- in `handleSearchTermChange`, we use `debouncedUpdateMovieList` so that the AJAX call will not be invoked if user type again within 200ms. You can adjust the wait time depends on your preference, just be aware that this would impact user experience.
+Now when you try to search, it will on hold for half a second before start firing the AJAX call. :sunglasses:
 
 <hr >
 
-## :pencil: Do It: Debounce API Call to Search
+## :pencil: Do It: Implement Search Movies Functionalities with Debounce
 
-1. Include `debounce` in your code and use it in your `App`.
-1. Verify that the API calls will only be called after you stop typing.
+1. Make the changes required to allow user to search movies.
+1. Verify that the movies is updated when you type to the input field.
+1. Add `useDebouncedEffect` hook and use it in your `App`.
 
-> [:octocat: `170-debounce-search`](https://github.com/malcolm-kee/react-movie-app/tree/170-debounce-search)
+> [:octocat: `search with debounce`](https://github.com/malcolm-kee/react-movie-app-v2/commit/fdf37cd3e9cc2b53e970908d4e7a5a694c66f9cf)
 
 <hr >
 
