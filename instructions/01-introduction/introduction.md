@@ -34,15 +34,16 @@ This workshop is "An Introduction to React JS", which will introduces you the co
 
 - Core API of React
 - common use cases when using React JS e.g. making api call, routing, testing, code splitting
+- React hook feature
 
 ## This Workshop will NOT Cover:
 
 - Basics of HTML, CSS, & Javascript
+- React Class Component
 - Advanced React Patterns e.g. Higher Order Components and Render Props
 - Tooling to use with React, e.g. webpack, Babel, ESLint. We'll use Create React App to abstract away all the tooling. If you're interested to learn about those tools, refer to [version 1][v1-website] of this workshop.
 - Redux
 - Typescript/Flow
-- React hook feature
 
 ## What is Expected of You
 
