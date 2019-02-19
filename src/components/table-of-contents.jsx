@@ -1,10 +1,11 @@
 import { graphql, Link, StaticQuery } from 'gatsby';
+import { joinClassName } from 'join-string';
 import React from 'react';
 
 const isActive = ({ isCurrent }) =>
   isCurrent ? { className: 'toc-link toc-link--active' } : null;
 
-export const TableOfContents = () => (
+export const TableOfContents = ({ fixed = true, hide }) => (
   <StaticQuery
     query={graphql`
       query {
@@ -24,7 +25,13 @@ export const TableOfContents = () => (
       }
     `}
     render={data => (
-      <nav className="table-of-content-section">
+      <nav
+        className={joinClassName(
+          'table-of-content-section',
+          fixed && 'table-of-content-section--fixed',
+          hide && 'table-of-content-section--hide'
+        )}
+      >
         <div className="table-of-content-inner-container">
           <ol>
             {data.instructions.edges

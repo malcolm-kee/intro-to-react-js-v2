@@ -1,4 +1,5 @@
 import { Link } from 'gatsby';
+import { joinClassName } from 'join-string';
 import React from 'react';
 import { MaterialIcons } from './material-icons';
 
@@ -7,8 +8,8 @@ const getReportIssueLink = (bugUrl, pageTitle) =>
     ? encodeURI(`${bugUrl}/new?title=Issue On ${pageTitle}`)
     : `${bugUrl}/new`;
 
-export const Navbar = ({ siteTitle, pageTitle, repositoryUrl, bugUrl }) => (
-  <header className="navbar">
+export const Navbar = ({ siteTitle, repositoryUrl, bugUrl, hide }) => (
+  <header className={joinClassName('navbar', hide && 'navbar--hide')}>
     <Link to="/">{siteTitle}</Link>
     <div className="navbar-toolbar">
       <a
@@ -22,7 +23,7 @@ export const Navbar = ({ siteTitle, pageTitle, repositoryUrl, bugUrl }) => (
         GitHub
       </a>
       <a
-        href={getReportIssueLink(bugUrl, pageTitle)}
+        href={getReportIssueLink(bugUrl)}
         aria-label="report issue on this page"
         title="report issue on this page"
         target="_BLANK"

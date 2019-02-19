@@ -4,8 +4,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { LinkButton } from '../components/button';
 import { MaterialIcons } from '../components/material-icons';
-import { PageContainer } from '../components/page-container';
-import { TableOfContents } from '../components/table-of-contents';
 
 const InstructionNav = ({ pageContext, top }) => (
   <nav
@@ -40,7 +38,7 @@ const InstructionNav = ({ pageContext, top }) => (
 );
 
 const InstructionTemplate = ({ data, pageContext }) => (
-  <PageContainer pageTitle={data.markdownRemark.frontmatter.title}>
+  <>
     <Helmet>
       <title>{data.markdownRemark.frontmatter.title}</title>
       {data.markdownRemark.frontmatter.description && (
@@ -57,11 +55,10 @@ const InstructionTemplate = ({ data, pageContext }) => (
           className="instruction-article"
           dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
         />
-        <TableOfContents />
       </main>
       <InstructionNav pageContext={pageContext} />
     </div>
-  </PageContainer>
+  </>
 );
 
 export default InstructionTemplate;

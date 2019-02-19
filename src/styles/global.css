@@ -131,12 +131,28 @@ h2 > a {
 .toc-link {
   color: #000;
   text-decoration: none;
-  border-left: 3px solid transparent;
+  position: relative;
+  transition: color 300ms ease-in-out;
 }
 
 .toc-link.toc-link--active {
   color: #0d47a1;
-  border-left: 3px solid #0d47a1;
+}
+
+.toc-link::before {
+  content: ' ';
+  display: block;
+  background: #0d47a1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0px;
+  width: 0;
+  transition: width 300ms ease-in-out;
+}
+
+.toc-link.toc-link--active::before {
+  width: 4px;
 }
 
 .instruction-template-nav {
@@ -175,11 +191,16 @@ h2 > a {
   border-bottom-color: transparent;
 }
 
-.instruction-template .table-of-content-section {
+.table-of-content-section.table-of-content-section--fixed {
   position: fixed;
   top: 64px;
   bottom: 0;
   right: 0px;
+  transition: right 350ms ease-in-out;
+}
+
+.table-of-content-section.table-of-content-section--fixed.table-of-content-section--hide {
+  right: -220px;
 }
 
 blockquote {
@@ -198,12 +219,17 @@ blockquote {
   z-index: 1;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: top 350ms ease-in-out;
 }
 
 .navbar > a {
   font-family: 'Roboto', 'Helvetica', 'Arial', 'sans serif';
   text-decoration: none;
   color: black;
+}
+
+.navbar--hide {
+  top: -64px;
 }
 
 .navbar-toolbar {
@@ -424,7 +450,7 @@ blockquote {
     padding: 8px 8px;
   }
 
-  .instruction-template .table-of-content-section {
+  .table-of-content-section.table-of-content-section--fixed {
     display: none;
   }
 

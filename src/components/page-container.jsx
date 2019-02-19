@@ -2,8 +2,10 @@ import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Navbar } from './navbar';
+import { TableOfContents } from './table-of-contents';
+import { joinClassName } from 'join-string';
 
-export const PageContainer = ({ pageTitle, children }) => (
+export const PageContainer = ({ children, isRoot }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
@@ -30,11 +32,14 @@ export const PageContainer = ({ pageTitle, children }) => (
         </Helmet>
         <Navbar
           siteTitle={data.site.siteMetadata.title}
-          pageTitle={pageTitle}
           repositoryUrl={data.site.siteMetadata.repositoryUrl}
           bugUrl={data.site.siteMetadata.bugUrl}
+          hide={isRoot}
         />
-        <main className="main-container">{children}</main>
+        <main className={joinClassName(!isRoot && 'main-container')}>
+          {children}
+        </main>
+        <TableOfContents fixed hide={isRoot} />
       </div>
     )}
   />

@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-postcss',
+    'gatsby-plugin-layout',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
