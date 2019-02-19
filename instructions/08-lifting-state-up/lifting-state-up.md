@@ -24,7 +24,7 @@ Let's test the API with [Restlet Client][restlet-client] that we've installed in
    https://react-intro-movies.herokuapp.com/movies/{movieId}
    ```
    - you need to replace `{movieId}` in the URL with the id of the movie that you want to update.
-   - you can get the movie id by inspecting the payload of `https://react-intro-movies.herokuapp.com/movies` GET calls. For instance, id for "Aquaman" is 1, while id for "A Star Is Born" is 4.
+   - you can get the movie id by inspecting the payload of the [GET request](https://react-intro-movies.herokuapp.com/movies). For instance, id for "Aquaman" is 1, while id for "A Star Is Born" is 4.
 1. add the following content in the BODY field (change it to the movie you want to update):
    ```json
    {

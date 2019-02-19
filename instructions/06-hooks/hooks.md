@@ -123,8 +123,23 @@ Update the `Button` properties in `App` component:
 ```
 
 - There are two ways to call the `setState` function:
-  - `setState(newValue)`, which is what we did initially.
-  - `setState(prevValue => { return newValue; })`, this should be how you call `setState` if your new value depends on previous value. In our case, because toggle the value is just negation of the previous value, so this should be how we call `setShowMovies`.
+
+  - pass the new value as parameter, like what we did initially:
+    ```js
+    setState(newValue);
+    ```
+  - pass a function that will return the new value as parameter, like this:
+
+    ```js
+    setState(function(prevValue) {
+      return newValue;
+    });
+
+    // OR
+    setState(prevValue => newValue);
+    ```
+
+    this should be how you call `setState` if your new value depends on previous value. In our case, because toggle the value is just negation of the previous value, so this should be how we call `setShowMovies`.
 
 Our `App` should works now where clicking the button will show movies if they are currently hidden, hide movies if they are currently shown.
 
