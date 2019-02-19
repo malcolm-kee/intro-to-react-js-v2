@@ -425,6 +425,15 @@ function App() {
 }
 ```
 
+## Rules of Hooks
+
+There are two rules when using hooks.
+
+1. **Only Call Hooks at the Top Level** - Don't call hooks inside loops, conditions, or nested functions.
+1. **Only Call Hooks from React Functions** - Don't call hooks from regular Javascript functions. Instead you can:
+   - call hooks from React function components.
+   - call hooks from custom hooks
+
 <hr >
 
 ## :pencil: Do It: Getting Data from Backend API
