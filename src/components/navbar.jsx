@@ -8,10 +8,17 @@ const getReportIssueLink = (bugUrl, pageTitle) =>
     ? encodeURI(`${bugUrl}/new?title=Issue On ${pageTitle}`)
     : `${bugUrl}/new`;
 
-export const Navbar = ({ siteTitle, repositoryUrl, bugUrl, hide }) => (
+export const Navbar = ({ siteTitle, repositoryUrl, bugUrl, theme, hide }) => (
   <header className={joinClassName('navbar', hide && 'navbar--hide')}>
     <Link to="/">{siteTitle}</Link>
     <div className="navbar-toolbar">
+      <input
+        type="checkbox"
+        checked={theme === 'dark'}
+        onChange={e =>
+          window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
+        }
+      />
       <a
         href={repositoryUrl}
         aria-label="GitHub repo of this site"

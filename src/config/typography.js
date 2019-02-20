@@ -24,22 +24,28 @@ const typography = new Typograph({
     }
   ],
   overrideStyles: ({ rhythm }) => ({
+    a: {
+      color: 'var(--textLink)'
+    },
     h1: {
       marginTop: rhythm(1 / 2),
       marginBottom: rhythm(3 / 2),
       fontSize: rhythm(2)
     },
     blockquote: {
-      color: '#000000',
+      color: 'inherit',
+      fontStyle: 'italic',
+      fontSize: rhythm(4 / 5),
       marginLeft: 0,
       marginRight: 0,
       paddingLeft: rhythm(1 / 2),
       paddingRight: rhythm(2 / 3),
       paddingTop: rhythm(1 / 2),
       paddingBottom: rhythm(1 / 2),
-      borderLeftColor: '#8d8d8d',
+      borderLeftColor: 'inherit',
       borderLeftWidth: rhythm(1 / 3),
-      borderLeftStyle: 'solid'
+      borderLeftStyle: 'solid',
+      opacity: '0.8'
     }
   })
 });

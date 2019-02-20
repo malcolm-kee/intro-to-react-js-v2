@@ -1,3 +1,26 @@
+/** color -theme- start */
+body.light {
+  --bg: #fff;
+  --textNormal: #222;
+  --textTitle: #222;
+  --textLink: #551a8b;
+}
+
+body.dark {
+  -webkit-font-smoothing: antialiased;
+
+  --bg: #282c35;
+  --textNormal: rgba(255, 255, 255, 0.88);
+  --textTitle: #ffffff;
+  --textLink: #a369d7;
+}
+
+body {
+  background-color: var(--bg);
+}
+
+/** color -theme- end */
+
 /** code highlight - start */
 .gatsby-highlight-code-line {
   background-color: #feb;
@@ -19,7 +42,7 @@ h2 > a {
 }
 
 .button {
-  background-color: #fff;
+  background-color: transparent;
   color: #0d47a1;
   padding: 8px;
   display: inline-flex;
@@ -201,10 +224,6 @@ h2 > a {
 
 .table-of-content-section.table-of-content-section--fixed.table-of-content-section--hide {
   right: -220px;
-}
-
-blockquote {
-  background: #efefef;
 }
 
 .navbar {
