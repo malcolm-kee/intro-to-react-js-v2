@@ -60,3 +60,12 @@ exports.createPages = ({ graphql, actions }) => {
       .catch(reject);
   });
 };
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+
+  if (page.path.match(/\//)) {
+    page.context.isRoot = true;
+    createPage(page);
+  }
+};
