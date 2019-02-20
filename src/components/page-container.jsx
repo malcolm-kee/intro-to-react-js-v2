@@ -5,7 +5,7 @@ import { Navbar } from './navbar';
 import { TableOfContents } from './table-of-contents';
 import { joinClassName } from 'join-string';
 
-export const PageContainer = ({ children, isRoot }) => (
+export const PageContainer = ({ children, isRoot = true }) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
