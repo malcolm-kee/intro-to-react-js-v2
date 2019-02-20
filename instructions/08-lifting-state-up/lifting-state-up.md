@@ -1,6 +1,6 @@
 ---
 title: Lifting State Up
-path: '/lifting-state-up'
+path: '/lifting-state-up/'
 description: 'Lifting the shared state up to closest common ancestor'
 ---
 

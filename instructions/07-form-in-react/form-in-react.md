@@ -1,6 +1,6 @@
 ---
 title: Form in React
-path: '/form-in-react'
+path: '/form-in-react/'
 description: 'Learn how to implements a simple form in React'
 ---
 

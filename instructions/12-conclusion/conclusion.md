@@ -1,6 +1,6 @@
 ---
 title: Conclusion
-path: '/conclusion'
+path: '/conclusion/'
 description: ''
 ---
 

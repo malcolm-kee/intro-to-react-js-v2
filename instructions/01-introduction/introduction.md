@@ -1,6 +1,6 @@
 ---
 title: Introduction
-path: '/introduction'
+path: '/introduction/'
 description: ''
 ---
 
