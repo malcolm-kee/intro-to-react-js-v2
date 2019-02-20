@@ -1,6 +1,6 @@
 ---
 title: Hooks
-path: '/hooks'
+path: '/hooks/'
 description: 'Learn React Hooks that are introduced in React 16.8'
 ---
 

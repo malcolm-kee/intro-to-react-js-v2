@@ -1,6 +1,6 @@
 ---
 title: Code Splitting
-path: '/code-splitting'
+path: '/code-splitting/'
 description: 'Learn to code-splitting and lazy-load Javascript code and React component.'
 ---
 

@@ -14,12 +14,9 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children, location } = this.props;
+    const { children, pageContext } = this.props;
     return (
-      <PageContainer
-        theme={this.state.theme}
-        isRoot={location.pathname === '/'}
-      >
+      <PageContainer theme={this.state.theme} isRoot={pageContext.isRoot}>
         {children}
       </PageContainer>
     );

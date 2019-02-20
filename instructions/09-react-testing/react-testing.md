@@ -1,6 +1,6 @@
 ---
 title: React Testing
-path: '/react-testing'
+path: '/react-testing/'
 description: 'Learn to write unit tests in Javascript and React components.'
 ---
 

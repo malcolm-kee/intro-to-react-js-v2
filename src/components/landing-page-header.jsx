@@ -13,7 +13,7 @@ const LandingPageHeaderContent = ({ repositoryUrl }) => (
     <div className="landing-title-container">
       <h1 className="landing-title">Introduction to React v2</h1>
       <div className="button-toolbar">
-        <LinkButton to="/introduction" primary large>
+        <LinkButton to="/introduction/" primary large>
           Start <MaterialIcons name="arrow_forward" />
         </LinkButton>
         <a

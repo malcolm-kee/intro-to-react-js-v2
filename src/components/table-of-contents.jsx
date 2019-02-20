@@ -2,9 +2,6 @@ import { graphql, Link, StaticQuery } from 'gatsby';
 import { joinClassName } from 'join-string';
 import React from 'react';
 
-const isActive = ({ isCurrent }) =>
-  isCurrent ? { className: 'toc-link toc-link--active' } : null;
-
 export const TableOfContents = ({ fixed = true, hide }) => (
   <StaticQuery
     query={graphql`
@@ -38,7 +35,11 @@ export const TableOfContents = ({ fixed = true, hide }) => (
               .map(edge => edge.node.frontmatter)
               .map(({ path, title }) => (
                 <li key={path}>
-                  <Link className="toc-link" getProps={isActive} to={path}>
+                  <Link
+                    className="toc-link"
+                    activeClassName="toc-link--active"
+                    to={path}
+                  >
                     {title}
                   </Link>
                 </li>

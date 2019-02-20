@@ -1,6 +1,6 @@
 ---
 title: Modern Frontend
-path: '/modern-frontend'
+path: '/modern-frontend/'
 description: 'Learn the benefits of modern frontend development and how to utilize them'
 ---
 

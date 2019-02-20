@@ -1,6 +1,6 @@
 ---
 title: Searching
-path: '/searching'
+path: '/searching/'
 description: 'Learn how to implements search function in React'
 ---
 

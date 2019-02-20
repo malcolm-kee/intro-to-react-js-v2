@@ -1,6 +1,6 @@
 ---
 title: Components & Props
-path: '/components-and-props'
+path: '/components-and-props/'
 description: 'Learn JSX and how to write and compose React components'
 ---
 
