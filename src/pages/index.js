@@ -20,7 +20,7 @@ const IndexPage = ({ data }) => (
       />
       <div className="button-toolbar">
         <Link
-          to="/introduction"
+          to="/introduction/"
           className="button button--large button--primary"
         >
           Start Learning <MaterialIcons name="arrow_forward" />

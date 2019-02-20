@@ -20,7 +20,7 @@ const LandingPageHeaderContent = ({ repositoryUrl }) => (
           href={repositoryUrl}
           aria-label="GitHub repo of this site"
           title="GitHub repo of this site"
-          className="button button--large"
+          className="button button--large button--white"
           target="_BLANK"
           rel="noopener noreferrer"
           style={{ color: 'black' }}

@@ -4,6 +4,8 @@ body.light {
   --textNormal: #222;
   --textTitle: #222;
   --textLink: #551a8b;
+  --textLinkHover: #0d47a1;
+  --btnHover: #d5d5d5;
 }
 
 body.dark {
@@ -13,6 +15,8 @@ body.dark {
   --textNormal: rgba(255, 255, 255, 0.88);
   --textTitle: #ffffff;
   --textLink: #a369d7;
+  --textLinkHover: #61dafb;
+  --btnHover: rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -43,7 +47,7 @@ h2 > a {
 
 .button {
   background-color: transparent;
-  color: #0d47a1;
+  color: inherit;
   padding: 8px;
   display: inline-flex;
   justify-content: center;
@@ -56,7 +60,17 @@ h2 > a {
 }
 
 .button:hover {
-  background-color: #eee;
+  background-color: #d5d5d5;
+  background-color: var(--btnHover);
+}
+
+.button--white {
+  background-color: #fff;
+  color: #000;
+}
+
+.button--white:hover {
+  background-color: #ddd;
 }
 
 .button--large {
@@ -207,7 +221,9 @@ h2 > a {
 .instruction-article a:hover,
 .landing-page-content article a:hover {
   color: #0d47a1;
+  color: var(--textLinkHover);
   border-bottom-color: #0d47a1;
+  border-bottom-color: var(--textLinkHover);
 }
 
 .instruction-article a.gatsby-resp-image-link:hover {
@@ -256,6 +272,7 @@ h2 > a {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #000;
 }
 
 .github-link {
