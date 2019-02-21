@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageContainer } from '../components/page-container';
+import { Transition } from '../components/transition';
 
 class Layout extends React.Component {
   state = {
@@ -14,10 +15,10 @@ class Layout extends React.Component {
   }
 
   render() {
-    const { children, pageContext } = this.props;
+    const { children, pageContext, location } = this.props;
     return (
       <PageContainer theme={this.state.theme} isRoot={pageContext.isRoot}>
-        {children}
+        <Transition location={location}>{children}</Transition>
       </PageContainer>
     );
   }

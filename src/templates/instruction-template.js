@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import PageTransition from 'gatsby-plugin-page-transitions';
 import { joinClassName } from 'join-string';
 import React from 'react';
 import { Helmet } from 'react-helmet';
@@ -39,7 +38,7 @@ const InstructionNav = ({ pageContext, top }) => (
 );
 
 const InstructionTemplate = ({ data, pageContext }) => (
-  <PageTransition>
+  <>
     <Helmet>
       <title>{data.markdownRemark.frontmatter.title}</title>
       {data.markdownRemark.frontmatter.description && (
@@ -59,7 +58,7 @@ const InstructionTemplate = ({ data, pageContext }) => (
       </main>
       <InstructionNav pageContext={pageContext} />
     </div>
-  </PageTransition>
+  </>
 );
 
 export default InstructionTemplate;
