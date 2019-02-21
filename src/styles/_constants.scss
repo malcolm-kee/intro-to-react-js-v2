@@ -1,0 +1,33 @@
+/**
+ * Color
+*/
+
+$primary-color: #0d47a1;
+$primary-color-light: #61dafb;
+$secondary-color: #fbc02d;
+
+$grey-100: #efefef;
+$grey-light: #d5d5d5;
+$grey-400: #bdbdbd;
+$grey-500: #9e9e9e;
+$grey-dark: rgba(0, 0, 0, 0.5);
+
+$bg-light: #fff;
+$bg-light-pale: $grey-100;
+$text-dark: #222;
+$text-link-dark: #551a8b;
+$text-link-dark-hover: $primary-color;
+$toc-light-selected: $primary-color;
+
+$bg-dark: #282c35;
+$bg-dark-pale: #626c81;
+$text-light: rgba(255, 255, 255, 0.88);
+$title-light: #fff;
+$text-link-light: $secondary-color;
+$text-link-light-hover: $primary-color-light;
+$toc-dark-selected: $secondary-color;
+
+/**
+ * Layout
+*/
+$spacing-unit: 8px;

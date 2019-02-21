@@ -1,2 +1,3 @@
-import 'prismjs/themes/prism-solarizedlight.css';
-import './src/styles/global.css';
+import './src/styles/prism.light-theme.scss';
+import './src/styles/prism.dark-theme.scss';
+import './src/styles/global.scss';
