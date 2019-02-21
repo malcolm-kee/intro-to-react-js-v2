@@ -33,6 +33,13 @@ body {
   background-color: $bg-light;
   background-color: var(--bg);
   transition: background-color 300ms ease-in-out;
+  --theme-switcher-display: block;
+}
+
+.theme-switcher {
+  // this will make the theme switcher hidden if browser doesn't support css variables.
+  display: none;
+  display: var(--theme-switcher-display);
 }
 
 /** color -theme- end */
@@ -182,6 +189,7 @@ h2 > a {
 
 .navbar {
   background: #61dafb;
+  min-height: $appbar-height;
   padding: 8px 16px;
   position: fixed;
   display: flex;

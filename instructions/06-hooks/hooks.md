@@ -313,7 +313,7 @@ Our app is able to load data from backend API now, which is great. However, ther
 
 Once your page load and you quickly click "Show Movies" button, you may see no movies is displayed if that API is slow. For that, we should display a loading indicator if we waiting for the API response.
 
-> To simulate slow API response, wrap `loadMovies` function in `api.js` to with this [utility](https://gist.github.com/malcolm-kee/8f3d2973872f0791ed5faea9cb4f1891).
+> To simulate slow API response, wrap `loadMovies` function in `api.js` with this [utility](https://gist.github.com/malcolm-kee/8f3d2973872f0791ed5faea9cb4f1891).
 
 To show loading indicator when waiting API response:
 

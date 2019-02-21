@@ -7,7 +7,7 @@
 
   &.table-of-content-section--fixed {
     position: fixed;
-    top: 64px;
+    top: $appbar-height;
     bottom: 0;
     right: 0px;
     transition: right 350ms ease-in-out;

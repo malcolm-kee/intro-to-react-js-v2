@@ -1,0 +1,9 @@
+@import '../styles/constants';
+
+.footer {
+  font-style: italic;
+  p {
+    margin: $spacing-unit * 2 0;
+    padding: 0 $spacing-unit;
+  }
+}

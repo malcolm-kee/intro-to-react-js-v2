@@ -1,9 +1,10 @@
 import { graphql, StaticQuery } from 'gatsby';
+import { joinClassName } from 'join-string';
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Footer } from './footer';
 import { Navbar } from './navbar';
 import { TableOfContents } from './table-of-contents';
-import { joinClassName } from 'join-string';
 
 export const PageContainer = ({ children, isRoot, theme }) => (
   <StaticQuery
@@ -33,13 +34,13 @@ export const PageContainer = ({ children, isRoot, theme }) => (
         <Navbar
           siteTitle={data.site.siteMetadata.title}
           repositoryUrl={data.site.siteMetadata.repositoryUrl}
-          bugUrl={data.site.siteMetadata.bugUrl}
           theme={theme}
           hide={isRoot}
         />
-        <main className={joinClassName(!isRoot && 'main-container')}>
-          {children}
-        </main>
+        <div className={joinClassName(!isRoot && 'main-container')}>
+          <main>{children}</main>
+          <Footer bugUrl={data.site.siteMetadata.bugUrl} />
+        </div>
         <TableOfContents fixed hide={isRoot} />
       </div>
     )}
