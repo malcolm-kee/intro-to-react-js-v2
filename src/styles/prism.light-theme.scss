@@ -1,3 +1,5 @@
+@import './constants';
+
 body.light {
   /*
  Solarized Color Schemes originally by Ethan Schoonover
@@ -151,5 +153,15 @@ green     #859900
 
   .token.entity {
     cursor: help;
+  }
+
+  .gatsby-highlight-code-line {
+    background-color: #feb;
+    display: block;
+    margin-right: -1em;
+    margin-left: -1em;
+    padding-right: 1em;
+    padding-left: 0.75em;
+    border-left: 0.25em solid $primary-color;
   }
 }

@@ -9,6 +9,9 @@ body.light {
   --textLinkHover: #{$text-link-dark-hover};
   --btnColor: inherit;
   --btnHover: #{$grey-light};
+  --tocBg: #{$bg-light-pale};
+  --tocLabel: #{$text-dark};
+  --tocSelected: #{$toc-light-selected};
 }
 
 body.dark {
@@ -21,26 +24,18 @@ body.dark {
   --textLinkHover: #{$text-link-light-hover};
   --btnColor: inherit;
   --btnHover: #{$grey-dark};
+  --tocBg: #{$bg-dark-pale};
+  --tocLabel: #{$grey-400};
+  --tocSelected: #{$toc-dark-selected};
 }
 
 body {
   background-color: $bg-light;
   background-color: var(--bg);
+  transition: background-color 300ms ease-in-out;
 }
 
 /** color -theme- end */
-
-/** code highlight - start */
-.gatsby-highlight-code-line {
-  background-color: #feb;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid $primary-color;
-}
-/** code highlight - end */
 
 img.emoji-icon {
   margin: 0;
@@ -48,6 +43,11 @@ img.emoji-icon {
 
 h2 > a {
   text-decoration: none;
+}
+
+.header-link-icon svg path {
+  fill: $text-link-dark-hover;
+  fill: var(--textLinkHover);
 }
 
 .button {
@@ -142,62 +142,6 @@ h2 > a {
   color: #b71c1c;
 }
 
-.table-of-content-section {
-  padding: 24px 0;
-  background-color: #efefef;
-}
-
-.table-of-content-section ol {
-  margin: 0;
-}
-
-.table-of-content-section li {
-  list-style-type: none;
-  padding: 0 8px;
-  margin-bottom: 0;
-}
-
-.table-of-content-section li a {
-  display: block;
-  padding: 4px 16px;
-}
-
-.table-of-content-section li a:hover {
-  color: #0d47a1;
-}
-
-.table-of-content-inner-container {
-  max-width: 300px;
-  margin: 0px auto;
-}
-
-.toc-link {
-  color: #000;
-  text-decoration: none;
-  position: relative;
-  transition: color 300ms ease-in-out;
-}
-
-.toc-link.toc-link--active {
-  color: #0d47a1;
-}
-
-.toc-link::before {
-  content: ' ';
-  display: block;
-  background: #0d47a1;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0px;
-  width: 0;
-  transition: width 300ms ease-in-out;
-}
-
-.toc-link.toc-link--active::before {
-  width: 4px;
-}
-
 .instruction-template-nav {
   display: flex;
   justify-content: space-between;
@@ -234,18 +178,6 @@ h2 > a {
 
 .instruction-article a.gatsby-resp-image-link:hover {
   border-bottom-color: transparent;
-}
-
-.table-of-content-section.table-of-content-section--fixed {
-  position: fixed;
-  top: 64px;
-  bottom: 0;
-  right: 0px;
-  transition: right 350ms ease-in-out;
-}
-
-.table-of-content-section.table-of-content-section--fixed.table-of-content-section--hide {
-  right: -220px;
 }
 
 .navbar {
@@ -348,19 +280,16 @@ h2 > a {
 
 .landing-page-content {
   position: relative;
-}
-
-.landing-page-content .button-toolbar {
-  padding: 16px;
-}
-
-.landing-page-content article,
-.landing-page-content .button-toolbar {
-  margin-right: 220px;
-}
-
-.landing-page-content article {
-  padding-top: 32px;
+  .button-toolbar {
+    padding: 16px;
+  }
+  article,
+  .button-toolbar {
+    margin-right: 220px;
+  }
+  article {
+    padding-top: 32px;
+  }
 }
 
 .landing-page .table-of-content-section {

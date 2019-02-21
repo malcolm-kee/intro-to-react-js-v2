@@ -1,0 +1,73 @@
+@import '../styles/constants';
+
+.table-of-content-section {
+  padding: $spacing-unit * 3 0;
+  background-color: $grey-100;
+  background-color: var(--tocBg);
+
+  &.table-of-content-section--fixed {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    right: 0px;
+    transition: right 350ms ease-in-out;
+
+    &.table-of-content-section--hide {
+      right: -220px;
+    }
+  }
+
+  ol {
+    margin: 0;
+  }
+
+  li {
+    list-style-type: none;
+    padding: 0 $spacing-unit;
+    margin-bottom: 0;
+    a {
+      display: block;
+      padding: $spacing-unit / 2 $spacing-unit * 2;
+
+      &:hover {
+        color: $toc-light-selected;
+        color: var(--tocSelected);
+      }
+    }
+  }
+}
+
+.table-of-content-inner-container {
+  max-width: 300px;
+  margin: 0px auto;
+}
+
+.toc-link {
+  color: inherit;
+  color: var(--tocLabel);
+  text-decoration: none;
+  position: relative;
+  transition: color 300ms ease-in-out;
+
+  &::before {
+    content: ' ';
+    display: block;
+    background: $toc-light-selected;
+    background: var(--tocSelected);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    width: 0;
+    transition: width 300ms ease-in-out;
+  }
+
+  &.toc-link--active {
+    color: $toc-light-selected;
+    color: var(--tocSelected);
+
+    &::before {
+      width: 4px;
+    }
+  }
+}

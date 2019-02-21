@@ -21,7 +21,7 @@ function pointerCoord(event) {
   return { x: 0, y: 0 };
 }
 
-export class Toggle extends React.PureComponent {
+export class Toggle extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);

@@ -34,7 +34,12 @@ module.exports = {
         plugins: [
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-external-links',
-          'gatsby-remark-autolink-headers',
+          {
+            resolve: 'gatsby-remark-autolink-headers',
+            options: {
+              className: 'header-link-icon'
+            }
+          },
           {
             resolve: 'gatsby-remark-images',
             options: {

@@ -1,6 +1,7 @@
 import { graphql, Link, StaticQuery } from 'gatsby';
 import { joinClassName } from 'join-string';
 import React from 'react';
+import './table-of-contents.scss';
 
 export const TableOfContents = ({ fixed = true, hide }) => (
   <StaticQuery
