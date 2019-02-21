@@ -44,6 +44,20 @@ body {
 
 /** color -theme- end */
 
+*[id]:before {
+  display: block;
+  content: ' ';
+  margin-top: -75px; // Set the Appropriate Height
+  height: 75px; // Set the Appropriate Height
+  visibility: hidden;
+}
+
+.landing-page-content {
+  *[id]:before {
+    display: none;
+  }
+}
+
 img.emoji-icon {
   margin: 0;
 }

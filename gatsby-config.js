@@ -15,6 +15,12 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-layout',
     {
+      resolve: 'gatsby-plugin-page-transitions',
+      options: {
+        transitionTime: 500
+      }
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: path.resolve(__dirname, 'instructions'),
