@@ -69,7 +69,7 @@ ReactDOM.render(appElement, document.getElementById('root'));
 - `ReactDOM.render` is used to render our React component to HTML. It takes two parameters:
   - the first parameter should be a React element.
   - the second parameter is the HTML element that should contains the React element. In this case, a div with id `root`.
-- When we call `ReactDOM.render(ReactElement, container)`, you can understand it as the conversations below:
+- When we call `ReactDOM.render(elem, container)`, you can understand it as the conversations below:
   - us: **Hey React, here is a React element, make sure what's inside the container match what's produced by the React element**.
   - ReactDOM: Roger that. This React element is a function, let's run it and see what we get.
   - (Run the App function)
