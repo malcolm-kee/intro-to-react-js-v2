@@ -279,6 +279,9 @@ h2 > a {
   justify-content: center;
   align-items: center;
   color: #000;
+  > * {
+    margin: 0 $spacing-unit;
+  }
 }
 
 .github-link {
