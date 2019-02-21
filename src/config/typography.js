@@ -10,6 +10,7 @@ const typography = new Typograph({
     'Arial',
     'sans serif'
   ],
+  headerColor: 'var(--textTitle)',
   bodyFontFamily: [
     '-apple-system',
     'BlinkMacSystemFont',

@@ -1,0 +1,26 @@
+/**
+ * Color
+*/
+
+$primary-color: #0d47a1;
+$primary-color-light: #61dafb;
+$secondary-color: #fbc02d;
+
+$bg-light: #fff;
+$text-dark: #222;
+$text-link-dark: #551a8b;
+$text-link-dark-hover: $primary-color;
+
+$bg-dark: #282c35;
+$text-light: rgba(255, 255, 255, 0.88);
+$title-light: #fff;
+$text-link-light: $secondary-color;
+$text-link-light-hover: $primary-color-light;
+
+$grey-light: #d5d5d5;
+$grey-dark: rgba(0, 0, 0, 0.5);
+
+/**
+ * Layout
+*/
+$spacing-unit: 8px;

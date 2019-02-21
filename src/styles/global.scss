@@ -1,25 +1,30 @@
+@import './constants';
+
 /** color -theme- start */
 body.light {
-  --bg: #fff;
-  --textNormal: #222;
-  --textTitle: #222;
-  --textLink: #551a8b;
-  --textLinkHover: #0d47a1;
-  --btnHover: #d5d5d5;
+  --bg: #{$bg-light};
+  --textNormal: #{$text-dark};
+  --textTitle: #{$text-dark};
+  --textLink: #{$text-link-dark};
+  --textLinkHover: #{$text-link-dark-hover};
+  --btnColor: inherit;
+  --btnHover: #{$grey-light};
 }
 
 body.dark {
   -webkit-font-smoothing: antialiased;
 
-  --bg: #282c35;
-  --textNormal: rgba(255, 255, 255, 0.88);
-  --textTitle: #ffffff;
-  --textLink: #a369d7;
-  --textLinkHover: #61dafb;
-  --btnHover: rgba(0, 0, 0, 0.5);
+  --bg: #{$bg-dark};
+  --textNormal: #{$text-light};
+  --textTitle: #{$title-light};
+  --textLink: #{$text-link-light};
+  --textLinkHover: #{$text-link-light-hover};
+  --btnColor: inherit;
+  --btnHover: #{$grey-dark};
 }
 
 body {
+  background-color: $bg-light;
   background-color: var(--bg);
 }
 
@@ -33,7 +38,7 @@ body {
   margin-left: -1em;
   padding-right: 1em;
   padding-left: 0.75em;
-  border-left: 0.25em solid #0d47a1;
+  border-left: 0.25em solid $primary-color;
 }
 /** code highlight - end */
 
@@ -48,12 +53,13 @@ h2 > a {
 .button {
   background-color: transparent;
   color: inherit;
-  padding: 8px;
+  color: var(--btnColor);
+  padding: $spacing-unit;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: $spacing-unit / 2;
   line-height: 0;
   user-select: none;
   transition: background-color 300ms ease-in-out;
@@ -77,7 +83,7 @@ h2 > a {
   min-height: 56px;
   min-width: 180px;
   font-size: 1.3rem;
-  padding: 8px 16px;
+  padding: $spacing-unit $spacing-unit * 2;
 }
 
 .button--primary {
@@ -98,13 +104,13 @@ h2 > a {
 }
 
 .button-toolbar {
-  padding: 16px 0 16px 4px;
+  padding: $spacing-unit * 2 0 $spacing-unit * 2 $spacing-unit / 2;
   display: flex;
   justify-content: center;
 }
 
 .button-toolbar > .button {
-  margin: 0 8px;
+  margin: 0 $spacing-unit;
 }
 
 .button-toolbar > .button:first-child {
@@ -291,7 +297,7 @@ h2 > a {
 }
 
 .navbar-toolbar > .icon-button {
-  margin: 0 8px;
+  margin: 0 $spacing-unit;
 }
 
 .navbar-toolbar > .icon-button:first-child {
