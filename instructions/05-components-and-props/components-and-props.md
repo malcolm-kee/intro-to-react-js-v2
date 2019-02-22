@@ -33,22 +33,20 @@ export const Movie = props => (
 So now JSX is demystified a bit, let's go convert `App` and `index.js`.
 
 ```jsx
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="title-bar">
-          <h1>React Movie App</h1>
-        </div>
-        <Movie name="Aquaman" releaseDate="2018-12-07" />
-        <Movie name="Bumblebee" releaseDate="2018-12-15" />
-        <Movie
-          name="Fantastic Beasts: The Crimes of Grindelwald"
-          releaseDate="2018-11-14"
-        />
+function App() {
+  return (
+    <div>
+      <div className="title-bar">
+        <h1>React Movie App</h1>
       </div>
-    );
-  }
+      <Movie name="Aquaman" releaseDate="2018-12-07" />
+      <Movie name="Bumblebee" releaseDate="2018-12-15" />
+      <Movie
+        name="Fantastic Beasts: The Crimes of Grindelwald"
+        releaseDate="2018-11-14"
+      />
+    </div>
+  );
 }
 ```
 
@@ -96,22 +94,20 @@ export const TitleBar = props => (
 ...
 import { TitleBar } from './components/title-bar';
 ...
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <TitleBar>
-          <h1>React Movie App</h1>
-        </TitleBar>
-        <Movie name="Aquaman" releaseDate="2018-12-07" />
-        <Movie name="Bumblebee" releaseDate="2018-12-15" />
-        <Movie
-          name="Fantastic Beasts: The Crimes of Grindelwald"
-          releaseDate="2018-11-14"
-        />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <TitleBar>
+        <h1>React Movie App</h1>
+      </TitleBar>
+      <Movie name="Aquaman" releaseDate="2018-12-07" />
+      <Movie name="Bumblebee" releaseDate="2018-12-15" />
+      <Movie
+        name="Fantastic Beasts: The Crimes of Grindelwald"
+        releaseDate="2018-11-14"
+      />
+    </div>
+  );
 }
 ```
 
@@ -127,14 +123,12 @@ export const TitleBar = props => (
 );
 
 // src/app.js
-class App extends React.Component {
-  render() {
-    return (
-      ...
-      <TitleBar title="React Movie App" />
-      ...
-    )
-  }
+function App() {
+  return (
+    ...
+    <TitleBar title="React Movie App" />
+    ...
+  )
 }
 ```
 

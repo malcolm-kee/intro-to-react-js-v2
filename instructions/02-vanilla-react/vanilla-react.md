@@ -50,13 +50,13 @@ Following is a html page for us to start learn React.
 In the `<script>` tag, add the following code
 
 ```js
-const App = function() {
+function App() {
   return React.createElement(
     'div',
     {},
     React.createElement('h1', {}, 'React Movie App')
   );
-};
+}
 
 const appElement = React.createElement(App);
 
@@ -91,13 +91,13 @@ ReactDOM.render(appElement, document.getElementById('root'));
 Let's change our code slightly:
 
 ```js
-const App = function(props) {
+function App(props) {
   return React.createElement(
     'div',
     {},
     React.createElement('h1', {}, props.appTitle)
   );
-};
+}
 
 const appElement = React.createElement(App, { appTitle: 'React Movie App' });
 
@@ -149,7 +149,7 @@ const Movie = () =>
     React.createElement('h2', {}, '2018-12-07')
   ]);
 
-const App = function() {
+function App() {
   return React.createElement('div', {}, [
     React.createElement(
       'div',
@@ -160,7 +160,7 @@ const App = function() {
     React.createElement(Movie),
     React.createElement(Movie)
   ]);
-};
+}
 
 ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
@@ -182,7 +182,7 @@ const Movie = props =>
     React.createElement('h2', {}, props.releaseDate)
   ]);
 
-const App = function() {
+function App() {
   return React.createElement('div', {}, [
     React.createElement(
       'div',
@@ -202,7 +202,7 @@ const App = function() {
       releaseDate: '2018-11-14'
     })
   ]);
-};
+}
 
 ReactDOM.render(React.createElement(App), document.getElementById('root'));
 ```
