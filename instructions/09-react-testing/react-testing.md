@@ -2,6 +2,7 @@
 title: React Testing
 path: '/react-testing/'
 description: 'Learn to write unit tests in Javascript and React components.'
+order: 9
 ---
 
 # React Testing

@@ -2,6 +2,7 @@
 title: Create A React Project
 path: '/create-react-project/'
 description: 'Learn to create a React project with create-react-app CLI and host it in GitHub'
+order: 3
 ---
 
 # Create A React Project

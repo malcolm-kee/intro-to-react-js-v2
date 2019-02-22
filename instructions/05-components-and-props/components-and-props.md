@@ -2,6 +2,7 @@
 title: Components & Props
 path: '/components-and-props/'
 description: 'Learn JSX and how to write and compose React components'
+order: 5
 ---
 
 # Components & Props

@@ -2,6 +2,7 @@
 title: Vanilla React
 path: '/vanilla-react/'
 description: 'Learn to use React without build tools allows us to have better understandings of React API.'
+order: 2
 ---
 
 # Vanilla React

@@ -2,6 +2,7 @@
 title: Hooks
 path: '/hooks/'
 description: 'Learn React Hooks that are introduced in React 16.8'
+order: 6
 ---
 
 # Hooks

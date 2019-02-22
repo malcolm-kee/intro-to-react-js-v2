@@ -1,6 +1,7 @@
 ---
 title: README
 path: '/'
+order: 0
 ---
 
 # Introduction to React JS v2

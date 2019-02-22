@@ -2,6 +2,7 @@
 title: Conclusion
 path: '/conclusion/'
 description: ''
+order: 12
 ---
 
 # Conclusion

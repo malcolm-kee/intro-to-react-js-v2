@@ -2,6 +2,7 @@
 title: Searching
 path: '/searching/'
 description: 'Learn how to implements search function in React'
+order: 11
 ---
 
 # Searching
