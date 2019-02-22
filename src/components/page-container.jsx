@@ -1,5 +1,4 @@
 import { graphql, StaticQuery } from 'gatsby';
-import { joinClassName } from 'join-string';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Footer } from './footer';
@@ -37,7 +36,7 @@ export const PageContainer = ({ children, isRoot, theme }) => (
           theme={theme}
           hide={isRoot}
         />
-        <div className={joinClassName(!isRoot && 'main-container')}>
+        <div>
           <main>{children}</main>
           <Footer bugUrl={data.site.siteMetadata.bugUrl} />
         </div>

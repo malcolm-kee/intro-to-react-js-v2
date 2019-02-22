@@ -38,7 +38,7 @@ const InstructionNav = ({ pageContext, top }) => (
 );
 
 const InstructionTemplate = ({ data, pageContext }) => (
-  <>
+  <div className="main-container">
     <Helmet>
       <title>{data.markdownRemark.frontmatter.title}</title>
       {data.markdownRemark.frontmatter.description && (
@@ -58,7 +58,7 @@ const InstructionTemplate = ({ data, pageContext }) => (
       </main>
       <InstructionNav pageContext={pageContext} />
     </div>
-  </>
+  </div>
 );
 
 export default InstructionTemplate;
