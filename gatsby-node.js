@@ -1,5 +1,4 @@
 const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -23,6 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
               frontmatter {
                 title
                 path
+                order
               }
               html
             }
@@ -50,7 +50,8 @@ exports.createPages = ({ graphql, actions }) => {
             component: instructionTemplate,
             context: {
               previous,
-              next
+              next,
+              order: instruction.node.frontmatter.order
             }
           });
         });
