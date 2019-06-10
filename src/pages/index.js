@@ -12,6 +12,10 @@ const IndexPage = ({ data }) => (
       <meta name="author" content={data.site.siteMetadata.author} />
       <meta name="description" content={data.site.siteMetadata.description} />
     </Helmet>
+    <h1>
+      This page is no longer maintained. It is migrated{' '}
+      <a href="https://malcolmkee.com/intro-to-react-js-v2">here</a>
+    </h1>
     <LandingPageHeader />
     <div className="landing-page-content">
       <article
